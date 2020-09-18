@@ -4,7 +4,28 @@ set -u
 set -o pipefail
 
 
-# Use explicit version if declared, otherwise default to latest stable
+# Patching with grsecurity is disabled by default.
+# Can be renabled vai env var or cli flag.
+GRSECURITY="${GRSECURITY:-}"
+if [[ $# > 0 ]]; then
+    x="$1"
+    shift
+    if [[ "$x" = "--grsecurity" ]]; then
+        GRSECURITY=1
+    else
+        echo "Usage: $0 [--grsecurity]"
+        exit 1
+    fi
+fi
+
+if [[ -n "$GRSECURITY" ]]; then
+    LINUX_VERSION="$(/usr/local/bin/grsecurity-urls.py --print-version)"
+    echo "Will include grsecurity patch for kernel $LINUX_VERSION"
+    /usr/local/bin/grsecurity-urls.py > /patches/grsec
+else
+    echo "Skipping grsecurity patch set"
+fi
+
 LINUX_VERSION="${LINUX_VERSION:-}"
 if [[ -z "$LINUX_VERSION" ]]; then
     LINUX_VERSION="$(curl -s https://www.kernel.org/ | grep -m1 -F stable: -A1 | tail -n1 | grep -oP '[\d\.]+')"
@@ -21,19 +42,29 @@ fi
 
 echo "Fetching Linux kernel source $LINUX_VERSION"
 wget https://cdn.kernel.org/pub/linux/kernel/v${LINUX_MAJOR_VERSION}.x/linux-${LINUX_VERSION}.tar.xz
+
+echo "Extracting Linux kernel source $LINUX_VERSION"
 xz -d -v linux-${LINUX_VERSION}.tar.xz
 tar -xf linux-${LINUX_VERSION}.tar
 cd linux-${LINUX_VERSION}
 
 if [[ -e /config ]]; then
+    echo "Copying custom config for kernel source $LINUX_VERSION"
     cp /config .config
 fi
 
-make olddefconfig
-VCPUS="$(nproc)"
+if [[ -d /patches ]]; then
+    echo "Applying custom patches for kernel source $LINUX_VERSION"
+    find /patches -maxdepth 1 -type f -exec patch -p 1 -i {} \;
+fi
 
+echo "Building Linux kernel source $LINUX_VERSION"
+make olddefconfig
+
+VCPUS="$(nproc)"
 make -j $VCPUS deb-pkg
 
+echo "Storing build artifacts for $LINUX_VERSION"
 if [[ -d /output ]]; then
-    rsync -a --info=progress2 *.deb /output/
+    rsync -a --info=progress2 ../*.deb ../*.tar.gz /output/
 fi
