@@ -6,7 +6,8 @@ set -o pipefail
 
 
 img_name="quay.io/conorsch/kernel-builder"
-mkdir -p /tmp/kernels
+kernel_dir="/tmp/kernels"
+mkdir -p "$kernel_dir"
 docker build -t "$img_name" .
 docker run -it \
     -e GRSECURITY_USERNAME \
@@ -14,3 +15,6 @@ docker run -it \
     -e GRSECURITY \
     -v /tmp/kernels:/output \
     "$img_name"
+
+echo "Build complete. Packages can be found at:"
+find "$kernel_dir" -type f | sort
