@@ -11,6 +11,6 @@ docker build -t "$img_name" .
 docker run -it \
     -e GRSECURITY_USERNAME \
     -e GRSECURITY_PASSWORD \
-    -e GRSECURITY=1 \
+    -e GRSECURITY \
     -v /tmp/kernels:/output \
     "$img_name"
