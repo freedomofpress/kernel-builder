@@ -24,7 +24,7 @@ def parse_args():
     parser.add_argument(
         "--patch-type",
         action="store",
-        default="stable3",
+        default=os.environ.get("GRSECURITY_PATCH_TYPE", "stable4"),
         choices=GRSECURITY_PATCH_TYPES,
         help="Which channel to use for kernel & patch; affects kernel version",
     )
