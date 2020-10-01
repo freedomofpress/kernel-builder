@@ -7,7 +7,7 @@ ARG USERNAME=kernel-builder
 RUN apt-get update && \
     apt-get install -y \
     git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc wget \
-    flex curl bison rsync kmod cpio libelf-dev
+    flex curl bison rsync kmod cpio libelf-dev liblz4-tool
 
 RUN apt-get install -y python3 python3-requests
 RUN apt-get install -y gnupg
