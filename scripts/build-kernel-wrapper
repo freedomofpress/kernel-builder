@@ -12,6 +12,15 @@ export SOURCE_DATE_EPOCH
 export KBUILD_BUILD_TIMESTAMP="@${SOURCE_DATE_EPOCH}"
 export DEB_BUILD_TIMESTAMP="${SOURCE_DATE_EPOCH}"
 
+local_config_volume_opt=""
+if [[ -n "${LINUX_LOCAL_CONFIG_PATH:-}" ]]; then
+    local_config_volume_opt="-v ${LINUX_LOCAL_CONFIG_PATH}:/config:ro"
+fi
+local_patches_volume_opt=""
+if [[ -n "${LINUX_LOCAL_PATCHES_PATH:-}" ]]; then
+    local_patches_volume_opt="-v ${LINUX_LOCAL_PATCHES_PATH}:/patches:ro"
+fi
+
 img_name="quay.io/conorsch/kernel-builder"
 kernel_dir="$PWD/build"
 mkdir -p -m 755 "$kernel_dir"
@@ -21,7 +30,7 @@ docker build -t "$img_name" \
     --build-arg GID="$(id -g)" \
     .
 
-docker run -t \
+docker run --rm -t \
     -e GRSECURITY_USERNAME \
     -e GRSECURITY_PASSWORD \
     -e GRSECURITY_PATCH_TYPE \
@@ -29,9 +38,10 @@ docker run -t \
     -e SOURCE_DATE_EPOCH \
     -e KBUILD_BUILD_TIMESTAMP \
     -e DEB_BUILD_TIMESTAMP \
+    -e LOCALVERSION \
     -v "${kernel_dir}:/output" \
-    -v $PWD/configs/tinyconfig:/config \
-    -v $PWD/patches:/patches \
+    $local_config_volume_opt \
+    $local_patches_volume_opt \
     "$img_name"
 
 echo "Build complete. Packages can be found at:"

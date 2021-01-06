@@ -21,8 +21,8 @@ RUN groupadd -g ${GID} ${USERNAME} && useradd -m -d /home/${USERNAME} -g ${GID} 
 COPY build-kernel.sh /usr/local/bin/build-kernel.sh
 COPY grsecurity-urls.py /usr/local/bin/grsecurity-urls.py
 
-RUN mkdir -p -m 0755 /kernel /patches /output
-RUN chown ${USERNAME}:${USERNAME} /kernel /patches /output
+RUN mkdir -p -m 0755 /kernel /patches /patches-grsec /output
+RUN chown ${USERNAME}:${USERNAME} /kernel /patches /patches-grsec /output
 WORKDIR /kernel
 
 # VOLUME ["/kernel"]
