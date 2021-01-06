@@ -35,7 +35,7 @@ fi
 if [[ -n "$GRSECURITY" ]]; then
     LINUX_VERSION="$(/usr/local/bin/grsecurity-urls.py --print-version)"
     echo "Will include grsecurity patch for kernel $LINUX_VERSION"
-    /usr/local/bin/grsecurity-urls.py > /patches/grsec
+    /usr/local/bin/grsecurity-urls.py > /patches-grsec/grsec
 else
     echo "Skipping grsecurity patch set"
 fi
@@ -60,7 +60,7 @@ fi
 
 if [[ -d /patches ]]; then
     echo "Applying custom patches for kernel source $LINUX_VERSION"
-    find /patches -maxdepth 1 -type f -exec patch -p 1 -i {} \;
+    find /patches /patches-grsec -maxdepth 1 -type f -exec patch -p 1 -i {} \;
 fi
 
 echo "Building Linux kernel source $LINUX_VERSION"
