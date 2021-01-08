@@ -4,7 +4,7 @@ jobs:
   # Build recent stable Linux kernel, with no patches
   vanilla:
     docker:
-      - image: debian:stable
+      - image: circleci/python:buster
     steps:
       - checkout
       - setup_remote_docker
