@@ -4,7 +4,7 @@ jobs:
   # Build recent stable Linux kernel, with no patches
   vanilla:
     docker:
-      - image: debian/buster
+      - image: debian:stable
     steps:
       - checkout
       - run: apt-get install -y make build-essential
