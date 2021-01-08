@@ -8,7 +8,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - mkdir -p /tmp/kernels && chmod 777 /tmp/kernels
+      - run: mkdir -p /tmp/kernels && chmod 777 /tmp/kernels
       - run: sudo apt-get update && sudo apt-get install -y make build-essential
       - run: ./go.sh
 workflows:
