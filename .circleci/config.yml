@@ -7,7 +7,7 @@ jobs:
       - image: debian:stable
     steps:
       - checkout
-      - run: apt-get install -y make build-essential
+      - run: apt-get update && apt-get install -y make build-essential
       - run: ./go.sh
 workflows:
   version: 2
