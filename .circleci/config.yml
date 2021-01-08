@@ -1,0 +1,16 @@
+---
+version: 2
+jobs:
+  # Build recent stable Linux kernel, with no patches
+  vanilla:
+    docker:
+      - image: debian/buster
+    steps:
+      - checkout
+      - run: apt-get install -y make build-essential
+      - run: ./go.sh
+workflows:
+  version: 2
+  build:
+    jobs:
+      - vanilla
