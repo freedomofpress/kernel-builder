@@ -1,0 +1,20 @@
+---
+version: 2
+jobs:
+  # Build recent stable Linux kernel, with no patches
+  vanilla:
+    machine:
+      image: ubuntu-2004:202010-01
+    # Can't use volume mounts in CircleCI with docker driver
+    # docker:
+    #   - image: circleci/python:buster
+    steps:
+      - checkout
+      - run: mkdir -p /tmp/kernels && chmod 777 /tmp/kernels
+      - run: sudo apt-get update && sudo apt-get install -y make build-essential
+      - run: ./go.sh
+workflows:
+  version: 2
+  build:
+    jobs:
+      - vanilla
