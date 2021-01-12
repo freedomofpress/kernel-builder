@@ -1,0 +1,25 @@
+#!/bin/bash
+set -e
+set -u
+set -o pipefail
+set -x
+
+
+# Full list of reprotest options, for reference
+# "+environment, +build_path, +kernel, +aslr, +num_cpus, +time,
+# +user_group, +fileordering, +domain_host, +home, +locales, +exec_path, +timezone, +umask"
+
+# Known failing tests:
+#   - fileordering
+#   - aslr
+#   - time
+#   - domain_host
+
+
+# If TERM is not set, diffoscope will fail with "setupterm: could not find terminfo database".
+# Set TERM to someting if it's unset, mostly useful for CI.
+TERM="${TERM:-xterm-256color}"
+export TERM
+reprotest -c "./scripts/build-kernel-wrapper" \
+    --vary "+all, -fileordering, -aslr, -time, -domain_host" \
+    "." "build/linux-image*.deb"

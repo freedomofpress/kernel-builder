@@ -4,20 +4,9 @@ A small suite of tools to build a Linux kernel, optionally patched with [grsecur
 
 ## Getting started
 
-Make sure you have docker installed. Then just run `./go.sh`, which contains:
-
-```
-mkdir -p /tmp/kernels
-docker run -it \
-    -e GRSECURITY_USERNAME \
-    -e GRSECURITY_PASSWORD \
-    -e GRSECURITY=1 \
-    -v /tmp/kernels:/output \
-    quay.io/conorsch/kernel-builder
-```
-
+Make sure you have docker installed. Then just run `make`.
 The script will look up the most recent stable Linux version from https://www.kernel.org
-and build that. Artifacts will be available in `/tmp/kernels/` afterward.
+and build that. Artifacts will be available in `./build/` afterward.
 
 ## Enabling grsecurity patches
 
@@ -27,7 +16,7 @@ Export your credentials:
 ```
 export GRSECURITY_USERNAME=foo
 export GRSECURITY_PASSWORD=bar
-./go.sh
+make
 ```
 
 The resulting packages will used the patch set.
@@ -36,7 +25,7 @@ The resulting packages will used the patch set.
 
 You can mount in any set of patches to be applied to the kernel
 source prior to building. Store the patches in a directory,
-then mount that directory into the container at `/patches`.
+such as `./patches/`, and those will be mounted into the container at `/patches/`.
 The build script will loop over all files in that dir and apply each
 patch prior to building.
 
@@ -50,7 +39,7 @@ Note that `make olddefconfig` will be run regardless to ensure the latest
 options have been applied.
 
 ## Where on my files?
-Check `/tmp/kernels/` on the host machine. You can mount any directory to `/output`
+Check `./build/` on the host machine. You can mount any directory to `/output`
 inside the container, and that's where the packages will be stored. By default,
 the build script attempts to save `.deb` packages and `.tar.gz`, the source tarball.
 

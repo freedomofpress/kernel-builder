@@ -1,0 +1,38 @@
+#!/bin/bash
+
+set -e
+set -u
+set -o pipefail
+
+
+# SOURCE_DATE_EPOCH="$(git log -1 --pretty=%ct)"
+# DEBUG: setting constant value to make eval easier
+SOURCE_DATE_EPOCH="1309379017"
+export SOURCE_DATE_EPOCH
+export KBUILD_BUILD_TIMESTAMP="@${SOURCE_DATE_EPOCH}"
+export DEB_BUILD_TIMESTAMP="${SOURCE_DATE_EPOCH}"
+
+img_name="quay.io/conorsch/kernel-builder"
+kernel_dir="$PWD/build"
+mkdir -p -m 755 "$kernel_dir"
+docker build -t "$img_name" \
+    --build-arg USERNAME="$USER" \
+    --build-arg UID="$(id -u)" \
+    --build-arg GID="$(id -g)" \
+    .
+
+docker run -t \
+    -e GRSECURITY_USERNAME \
+    -e GRSECURITY_PASSWORD \
+    -e GRSECURITY_PATCH_TYPE \
+    -e GRSECURITY \
+    -e SOURCE_DATE_EPOCH \
+    -e KBUILD_BUILD_TIMESTAMP \
+    -e DEB_BUILD_TIMESTAMP \
+    -v "${kernel_dir}:/output" \
+    -v $PWD/configs/tinyconfig:/config \
+    -v $PWD/patches:/patches \
+    "$img_name"
+
+echo "Build complete. Packages can be found at:"
+find "$kernel_dir" -type f | sort
