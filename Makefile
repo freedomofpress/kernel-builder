@@ -18,7 +18,7 @@ build-image: ## Builds container image
 
 securedrop-core: build-image ## Builds kernels for SecureDrop servers, 5.4.x
 	GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable4 LOCALVERSION="-securedrop" \
-		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-securedrop-4.14" \
+		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-securedrop-5.4" \
 		LINUX_LOCAL_PATCHES_PATH="$(PWD)/patches" \
 		./scripts/build-kernel-wrapper
 
