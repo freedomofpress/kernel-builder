@@ -20,9 +20,23 @@ jobs:
       - checkout
       - run: sudo apt-get update && sudo apt-get install -y make build-essential reprotest
       - run: make reprotest
+
+  # Debug only, trying to use CI to run builds a bit faster
+  reproducibility-securedrop:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      - checkout
+      - run: sudo apt-get update && sudo apt-get install -y make build-essential reprotest
+      - run:
+          name: Build SecureDrop kernel reproducibly
+          command: make reprotest-sd
+          # The linux-image-debug package step takes >30m
+          no_output_timeout: 60m
 workflows:
   version: 2
   build:
     jobs:
       - vanilla
       - reproducibility
+      - reproducibility-securedrop

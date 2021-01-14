@@ -32,7 +32,7 @@ if [[ ! -d /output && ! -w /output ]]; then
     exit 1
 fi
 
-if [[ -n "$GRSECURITY" ]]; then
+if [[ -n "$GRSECURITY" && "$GRSECURITY" = "1" ]]; then
     LINUX_VERSION="$(/usr/local/bin/grsecurity-urls.py --print-version)"
     echo "Will include grsecurity patch for kernel $LINUX_VERSION"
     /usr/local/bin/grsecurity-urls.py > /patches-grsec/grsec
@@ -58,7 +58,7 @@ if [[ -e "$LINUX_CUSTOM_CONFIG" ]]; then
     cp "$LINUX_CUSTOM_CONFIG" .config
 fi
 
-if [[ -d /patches ]]; then
+if [[ -e /patches ]]; then
     echo "Applying custom patches for kernel source $LINUX_VERSION"
     find /patches /patches-grsec -maxdepth 1 -type f -exec patch -p 1 -i {} \;
 fi
