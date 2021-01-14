@@ -20,6 +20,11 @@ set -x
 # Set TERM to someting if it's unset, mostly useful for CI.
 TERM="${TERM:-xterm-256color}"
 export TERM
-reprotest -c "./scripts/build-kernel-wrapper" \
+
+# Support overriding the build command
+reprotest_build_cmd="${1:-make vanilla}"
+
+echo "Running reprotest with cmd: '$reprotest_build_cmd'"
+reprotest -c "$reprotest_build_cmd" \
     --vary "+all, -fileordering, -aslr, -time, -domain_host" \
     "." "build/linux-image*.deb"
