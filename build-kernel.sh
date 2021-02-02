@@ -60,7 +60,9 @@ fi
 
 if [[ -e /patches ]]; then
     echo "Applying custom patches for kernel source $LINUX_VERSION"
-    find /patches /patches-grsec -maxdepth 1 -type f -exec patch -p 1 -i {} \;
+    find /patches /patches-grsec -maxdepth 1 -type f \
+        | sort -n \
+        | xargs -d '\n' -n1 patch -p 1 -i
 fi
 
 echo "Building Linux kernel source $LINUX_VERSION"

@@ -1,0 +1,1697 @@
+From ae06c70b135886d7d6252f3090146f01a3f3b80c Mon Sep 17 00:00:00 2001
+From: Jeff Kirsher <jeffrey.t.kirsher@intel.com>
+Date: Thu, 22 Mar 2018 10:08:48 -0700
+Subject: [PATCH] intel: add SPDX identifiers to all the Intel drivers
+
+Add the SPDX identifiers to all the Intel wired LAN driver files, as
+outlined in Documentation/process/license-rules.rst.
+
+Signed-off-by: Jeff Kirsher <jeffrey.t.kirsher@intel.com>
+Tested-by: Aaron Brown <aaron.f.brown@intel.com>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+---
+ drivers/net/ethernet/intel/e100.c                   | 1 +
+ drivers/net/ethernet/intel/e1000/Makefile           | 1 +
+ drivers/net/ethernet/intel/e1000/e1000.h            | 1 +
+ drivers/net/ethernet/intel/e1000/e1000_ethtool.c    | 1 +
+ drivers/net/ethernet/intel/e1000/e1000_hw.c         | 1 +
+ drivers/net/ethernet/intel/e1000/e1000_hw.h         | 1 +
+ drivers/net/ethernet/intel/e1000/e1000_main.c       | 1 +
+ drivers/net/ethernet/intel/e1000/e1000_osdep.h      | 1 +
+ drivers/net/ethernet/intel/e1000/e1000_param.c      | 1 +
+ drivers/net/ethernet/intel/e1000e/80003es2lan.c     | 1 +
+ drivers/net/ethernet/intel/e1000e/80003es2lan.h     | 1 +
+ drivers/net/ethernet/intel/e1000e/82571.c           | 1 +
+ drivers/net/ethernet/intel/e1000e/82571.h           | 1 +
+ drivers/net/ethernet/intel/e1000e/Makefile          | 1 +
+ drivers/net/ethernet/intel/e1000e/defines.h         | 1 +
+ drivers/net/ethernet/intel/e1000e/e1000.h           | 1 +
+ drivers/net/ethernet/intel/e1000e/ethtool.c         | 1 +
+ drivers/net/ethernet/intel/e1000e/hw.h              | 1 +
+ drivers/net/ethernet/intel/e1000e/ich8lan.c         | 1 +
+ drivers/net/ethernet/intel/e1000e/ich8lan.h         | 1 +
+ drivers/net/ethernet/intel/e1000e/mac.c             | 1 +
+ drivers/net/ethernet/intel/e1000e/mac.h             | 1 +
+ drivers/net/ethernet/intel/e1000e/manage.c          | 1 +
+ drivers/net/ethernet/intel/e1000e/manage.h          | 1 +
+ drivers/net/ethernet/intel/e1000e/netdev.c          | 1 +
+ drivers/net/ethernet/intel/e1000e/nvm.c             | 1 +
+ drivers/net/ethernet/intel/e1000e/nvm.h             | 1 +
+ drivers/net/ethernet/intel/e1000e/param.c           | 1 +
+ drivers/net/ethernet/intel/e1000e/phy.c             | 1 +
+ drivers/net/ethernet/intel/e1000e/phy.h             | 1 +
+ drivers/net/ethernet/intel/e1000e/ptp.c             | 1 +
+ drivers/net/ethernet/intel/e1000e/regs.h            | 1 +
+ drivers/net/ethernet/intel/fm10k/Makefile           | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k.h            | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k_common.c     | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k_common.h     | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k_dcbnl.c      | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k_debugfs.c    | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k_ethtool.c    | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k_iov.c        | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k_main.c       | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k_mbx.c        | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k_mbx.h        | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k_netdev.c     | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k_pci.c        | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k_pf.c         | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k_pf.h         | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k_tlv.c        | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k_tlv.h        | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k_type.h       | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k_vf.c         | 1 +
+ drivers/net/ethernet/intel/fm10k/fm10k_vf.h         | 1 +
+ drivers/net/ethernet/intel/i40e/Makefile            | 1 +
+ drivers/net/ethernet/intel/i40e/i40e.h              | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_adminq.c       | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_adminq.h       | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_adminq_cmd.h   | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_alloc.h        | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_client.c       | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_client.h       | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_common.c       | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_dcb.c          | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_dcb.h          | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_dcb_nl.c       | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_debugfs.c      | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_devids.h       | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_diag.c         | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_diag.h         | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_ethtool.c      | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_hmc.c          | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_hmc.h          | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_lan_hmc.c      | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_lan_hmc.h      | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_main.c         | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_nvm.c          | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_osdep.h        | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_prototype.h    | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_ptp.c          | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_register.h     | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_status.h       | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_trace.h        | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_txrx.c         | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_txrx.h         | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_type.h         | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_virtchnl_pf.c  | 1 +
+ drivers/net/ethernet/intel/i40e/i40e_virtchnl_pf.h  | 1 +
+ drivers/net/ethernet/intel/i40evf/Makefile          | 1 +
+ drivers/net/ethernet/intel/i40evf/i40e_adminq.c     | 1 +
+ drivers/net/ethernet/intel/i40evf/i40e_adminq.h     | 1 +
+ drivers/net/ethernet/intel/i40evf/i40e_adminq_cmd.h | 1 +
+ drivers/net/ethernet/intel/i40evf/i40e_alloc.h      | 1 +
+ drivers/net/ethernet/intel/i40evf/i40e_common.c     | 1 +
+ drivers/net/ethernet/intel/i40evf/i40e_devids.h     | 1 +
+ drivers/net/ethernet/intel/i40evf/i40e_hmc.h        | 1 +
+ drivers/net/ethernet/intel/i40evf/i40e_lan_hmc.h    | 1 +
+ drivers/net/ethernet/intel/i40evf/i40e_osdep.h      | 1 +
+ drivers/net/ethernet/intel/i40evf/i40e_prototype.h  | 1 +
+ drivers/net/ethernet/intel/i40evf/i40e_register.h   | 1 +
+ drivers/net/ethernet/intel/i40evf/i40e_status.h     | 1 +
+ drivers/net/ethernet/intel/i40evf/i40e_trace.h      | 1 +
+ drivers/net/ethernet/intel/i40evf/i40e_txrx.c       | 1 +
+ drivers/net/ethernet/intel/i40evf/i40e_txrx.h       | 1 +
+ drivers/net/ethernet/intel/i40evf/i40e_type.h       | 1 +
+ drivers/net/ethernet/intel/i40evf/i40evf.h          | 1 +
+ drivers/net/ethernet/intel/i40evf/i40evf_ethtool.c  | 1 +
+ drivers/net/ethernet/intel/i40evf/i40evf_main.c     | 1 +
+ drivers/net/ethernet/intel/i40evf/i40evf_virtchnl.c | 1 +
+ drivers/net/ethernet/intel/igb/Makefile             | 1 +
+ drivers/net/ethernet/intel/igb/e1000_82575.c        | 1 +
+ drivers/net/ethernet/intel/igb/e1000_82575.h        | 1 +
+ drivers/net/ethernet/intel/igb/e1000_defines.h      | 1 +
+ drivers/net/ethernet/intel/igb/e1000_hw.h           | 1 +
+ drivers/net/ethernet/intel/igb/e1000_i210.c         | 1 +
+ drivers/net/ethernet/intel/igb/e1000_i210.h         | 1 +
+ drivers/net/ethernet/intel/igb/e1000_mac.c          | 1 +
+ drivers/net/ethernet/intel/igb/e1000_mac.h          | 1 +
+ drivers/net/ethernet/intel/igb/e1000_mbx.c          | 1 +
+ drivers/net/ethernet/intel/igb/e1000_mbx.h          | 1 +
+ drivers/net/ethernet/intel/igb/e1000_nvm.c          | 1 +
+ drivers/net/ethernet/intel/igb/e1000_nvm.h          | 1 +
+ drivers/net/ethernet/intel/igb/e1000_phy.c          | 1 +
+ drivers/net/ethernet/intel/igb/e1000_phy.h          | 1 +
+ drivers/net/ethernet/intel/igb/e1000_regs.h         | 1 +
+ drivers/net/ethernet/intel/igb/igb.h                | 1 +
+ drivers/net/ethernet/intel/igb/igb_ethtool.c        | 1 +
+ drivers/net/ethernet/intel/igb/igb_hwmon.c          | 1 +
+ drivers/net/ethernet/intel/igb/igb_main.c           | 1 +
+ drivers/net/ethernet/intel/igb/igb_ptp.c            | 1 +
+ drivers/net/ethernet/intel/igbvf/Makefile           | 1 +
+ drivers/net/ethernet/intel/igbvf/defines.h          | 1 +
+ drivers/net/ethernet/intel/igbvf/ethtool.c          | 1 +
+ drivers/net/ethernet/intel/igbvf/igbvf.h            | 1 +
+ drivers/net/ethernet/intel/igbvf/mbx.c              | 1 +
+ drivers/net/ethernet/intel/igbvf/mbx.h              | 1 +
+ drivers/net/ethernet/intel/igbvf/netdev.c           | 1 +
+ drivers/net/ethernet/intel/igbvf/regs.h             | 1 +
+ drivers/net/ethernet/intel/igbvf/vf.c               | 1 +
+ drivers/net/ethernet/intel/igbvf/vf.h               | 1 +
+ drivers/net/ethernet/intel/ixgb/Makefile            | 1 +
+ drivers/net/ethernet/intel/ixgb/ixgb.h              | 1 +
+ drivers/net/ethernet/intel/ixgb/ixgb_ee.h           | 1 +
+ drivers/net/ethernet/intel/ixgb/ixgb_hw.h           | 1 +
+ drivers/net/ethernet/intel/ixgb/ixgb_ids.h          | 1 +
+ drivers/net/ethernet/intel/ixgb/ixgb_osdep.h        | 1 +
+ drivers/net/ethernet/intel/ixgbe/Makefile           | 1 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe.h            | 1 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe_82598.c      | 1 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe_82599.c      | 1 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe_common.c     | 1 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe_common.h     | 1 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe_dcb.h        | 1 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe_dcb_82598.c  | 1 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe_dcb_82598.h  | 1 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe_dcb_82599.h  | 1 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe_fcoe.h       | 1 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe_ipsec.h      | 1 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe_mbx.h        | 1 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe_model.h      | 1 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe_phy.h        | 1 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe_sriov.h      | 1 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe_type.h       | 1 +
+ drivers/net/ethernet/intel/ixgbe/ixgbe_x540.h       | 1 +
+ drivers/net/ethernet/intel/ixgbevf/Makefile         | 1 +
+ drivers/net/ethernet/intel/ixgbevf/defines.h        | 1 +
+ drivers/net/ethernet/intel/ixgbevf/ixgbevf.h        | 1 +
+ drivers/net/ethernet/intel/ixgbevf/mbx.h            | 1 +
+ drivers/net/ethernet/intel/ixgbevf/regs.h           | 1 +
+ drivers/net/ethernet/intel/ixgbevf/vf.h             | 1 +
+ 168 files changed, 168 insertions(+)
+
+diff --git a/drivers/net/ethernet/intel/e100.c b/drivers/net/ethernet/intel/e100.c
+index 29486478836e..41ad56edfb96 100644
+--- a/drivers/net/ethernet/intel/e100.c
++++ b/drivers/net/ethernet/intel/e100.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+ 
+   Intel PRO/100 Linux driver
+diff --git a/drivers/net/ethernet/intel/e1000/Makefile b/drivers/net/ethernet/intel/e1000/Makefile
+index 4a6ab1522451..c7caadd3c8af 100644
+--- a/drivers/net/ethernet/intel/e1000/Makefile
++++ b/drivers/net/ethernet/intel/e1000/Makefile
+@@ -1,3 +1,4 @@
++# SPDX-License-Identifier: GPL-2.0
+ ################################################################################
+ #
+ # Intel PRO/1000 Linux driver
+diff --git a/drivers/net/ethernet/intel/e1000/e1000.h b/drivers/net/ethernet/intel/e1000/e1000.h
+index 8fd2458060a0..3a0feea2df54 100644
+--- a/drivers/net/ethernet/intel/e1000/e1000.h
++++ b/drivers/net/ethernet/intel/e1000/e1000.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel PRO/1000 Linux driver
+diff --git a/drivers/net/ethernet/intel/e1000/e1000_ethtool.c b/drivers/net/ethernet/intel/e1000/e1000_ethtool.c
+index dc71e87c3260..3e80ca170dd7 100644
+--- a/drivers/net/ethernet/intel/e1000/e1000_ethtool.c
++++ b/drivers/net/ethernet/intel/e1000/e1000_ethtool.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  * Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2006 Intel Corporation.
+diff --git a/drivers/net/ethernet/intel/e1000/e1000_hw.c b/drivers/net/ethernet/intel/e1000/e1000_hw.c
+index 3bac9df1c099..6e7e923d57bf 100644
+--- a/drivers/net/ethernet/intel/e1000/e1000_hw.c
++++ b/drivers/net/ethernet/intel/e1000/e1000_hw.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+ *
+   Intel PRO/1000 Linux driver
+diff --git a/drivers/net/ethernet/intel/e1000/e1000_hw.h b/drivers/net/ethernet/intel/e1000/e1000_hw.h
+index 5cf7268cc4e1..f09c569ec19b 100644
+--- a/drivers/net/ethernet/intel/e1000/e1000_hw.h
++++ b/drivers/net/ethernet/intel/e1000/e1000_hw.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel PRO/1000 Linux driver
+diff --git a/drivers/net/ethernet/intel/e1000/e1000_main.c b/drivers/net/ethernet/intel/e1000/e1000_main.c
+index 3dd4aeb2706d..d5eb19b86a0a 100644
+--- a/drivers/net/ethernet/intel/e1000/e1000_main.c
++++ b/drivers/net/ethernet/intel/e1000/e1000_main.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+ 
+   Intel PRO/1000 Linux driver
+diff --git a/drivers/net/ethernet/intel/e1000/e1000_osdep.h b/drivers/net/ethernet/intel/e1000/e1000_osdep.h
+index 33e7c45a4fe4..ae0559b8b011 100644
+--- a/drivers/net/ethernet/intel/e1000/e1000_osdep.h
++++ b/drivers/net/ethernet/intel/e1000/e1000_osdep.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel PRO/1000 Linux driver
+diff --git a/drivers/net/ethernet/intel/e1000/e1000_param.c b/drivers/net/ethernet/intel/e1000/e1000_param.c
+index c9cde352b1c8..345f23927bcc 100644
+--- a/drivers/net/ethernet/intel/e1000/e1000_param.c
++++ b/drivers/net/ethernet/intel/e1000/e1000_param.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+ 
+   Intel PRO/1000 Linux driver
+diff --git a/drivers/net/ethernet/intel/e1000e/80003es2lan.c b/drivers/net/ethernet/intel/e1000e/80003es2lan.c
+index cd391376036c..953e99df420c 100644
+--- a/drivers/net/ethernet/intel/e1000e/80003es2lan.c
++++ b/drivers/net/ethernet/intel/e1000e/80003es2lan.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/80003es2lan.h b/drivers/net/ethernet/intel/e1000e/80003es2lan.h
+index a2162e11673e..ee6d1256fda4 100644
+--- a/drivers/net/ethernet/intel/e1000e/80003es2lan.h
++++ b/drivers/net/ethernet/intel/e1000e/80003es2lan.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/82571.c b/drivers/net/ethernet/intel/e1000e/82571.c
+index 6b03c8553e59..924f2c8dfa6c 100644
+--- a/drivers/net/ethernet/intel/e1000e/82571.c
++++ b/drivers/net/ethernet/intel/e1000e/82571.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/82571.h b/drivers/net/ethernet/intel/e1000e/82571.h
+index abc6a9abff98..9a24c645f726 100644
+--- a/drivers/net/ethernet/intel/e1000e/82571.h
++++ b/drivers/net/ethernet/intel/e1000e/82571.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/Makefile b/drivers/net/ethernet/intel/e1000e/Makefile
+index 106de493373c..24e391a4ac68 100644
+--- a/drivers/net/ethernet/intel/e1000e/Makefile
++++ b/drivers/net/ethernet/intel/e1000e/Makefile
+@@ -1,3 +1,4 @@
++# SPDX-License-Identifier: GPL-2.0
+ ################################################################################
+ #
+ # Intel PRO/1000 Linux driver
+diff --git a/drivers/net/ethernet/intel/e1000e/defines.h b/drivers/net/ethernet/intel/e1000e/defines.h
+index 824fd44e25f0..22883015a695 100644
+--- a/drivers/net/ethernet/intel/e1000e/defines.h
++++ b/drivers/net/ethernet/intel/e1000e/defines.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/e1000.h b/drivers/net/ethernet/intel/e1000e/e1000.h
+index 2311b31bdcac..da88555ba1fd 100644
+--- a/drivers/net/ethernet/intel/e1000e/e1000.h
++++ b/drivers/net/ethernet/intel/e1000e/e1000.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/ethtool.c b/drivers/net/ethernet/intel/e1000e/ethtool.c
+index 003cbd605799..64dc0c11147f 100644
+--- a/drivers/net/ethernet/intel/e1000e/ethtool.c
++++ b/drivers/net/ethernet/intel/e1000e/ethtool.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/hw.h b/drivers/net/ethernet/intel/e1000e/hw.h
+index d803b1a12349..21802396bed6 100644
+--- a/drivers/net/ethernet/intel/e1000e/hw.h
++++ b/drivers/net/ethernet/intel/e1000e/hw.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/ich8lan.c b/drivers/net/ethernet/intel/e1000e/ich8lan.c
+index 1dddfb7b2de6..1551d6ce5341 100644
+--- a/drivers/net/ethernet/intel/e1000e/ich8lan.c
++++ b/drivers/net/ethernet/intel/e1000e/ich8lan.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/ich8lan.h b/drivers/net/ethernet/intel/e1000e/ich8lan.h
+index 00a36df02a3f..3c4f82c21084 100644
+--- a/drivers/net/ethernet/intel/e1000e/ich8lan.h
++++ b/drivers/net/ethernet/intel/e1000e/ich8lan.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/mac.c b/drivers/net/ethernet/intel/e1000e/mac.c
+index 5bdc3a2d4fd7..b293464a9f27 100644
+--- a/drivers/net/ethernet/intel/e1000e/mac.c
++++ b/drivers/net/ethernet/intel/e1000e/mac.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/mac.h b/drivers/net/ethernet/intel/e1000e/mac.h
+index 8284618af9ff..cb0abf6c76a5 100644
+--- a/drivers/net/ethernet/intel/e1000e/mac.h
++++ b/drivers/net/ethernet/intel/e1000e/mac.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/manage.c b/drivers/net/ethernet/intel/e1000e/manage.c
+index cc9b3befc2bc..e027660aeb92 100644
+--- a/drivers/net/ethernet/intel/e1000e/manage.c
++++ b/drivers/net/ethernet/intel/e1000e/manage.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/manage.h b/drivers/net/ethernet/intel/e1000e/manage.h
+index 0b9ea5952b07..3268f2e58593 100644
+--- a/drivers/net/ethernet/intel/e1000e/manage.h
++++ b/drivers/net/ethernet/intel/e1000e/manage.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/netdev.c b/drivers/net/ethernet/intel/e1000e/netdev.c
+index dc853b0863af..ec4a9759a6f2 100644
+--- a/drivers/net/ethernet/intel/e1000e/netdev.c
++++ b/drivers/net/ethernet/intel/e1000e/netdev.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/nvm.c b/drivers/net/ethernet/intel/e1000e/nvm.c
+index 2efd80dfd88e..68949bb41b7b 100644
+--- a/drivers/net/ethernet/intel/e1000e/nvm.c
++++ b/drivers/net/ethernet/intel/e1000e/nvm.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/nvm.h b/drivers/net/ethernet/intel/e1000e/nvm.h
+index 5d46967e0d1f..8e082028be7d 100644
+--- a/drivers/net/ethernet/intel/e1000e/nvm.h
++++ b/drivers/net/ethernet/intel/e1000e/nvm.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/param.c b/drivers/net/ethernet/intel/e1000e/param.c
+index 47da51864543..2def33eba9e6 100644
+--- a/drivers/net/ethernet/intel/e1000e/param.c
++++ b/drivers/net/ethernet/intel/e1000e/param.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/phy.c b/drivers/net/ethernet/intel/e1000e/phy.c
+index 86ff0969efb6..b8226ed0e338 100644
+--- a/drivers/net/ethernet/intel/e1000e/phy.c
++++ b/drivers/net/ethernet/intel/e1000e/phy.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/phy.h b/drivers/net/ethernet/intel/e1000e/phy.h
+index 3027f63ee793..d4180b5e9196 100644
+--- a/drivers/net/ethernet/intel/e1000e/phy.h
++++ b/drivers/net/ethernet/intel/e1000e/phy.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/ptp.c b/drivers/net/ethernet/intel/e1000e/ptp.c
+index b366885487a8..f941e5085f44 100644
+--- a/drivers/net/ethernet/intel/e1000e/ptp.c
++++ b/drivers/net/ethernet/intel/e1000e/ptp.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/e1000e/regs.h b/drivers/net/ethernet/intel/e1000e/regs.h
+index 0cb4d365e5ad..16afc3c2a986 100644
+--- a/drivers/net/ethernet/intel/e1000e/regs.h
++++ b/drivers/net/ethernet/intel/e1000e/regs.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel PRO/1000 Linux driver
+  * Copyright(c) 1999 - 2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/Makefile b/drivers/net/ethernet/intel/fm10k/Makefile
+index cac645329cea..93277cb99cb7 100644
+--- a/drivers/net/ethernet/intel/fm10k/Makefile
++++ b/drivers/net/ethernet/intel/fm10k/Makefile
+@@ -1,3 +1,4 @@
++# SPDX-License-Identifier: GPL-2.0
+ ################################################################################
+ #
+ # Intel(R) Ethernet Switch Host Interface Driver
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k.h b/drivers/net/ethernet/intel/fm10k/fm10k.h
+index 46973fb234c5..a9cdf763c59d 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k.h
++++ b/drivers/net/ethernet/intel/fm10k/fm10k.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2017 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k_common.c b/drivers/net/ethernet/intel/fm10k/fm10k_common.c
+index c58a5377a287..e303d88720ef 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k_common.c
++++ b/drivers/net/ethernet/intel/fm10k/fm10k_common.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2018 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k_common.h b/drivers/net/ethernet/intel/fm10k/fm10k_common.h
+index d51f9c7a47ff..2bdb24d2ca9d 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k_common.h
++++ b/drivers/net/ethernet/intel/fm10k/fm10k_common.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2016 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k_dcbnl.c b/drivers/net/ethernet/intel/fm10k/fm10k_dcbnl.c
+index db4bd8bf9722..c4f733452ef2 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k_dcbnl.c
++++ b/drivers/net/ethernet/intel/fm10k/fm10k_dcbnl.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2016 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k_debugfs.c b/drivers/net/ethernet/intel/fm10k/fm10k_debugfs.c
+index 14df09e2d964..43e8d839831f 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k_debugfs.c
++++ b/drivers/net/ethernet/intel/fm10k/fm10k_debugfs.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2016 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k_ethtool.c b/drivers/net/ethernet/intel/fm10k/fm10k_ethtool.c
+index c7234f35f8ff..28b6b4e56487 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k_ethtool.c
++++ b/drivers/net/ethernet/intel/fm10k/fm10k_ethtool.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2017 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k_iov.c b/drivers/net/ethernet/intel/fm10k/fm10k_iov.c
+index 760cfa52d02c..30395f5e5e87 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k_iov.c
++++ b/drivers/net/ethernet/intel/fm10k/fm10k_iov.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2017 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k_main.c b/drivers/net/ethernet/intel/fm10k/fm10k_main.c
+index 2c93d719438f..df8607097e4a 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k_main.c
++++ b/drivers/net/ethernet/intel/fm10k/fm10k_main.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2017 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k_mbx.c b/drivers/net/ethernet/intel/fm10k/fm10k_mbx.c
+index 244d3ad58ca7..c01bf30a0c9e 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k_mbx.c
++++ b/drivers/net/ethernet/intel/fm10k/fm10k_mbx.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2017 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k_mbx.h b/drivers/net/ethernet/intel/fm10k/fm10k_mbx.h
+index 35c1dbad1330..007e1dfa9b7a 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k_mbx.h
++++ b/drivers/net/ethernet/intel/fm10k/fm10k_mbx.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2016 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k_netdev.c b/drivers/net/ethernet/intel/fm10k/fm10k_netdev.c
+index 75c99aed3c41..45793491d4ba 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k_netdev.c
++++ b/drivers/net/ethernet/intel/fm10k/fm10k_netdev.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2018 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k_pci.c b/drivers/net/ethernet/intel/fm10k/fm10k_pci.c
+index 50f53e403ef5..cffcb187cb76 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k_pci.c
++++ b/drivers/net/ethernet/intel/fm10k/fm10k_pci.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2018 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k_pf.c b/drivers/net/ethernet/intel/fm10k/fm10k_pf.c
+index bee192fe2ffb..7ba54c534f8c 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k_pf.c
++++ b/drivers/net/ethernet/intel/fm10k/fm10k_pf.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2018 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k_pf.h b/drivers/net/ethernet/intel/fm10k/fm10k_pf.h
+index e04d41f1a532..ae81f9a16602 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k_pf.h
++++ b/drivers/net/ethernet/intel/fm10k/fm10k_pf.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2017 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k_tlv.c b/drivers/net/ethernet/intel/fm10k/fm10k_tlv.c
+index 9d0d31da426b..725ecb7abccd 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k_tlv.c
++++ b/drivers/net/ethernet/intel/fm10k/fm10k_tlv.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2018 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k_tlv.h b/drivers/net/ethernet/intel/fm10k/fm10k_tlv.h
+index a1f1027fe184..5d2ee759507e 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k_tlv.h
++++ b/drivers/net/ethernet/intel/fm10k/fm10k_tlv.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2016 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k_type.h b/drivers/net/ethernet/intel/fm10k/fm10k_type.h
+index 6bb16c13d9d6..dd23af11e2c1 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k_type.h
++++ b/drivers/net/ethernet/intel/fm10k/fm10k_type.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2016 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k_vf.c b/drivers/net/ethernet/intel/fm10k/fm10k_vf.c
+index 337ba65a9411..f06913630b39 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k_vf.c
++++ b/drivers/net/ethernet/intel/fm10k/fm10k_vf.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2016 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/fm10k/fm10k_vf.h b/drivers/net/ethernet/intel/fm10k/fm10k_vf.h
+index 2662f33c0c71..66a66b73a2f1 100644
+--- a/drivers/net/ethernet/intel/fm10k/fm10k_vf.h
++++ b/drivers/net/ethernet/intel/fm10k/fm10k_vf.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel(R) Ethernet Switch Host Interface Driver
+  * Copyright(c) 2013 - 2016 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/i40e/Makefile b/drivers/net/ethernet/intel/i40e/Makefile
+index 3da482c3d68d..75437768a07c 100644
+--- a/drivers/net/ethernet/intel/i40e/Makefile
++++ b/drivers/net/ethernet/intel/i40e/Makefile
+@@ -1,3 +1,4 @@
++# SPDX-License-Identifier: GPL-2.0
+ ################################################################################
+ #
+ # Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e.h b/drivers/net/ethernet/intel/i40e/i40e.h
+index 271ab1a861b7..1d33a8b3ef54 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e.h
++++ b/drivers/net/ethernet/intel/i40e/i40e.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_adminq.c b/drivers/net/ethernet/intel/i40e/i40e_adminq.c
+index e78971605e0b..843fc7781ef8 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_adminq.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_adminq.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_adminq.h b/drivers/net/ethernet/intel/i40e/i40e_adminq.h
+index 2349fbe04bd2..0a8749ee9fd3 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_adminq.h
++++ b/drivers/net/ethernet/intel/i40e/i40e_adminq.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_adminq_cmd.h b/drivers/net/ethernet/intel/i40e/i40e_adminq_cmd.h
+index 0dfc52772c45..0244923edeb8 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_adminq_cmd.h
++++ b/drivers/net/ethernet/intel/i40e/i40e_adminq_cmd.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_alloc.h b/drivers/net/ethernet/intel/i40e/i40e_alloc.h
+index 926811ad44ac..abed0c52e782 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_alloc.h
++++ b/drivers/net/ethernet/intel/i40e/i40e_alloc.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_client.c b/drivers/net/ethernet/intel/i40e/i40e_client.c
+index 704695a61645..999dea5a7c9e 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_client.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_client.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_client.h b/drivers/net/ethernet/intel/i40e/i40e_client.h
+index ba55c889e4c5..9d464d40bc17 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_client.h
++++ b/drivers/net/ethernet/intel/i40e/i40e_client.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_common.c b/drivers/net/ethernet/intel/i40e/i40e_common.c
+index 4fa31d87d9d2..c0a3dae8a2db 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_common.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_common.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_dcb.c b/drivers/net/ethernet/intel/i40e/i40e_dcb.c
+index 55079fe3ed63..9fec728dc4b9 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_dcb.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_dcb.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_dcb.h b/drivers/net/ethernet/intel/i40e/i40e_dcb.h
+index 92d01042c1f6..4f806386cb22 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_dcb.h
++++ b/drivers/net/ethernet/intel/i40e/i40e_dcb.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_dcb_nl.c b/drivers/net/ethernet/intel/i40e/i40e_dcb_nl.c
+index 886e667f2f1c..502818e3da78 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_dcb_nl.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_dcb_nl.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_debugfs.c b/drivers/net/ethernet/intel/i40e/i40e_debugfs.c
+index b829fd365693..d494dcaf18d0 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_debugfs.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_debugfs.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_devids.h b/drivers/net/ethernet/intel/i40e/i40e_devids.h
+index 8e46098bad57..ad6a66ccb576 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_devids.h
++++ b/drivers/net/ethernet/intel/i40e/i40e_devids.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_diag.c b/drivers/net/ethernet/intel/i40e/i40e_diag.c
+index 76ed56641864..df3e60470f8b 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_diag.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_diag.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_diag.h b/drivers/net/ethernet/intel/i40e/i40e_diag.h
+index 0b5911652084..be8341763475 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_diag.h
++++ b/drivers/net/ethernet/intel/i40e/i40e_diag.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_ethtool.c b/drivers/net/ethernet/intel/i40e/i40e_ethtool.c
+index 0c7e7de595d3..846a9d597e01 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_ethtool.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_ethtool.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_hmc.c b/drivers/net/ethernet/intel/i40e/i40e_hmc.c
+index a7c7b1d9b7c8..6d4b590f851b 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_hmc.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_hmc.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_hmc.h b/drivers/net/ethernet/intel/i40e/i40e_hmc.h
+index d90669211392..7b5fd33d70ae 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_hmc.h
++++ b/drivers/net/ethernet/intel/i40e/i40e_hmc.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_lan_hmc.c b/drivers/net/ethernet/intel/i40e/i40e_lan_hmc.c
+index daa9204426d4..cd40dc487b38 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_lan_hmc.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_lan_hmc.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_lan_hmc.h b/drivers/net/ethernet/intel/i40e/i40e_lan_hmc.h
+index e74128db5be5..79e1396735d9 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_lan_hmc.h
++++ b/drivers/net/ethernet/intel/i40e/i40e_lan_hmc.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_main.c b/drivers/net/ethernet/intel/i40e/i40e_main.c
+index 4a4401c61089..536ed8e8a96f 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_main.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_main.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_nvm.c b/drivers/net/ethernet/intel/i40e/i40e_nvm.c
+index 76a5cb04e4fe..ba9687c03795 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_nvm.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_nvm.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_osdep.h b/drivers/net/ethernet/intel/i40e/i40e_osdep.h
+index 80e66da6b145..9c3c3b0d3ac4 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_osdep.h
++++ b/drivers/net/ethernet/intel/i40e/i40e_osdep.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_prototype.h b/drivers/net/ethernet/intel/i40e/i40e_prototype.h
+index eabb636f6a19..2ec24188d6e2 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_prototype.h
++++ b/drivers/net/ethernet/intel/i40e/i40e_prototype.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_ptp.c b/drivers/net/ethernet/intel/i40e/i40e_ptp.c
+index 97381238eb7c..5b47dd1f75a5 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_ptp.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_ptp.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_register.h b/drivers/net/ethernet/intel/i40e/i40e_register.h
+index c234758dad15..b3e206e49cc2 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_register.h
++++ b/drivers/net/ethernet/intel/i40e/i40e_register.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_status.h b/drivers/net/ethernet/intel/i40e/i40e_status.h
+index afb72e711d43..10c86f63dc52 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_status.h
++++ b/drivers/net/ethernet/intel/i40e/i40e_status.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_trace.h b/drivers/net/ethernet/intel/i40e/i40e_trace.h
+index d3e55f54a05e..410ba13bcf21 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_trace.h
++++ b/drivers/net/ethernet/intel/i40e/i40e_trace.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel(R) 40-10 Gigabit Ethernet Connection Network Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_txrx.c b/drivers/net/ethernet/intel/i40e/i40e_txrx.c
+index 97cfe944b568..7ccd05bf4b06 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_txrx.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_txrx.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_txrx.h b/drivers/net/ethernet/intel/i40e/i40e_txrx.h
+index 3c80ea784389..7f8220e65374 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_txrx.h
++++ b/drivers/net/ethernet/intel/i40e/i40e_txrx.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_type.h b/drivers/net/ethernet/intel/i40e/i40e_type.h
+index 69ea15892a5b..bfb80092b352 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_type.h
++++ b/drivers/net/ethernet/intel/i40e/i40e_type.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_virtchnl_pf.c b/drivers/net/ethernet/intel/i40e/i40e_virtchnl_pf.c
+index 321ab4badb68..35173cbe80f7 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_virtchnl_pf.c
++++ b/drivers/net/ethernet/intel/i40e/i40e_virtchnl_pf.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40e/i40e_virtchnl_pf.h b/drivers/net/ethernet/intel/i40e/i40e_virtchnl_pf.h
+index 6852599b2379..57f727bb9e36 100644
+--- a/drivers/net/ethernet/intel/i40e/i40e_virtchnl_pf.h
++++ b/drivers/net/ethernet/intel/i40e/i40e_virtchnl_pf.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/Makefile b/drivers/net/ethernet/intel/i40evf/Makefile
+index a393f4a07f06..1e89c5487676 100644
+--- a/drivers/net/ethernet/intel/i40evf/Makefile
++++ b/drivers/net/ethernet/intel/i40evf/Makefile
+@@ -1,3 +1,4 @@
++# SPDX-License-Identifier: GPL-2.0
+ ################################################################################
+ #
+ # Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40e_adminq.c b/drivers/net/ethernet/intel/i40evf/i40e_adminq.c
+index d1aab6b8bfb1..6fd677efa9da 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40e_adminq.c
++++ b/drivers/net/ethernet/intel/i40evf/i40e_adminq.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40e_adminq.h b/drivers/net/ethernet/intel/i40evf/i40e_adminq.h
+index e0bfaa3d4a21..a7137c165256 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40e_adminq.h
++++ b/drivers/net/ethernet/intel/i40evf/i40e_adminq.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40e_adminq_cmd.h b/drivers/net/ethernet/intel/i40evf/i40e_adminq_cmd.h
+index 815de8d9c3fb..439e71882049 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40e_adminq_cmd.h
++++ b/drivers/net/ethernet/intel/i40evf/i40e_adminq_cmd.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40e_alloc.h b/drivers/net/ethernet/intel/i40evf/i40e_alloc.h
+index 8e6a6dd9212b..7e0fddd8af36 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40e_alloc.h
++++ b/drivers/net/ethernet/intel/i40evf/i40e_alloc.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40e_common.c b/drivers/net/ethernet/intel/i40evf/i40e_common.c
+index 67bf5cebb76f..67140cdbcd7a 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40e_common.c
++++ b/drivers/net/ethernet/intel/i40evf/i40e_common.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40e_devids.h b/drivers/net/ethernet/intel/i40evf/i40e_devids.h
+index 0469e4bfd3ec..352dd3f3eb6a 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40e_devids.h
++++ b/drivers/net/ethernet/intel/i40evf/i40e_devids.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40e_hmc.h b/drivers/net/ethernet/intel/i40evf/i40e_hmc.h
+index 00ed24bfce13..7432596164f4 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40e_hmc.h
++++ b/drivers/net/ethernet/intel/i40evf/i40e_hmc.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40e_lan_hmc.h b/drivers/net/ethernet/intel/i40evf/i40e_lan_hmc.h
+index a5d79877354c..ddac0e4908d3 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40e_lan_hmc.h
++++ b/drivers/net/ethernet/intel/i40evf/i40e_lan_hmc.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40e_osdep.h b/drivers/net/ethernet/intel/i40evf/i40e_osdep.h
+index a90737786c34..8668ad6c1a65 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40e_osdep.h
++++ b/drivers/net/ethernet/intel/i40evf/i40e_osdep.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40e_prototype.h b/drivers/net/ethernet/intel/i40evf/i40e_prototype.h
+index 47c429931a57..72501bd0f1a9 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40e_prototype.h
++++ b/drivers/net/ethernet/intel/i40evf/i40e_prototype.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40e_register.h b/drivers/net/ethernet/intel/i40evf/i40e_register.h
+index 10febcfd7cd8..c9c935659758 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40e_register.h
++++ b/drivers/net/ethernet/intel/i40evf/i40e_register.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40e_status.h b/drivers/net/ethernet/intel/i40evf/i40e_status.h
+index 5b222246e08b..0d7993ecb99a 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40e_status.h
++++ b/drivers/net/ethernet/intel/i40evf/i40e_status.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40e_trace.h b/drivers/net/ethernet/intel/i40evf/i40e_trace.h
+index 9a5100b2b7c7..ece01dd12a3c 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40e_trace.h
++++ b/drivers/net/ethernet/intel/i40evf/i40e_trace.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel(R) 40-10 Gigabit Ethernet Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40e_txrx.c b/drivers/net/ethernet/intel/i40evf/i40e_txrx.c
+index e088d23eb083..12bd937861e7 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40e_txrx.c
++++ b/drivers/net/ethernet/intel/i40evf/i40e_txrx.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40e_txrx.h b/drivers/net/ethernet/intel/i40evf/i40e_txrx.h
+index 9129447d079b..5790897eae2e 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40e_txrx.h
++++ b/drivers/net/ethernet/intel/i40evf/i40e_txrx.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40e_type.h b/drivers/net/ethernet/intel/i40evf/i40e_type.h
+index 54951c84a481..449de4b0058e 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40e_type.h
++++ b/drivers/net/ethernet/intel/i40evf/i40e_type.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40evf.h b/drivers/net/ethernet/intel/i40evf/i40evf.h
+index 279dced87e47..3a7a1e77bf39 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40evf.h
++++ b/drivers/net/ethernet/intel/i40evf/i40evf.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40evf_ethtool.c b/drivers/net/ethernet/intel/i40evf/i40evf_ethtool.c
+index e6793255de0b..dc4cde274fb8 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40evf_ethtool.c
++++ b/drivers/net/ethernet/intel/i40evf/i40evf_ethtool.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40evf_main.c b/drivers/net/ethernet/intel/i40evf/i40evf_main.c
+index 7e7cd80abaf4..5f71532be7f1 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40evf_main.c
++++ b/drivers/net/ethernet/intel/i40evf/i40evf_main.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/i40evf/i40evf_virtchnl.c b/drivers/net/ethernet/intel/i40evf/i40evf_virtchnl.c
+index 3c76c817ca1a..26a59890532f 100644
+--- a/drivers/net/ethernet/intel/i40evf/i40evf_virtchnl.c
++++ b/drivers/net/ethernet/intel/i40evf/i40evf_virtchnl.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+  *
+  * Intel Ethernet Controller XL710 Family Linux Virtual Function Driver
+diff --git a/drivers/net/ethernet/intel/igb/Makefile b/drivers/net/ethernet/intel/igb/Makefile
+index 5bcb2de75933..c48583e98ac1 100644
+--- a/drivers/net/ethernet/intel/igb/Makefile
++++ b/drivers/net/ethernet/intel/igb/Makefile
+@@ -1,3 +1,4 @@
++# SPDX-License-Identifier: GPL-2.0
+ ################################################################################
+ #
+ # Intel 82575 PCI-Express Ethernet Linux driver
+diff --git a/drivers/net/ethernet/intel/igb/e1000_82575.c b/drivers/net/ethernet/intel/igb/e1000_82575.c
+index c37cc8bccf47..dd9b6cac220d 100644
+--- a/drivers/net/ethernet/intel/igb/e1000_82575.c
++++ b/drivers/net/ethernet/intel/igb/e1000_82575.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/igb/e1000_82575.h b/drivers/net/ethernet/intel/igb/e1000_82575.h
+index acf06051e111..e53ebe97d709 100644
+--- a/drivers/net/ethernet/intel/igb/e1000_82575.h
++++ b/drivers/net/ethernet/intel/igb/e1000_82575.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2014 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/igb/e1000_defines.h b/drivers/net/ethernet/intel/igb/e1000_defines.h
+index 83cabff1e0ab..98534f765e0e 100644
+--- a/drivers/net/ethernet/intel/igb/e1000_defines.h
++++ b/drivers/net/ethernet/intel/igb/e1000_defines.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2014 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/igb/e1000_hw.h b/drivers/net/ethernet/intel/igb/e1000_hw.h
+index 6c9485ab4b57..ff835e1e853d 100644
+--- a/drivers/net/ethernet/intel/igb/e1000_hw.h
++++ b/drivers/net/ethernet/intel/igb/e1000_hw.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2014 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/igb/e1000_i210.c b/drivers/net/ethernet/intel/igb/e1000_i210.c
+index 07d48f2e3369..6f548247e6d8 100644
+--- a/drivers/net/ethernet/intel/igb/e1000_i210.c
++++ b/drivers/net/ethernet/intel/igb/e1000_i210.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2014 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/igb/e1000_i210.h b/drivers/net/ethernet/intel/igb/e1000_i210.h
+index b2964a2a60b1..56f015ccb206 100644
+--- a/drivers/net/ethernet/intel/igb/e1000_i210.h
++++ b/drivers/net/ethernet/intel/igb/e1000_i210.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2014 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/igb/e1000_mac.c b/drivers/net/ethernet/intel/igb/e1000_mac.c
+index 5eff82678f0b..298afa0d9159 100644
+--- a/drivers/net/ethernet/intel/igb/e1000_mac.c
++++ b/drivers/net/ethernet/intel/igb/e1000_mac.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2014 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/igb/e1000_mac.h b/drivers/net/ethernet/intel/igb/e1000_mac.h
+index 90c8893c3eed..04d80c765aee 100644
+--- a/drivers/net/ethernet/intel/igb/e1000_mac.h
++++ b/drivers/net/ethernet/intel/igb/e1000_mac.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2014 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/igb/e1000_mbx.c b/drivers/net/ethernet/intel/igb/e1000_mbx.c
+index bffd58f7b2a1..ef42f1689b3b 100644
+--- a/drivers/net/ethernet/intel/igb/e1000_mbx.c
++++ b/drivers/net/ethernet/intel/igb/e1000_mbx.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2014 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/igb/e1000_mbx.h b/drivers/net/ethernet/intel/igb/e1000_mbx.h
+index a62b08e1572e..4f0ecd28354d 100644
+--- a/drivers/net/ethernet/intel/igb/e1000_mbx.h
++++ b/drivers/net/ethernet/intel/igb/e1000_mbx.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2014 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/igb/e1000_nvm.c b/drivers/net/ethernet/intel/igb/e1000_nvm.c
+index 3582c5cf8843..e4596f151cd4 100644
+--- a/drivers/net/ethernet/intel/igb/e1000_nvm.c
++++ b/drivers/net/ethernet/intel/igb/e1000_nvm.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2014 Intel Corporation.
+  * This program is free software; you can redistribute it and/or modify it
+diff --git a/drivers/net/ethernet/intel/igb/e1000_nvm.h b/drivers/net/ethernet/intel/igb/e1000_nvm.h
+index febc9cdb7391..dde68cd54a53 100644
+--- a/drivers/net/ethernet/intel/igb/e1000_nvm.h
++++ b/drivers/net/ethernet/intel/igb/e1000_nvm.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2014 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/igb/e1000_phy.c b/drivers/net/ethernet/intel/igb/e1000_phy.c
+index 413025bdcb50..4ec61243da82 100644
+--- a/drivers/net/ethernet/intel/igb/e1000_phy.c
++++ b/drivers/net/ethernet/intel/igb/e1000_phy.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2015 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/igb/e1000_phy.h b/drivers/net/ethernet/intel/igb/e1000_phy.h
+index 9b622b33bb5a..856d2cda0643 100644
+--- a/drivers/net/ethernet/intel/igb/e1000_phy.h
++++ b/drivers/net/ethernet/intel/igb/e1000_phy.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2014 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/igb/e1000_regs.h b/drivers/net/ethernet/intel/igb/e1000_regs.h
+index 568c96842f28..e8fa8c6530e0 100644
+--- a/drivers/net/ethernet/intel/igb/e1000_regs.h
++++ b/drivers/net/ethernet/intel/igb/e1000_regs.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2014 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/igb/igb.h b/drivers/net/ethernet/intel/igb/igb.h
+index 55d6f17d5799..8dbc399b345e 100644
+--- a/drivers/net/ethernet/intel/igb/igb.h
++++ b/drivers/net/ethernet/intel/igb/igb.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2014 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/igb/igb_ethtool.c b/drivers/net/ethernet/intel/igb/igb_ethtool.c
+index 606e6761758f..e77ba0d5866d 100644
+--- a/drivers/net/ethernet/intel/igb/igb_ethtool.c
++++ b/drivers/net/ethernet/intel/igb/igb_ethtool.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2014 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/igb/igb_hwmon.c b/drivers/net/ethernet/intel/igb/igb_hwmon.c
+index 44b6a68f1af7..41b306fb90f8 100644
+--- a/drivers/net/ethernet/intel/igb/igb_hwmon.c
++++ b/drivers/net/ethernet/intel/igb/igb_hwmon.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2014 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/igb/igb_main.c b/drivers/net/ethernet/intel/igb/igb_main.c
+index 715bb32e6901..c1c0bc30a16d 100644
+--- a/drivers/net/ethernet/intel/igb/igb_main.c
++++ b/drivers/net/ethernet/intel/igb/igb_main.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /* Intel(R) Gigabit Ethernet Linux driver
+  * Copyright(c) 2007-2014 Intel Corporation.
+  *
+diff --git a/drivers/net/ethernet/intel/igb/igb_ptp.c b/drivers/net/ethernet/intel/igb/igb_ptp.c
+index 0746b19ec6d3..7454b9895a65 100644
+--- a/drivers/net/ethernet/intel/igb/igb_ptp.c
++++ b/drivers/net/ethernet/intel/igb/igb_ptp.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0+
+ /* PTP Hardware Clock (PHC) driver for the Intel 82576 and 82580
+  *
+  * Copyright (C) 2011 Richard Cochran <richardcochran@gmail.com>
+diff --git a/drivers/net/ethernet/intel/igbvf/Makefile b/drivers/net/ethernet/intel/igbvf/Makefile
+index 044b0ad5fcb9..efe29dae384a 100644
+--- a/drivers/net/ethernet/intel/igbvf/Makefile
++++ b/drivers/net/ethernet/intel/igbvf/Makefile
+@@ -1,3 +1,4 @@
++# SPDX-License-Identifier: GPL-2.0
+ ################################################################################
+ #
+ # Intel(R) 82576 Virtual Function Linux driver
+diff --git a/drivers/net/ethernet/intel/igbvf/defines.h b/drivers/net/ethernet/intel/igbvf/defines.h
+index f1789d192e24..04bcfec0641b 100644
+--- a/drivers/net/ethernet/intel/igbvf/defines.h
++++ b/drivers/net/ethernet/intel/igbvf/defines.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel(R) 82576 Virtual Function Linux driver
+diff --git a/drivers/net/ethernet/intel/igbvf/ethtool.c b/drivers/net/ethernet/intel/igbvf/ethtool.c
+index a127688e83e6..ca39e3cccaeb 100644
+--- a/drivers/net/ethernet/intel/igbvf/ethtool.c
++++ b/drivers/net/ethernet/intel/igbvf/ethtool.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+ 
+   Intel(R) 82576 Virtual Function Linux driver
+diff --git a/drivers/net/ethernet/intel/igbvf/igbvf.h b/drivers/net/ethernet/intel/igbvf/igbvf.h
+index bf69f01f8467..f5bf248e22eb 100644
+--- a/drivers/net/ethernet/intel/igbvf/igbvf.h
++++ b/drivers/net/ethernet/intel/igbvf/igbvf.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel(R) 82576 Virtual Function Linux driver
+diff --git a/drivers/net/ethernet/intel/igbvf/mbx.c b/drivers/net/ethernet/intel/igbvf/mbx.c
+index c9a441632e9f..9195884096f8 100644
+--- a/drivers/net/ethernet/intel/igbvf/mbx.c
++++ b/drivers/net/ethernet/intel/igbvf/mbx.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+ 
+   Intel(R) 82576 Virtual Function Linux driver
+diff --git a/drivers/net/ethernet/intel/igbvf/mbx.h b/drivers/net/ethernet/intel/igbvf/mbx.h
+index 30d58c4a444e..479b062fe9ee 100644
+--- a/drivers/net/ethernet/intel/igbvf/mbx.h
++++ b/drivers/net/ethernet/intel/igbvf/mbx.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel(R) 82576 Virtual Function Linux driver
+diff --git a/drivers/net/ethernet/intel/igbvf/netdev.c b/drivers/net/ethernet/intel/igbvf/netdev.c
+index 4214c1519a87..e2b7502f1953 100644
+--- a/drivers/net/ethernet/intel/igbvf/netdev.c
++++ b/drivers/net/ethernet/intel/igbvf/netdev.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+ 
+   Intel(R) 82576 Virtual Function Linux driver
+diff --git a/drivers/net/ethernet/intel/igbvf/regs.h b/drivers/net/ethernet/intel/igbvf/regs.h
+index 86a7c120b574..614e52409f11 100644
+--- a/drivers/net/ethernet/intel/igbvf/regs.h
++++ b/drivers/net/ethernet/intel/igbvf/regs.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel(R) 82576 Virtual Function Linux driver
+diff --git a/drivers/net/ethernet/intel/igbvf/vf.c b/drivers/net/ethernet/intel/igbvf/vf.c
+index 9577ccf4b26a..bfe8d8297b2e 100644
+--- a/drivers/net/ethernet/intel/igbvf/vf.c
++++ b/drivers/net/ethernet/intel/igbvf/vf.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+ 
+   Intel(R) 82576 Virtual Function Linux driver
+diff --git a/drivers/net/ethernet/intel/igbvf/vf.h b/drivers/net/ethernet/intel/igbvf/vf.h
+index d213eefb6169..193b50026246 100644
+--- a/drivers/net/ethernet/intel/igbvf/vf.h
++++ b/drivers/net/ethernet/intel/igbvf/vf.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel(R) 82576 Virtual Function Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgb/Makefile b/drivers/net/ethernet/intel/ixgb/Makefile
+index 0b20c5e62ffe..1b42dd554dd2 100644
+--- a/drivers/net/ethernet/intel/ixgb/Makefile
++++ b/drivers/net/ethernet/intel/ixgb/Makefile
+@@ -1,3 +1,4 @@
++# SPDX-License-Identifier: GPL-2.0
+ ################################################################################
+ #
+ # Intel PRO/10GbE Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgb/ixgb.h b/drivers/net/ethernet/intel/ixgb/ixgb.h
+index 1180cd59b570..92022841755f 100644
+--- a/drivers/net/ethernet/intel/ixgb/ixgb.h
++++ b/drivers/net/ethernet/intel/ixgb/ixgb.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel PRO/10GbE Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgb/ixgb_ee.h b/drivers/net/ethernet/intel/ixgb/ixgb_ee.h
+index 5680f64314b8..475297a810fe 100644
+--- a/drivers/net/ethernet/intel/ixgb/ixgb_ee.h
++++ b/drivers/net/ethernet/intel/ixgb/ixgb_ee.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel PRO/10GbE Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgb/ixgb_hw.h b/drivers/net/ethernet/intel/ixgb/ixgb_hw.h
+index 0bd5d72e1af5..19f36d87ef61 100644
+--- a/drivers/net/ethernet/intel/ixgb/ixgb_hw.h
++++ b/drivers/net/ethernet/intel/ixgb/ixgb_hw.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel PRO/10GbE Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgb/ixgb_ids.h b/drivers/net/ethernet/intel/ixgb/ixgb_ids.h
+index 32c1b302d791..24e849902d60 100644
+--- a/drivers/net/ethernet/intel/ixgb/ixgb_ids.h
++++ b/drivers/net/ethernet/intel/ixgb/ixgb_ids.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel PRO/10GbE Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgb/ixgb_osdep.h b/drivers/net/ethernet/intel/ixgb/ixgb_osdep.h
+index 8fc905192231..b1710379192e 100644
+--- a/drivers/net/ethernet/intel/ixgb/ixgb_osdep.h
++++ b/drivers/net/ethernet/intel/ixgb/ixgb_osdep.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel PRO/10GbE Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgbe/Makefile b/drivers/net/ethernet/intel/ixgbe/Makefile
+index 8319465eb38d..4cd96c88cb5d 100644
+--- a/drivers/net/ethernet/intel/ixgbe/Makefile
++++ b/drivers/net/ethernet/intel/ixgbe/Makefile
+@@ -1,3 +1,4 @@
++# SPDX-License-Identifier: GPL-2.0
+ ################################################################################
+ #
+ # Intel 10 Gigabit PCI Express Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgbe/ixgbe.h b/drivers/net/ethernet/intel/ixgbe/ixgbe.h
+index c1e3a0039ea5..4f08c712e58e 100644
+--- a/drivers/net/ethernet/intel/ixgbe/ixgbe.h
++++ b/drivers/net/ethernet/intel/ixgbe/ixgbe.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel 10 Gigabit PCI Express Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgbe/ixgbe_82598.c b/drivers/net/ethernet/intel/ixgbe/ixgbe_82598.c
+index a0ebd9ecf243..cb0fe5fedb33 100644
+--- a/drivers/net/ethernet/intel/ixgbe/ixgbe_82598.c
++++ b/drivers/net/ethernet/intel/ixgbe/ixgbe_82598.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+ 
+   Intel 10 Gigabit PCI Express Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgbe/ixgbe_82599.c b/drivers/net/ethernet/intel/ixgbe/ixgbe_82599.c
+index 4dfc81dbee4b..66a74f4651e8 100644
+--- a/drivers/net/ethernet/intel/ixgbe/ixgbe_82599.c
++++ b/drivers/net/ethernet/intel/ixgbe/ixgbe_82599.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+ 
+   Intel 10 Gigabit PCI Express Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgbe/ixgbe_common.c b/drivers/net/ethernet/intel/ixgbe/ixgbe_common.c
+index 61188f343955..633be93f3dbb 100644
+--- a/drivers/net/ethernet/intel/ixgbe/ixgbe_common.c
++++ b/drivers/net/ethernet/intel/ixgbe/ixgbe_common.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+ 
+   Intel 10 Gigabit PCI Express Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgbe/ixgbe_common.h b/drivers/net/ethernet/intel/ixgbe/ixgbe_common.h
+index 4d4c02366cb3..67f304289fd9 100644
+--- a/drivers/net/ethernet/intel/ixgbe/ixgbe_common.h
++++ b/drivers/net/ethernet/intel/ixgbe/ixgbe_common.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel 10 Gigabit PCI Express Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgbe/ixgbe_dcb.h b/drivers/net/ethernet/intel/ixgbe/ixgbe_dcb.h
+index fc0a2dd52499..73b6362d4327 100644
+--- a/drivers/net/ethernet/intel/ixgbe/ixgbe_dcb.h
++++ b/drivers/net/ethernet/intel/ixgbe/ixgbe_dcb.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel 10 Gigabit PCI Express Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgbe/ixgbe_dcb_82598.c b/drivers/net/ethernet/intel/ixgbe/ixgbe_dcb_82598.c
+index f94c7e82a30b..085130626330 100644
+--- a/drivers/net/ethernet/intel/ixgbe/ixgbe_dcb_82598.c
++++ b/drivers/net/ethernet/intel/ixgbe/ixgbe_dcb_82598.c
+@@ -1,3 +1,4 @@
++// SPDX-License-Identifier: GPL-2.0
+ /*******************************************************************************
+ 
+   Intel 10 Gigabit PCI Express Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgbe/ixgbe_dcb_82598.h b/drivers/net/ethernet/intel/ixgbe/ixgbe_dcb_82598.h
+index 3164f5453b8f..7edce607f901 100644
+--- a/drivers/net/ethernet/intel/ixgbe/ixgbe_dcb_82598.h
++++ b/drivers/net/ethernet/intel/ixgbe/ixgbe_dcb_82598.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel 10 Gigabit PCI Express Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgbe/ixgbe_dcb_82599.h b/drivers/net/ethernet/intel/ixgbe/ixgbe_dcb_82599.h
+index 90c370230e20..fa030f0abc18 100644
+--- a/drivers/net/ethernet/intel/ixgbe/ixgbe_dcb_82599.h
++++ b/drivers/net/ethernet/intel/ixgbe/ixgbe_dcb_82599.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel 10 Gigabit PCI Express Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgbe/ixgbe_fcoe.h b/drivers/net/ethernet/intel/ixgbe/ixgbe_fcoe.h
+index 38385876effb..cf1919901514 100644
+--- a/drivers/net/ethernet/intel/ixgbe/ixgbe_fcoe.h
++++ b/drivers/net/ethernet/intel/ixgbe/ixgbe_fcoe.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel 10 Gigabit PCI Express Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgbe/ixgbe_ipsec.h b/drivers/net/ethernet/intel/ixgbe/ixgbe_ipsec.h
+index 87d2800b94ab..4f099f516645 100644
+--- a/drivers/net/ethernet/intel/ixgbe/ixgbe_ipsec.h
++++ b/drivers/net/ethernet/intel/ixgbe/ixgbe_ipsec.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel 10 Gigabit PCI Express Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgbe/ixgbe_mbx.h b/drivers/net/ethernet/intel/ixgbe/ixgbe_mbx.h
+index 811cb4f64a5b..c4628b663590 100644
+--- a/drivers/net/ethernet/intel/ixgbe/ixgbe_mbx.h
++++ b/drivers/net/ethernet/intel/ixgbe/ixgbe_mbx.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel 10 Gigabit PCI Express Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgbe/ixgbe_model.h b/drivers/net/ethernet/intel/ixgbe/ixgbe_model.h
+index 538a1c5475b6..72446644f9fa 100644
+--- a/drivers/net/ethernet/intel/ixgbe/ixgbe_model.h
++++ b/drivers/net/ethernet/intel/ixgbe/ixgbe_model.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel 10 Gigabit PCI Express Linux drive
+diff --git a/drivers/net/ethernet/intel/ixgbe/ixgbe_phy.h b/drivers/net/ethernet/intel/ixgbe/ixgbe_phy.h
+index b0cac961df3b..d6a7e77348c5 100644
+--- a/drivers/net/ethernet/intel/ixgbe/ixgbe_phy.h
++++ b/drivers/net/ethernet/intel/ixgbe/ixgbe_phy.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel 10 Gigabit PCI Express Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgbe/ixgbe_sriov.h b/drivers/net/ethernet/intel/ixgbe/ixgbe_sriov.h
+index cf67b9b18ed7..e30d1f07e891 100644
+--- a/drivers/net/ethernet/intel/ixgbe/ixgbe_sriov.h
++++ b/drivers/net/ethernet/intel/ixgbe/ixgbe_sriov.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel 10 Gigabit PCI Express Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgbe/ixgbe_type.h b/drivers/net/ethernet/intel/ixgbe/ixgbe_type.h
+index ca45359686d3..2daa81e6e9b2 100644
+--- a/drivers/net/ethernet/intel/ixgbe/ixgbe_type.h
++++ b/drivers/net/ethernet/intel/ixgbe/ixgbe_type.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel 10 Gigabit PCI Express Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgbe/ixgbe_x540.h b/drivers/net/ethernet/intel/ixgbe/ixgbe_x540.h
+index e21cd48491d3..182d640e9f7a 100644
+--- a/drivers/net/ethernet/intel/ixgbe/ixgbe_x540.h
++++ b/drivers/net/ethernet/intel/ixgbe/ixgbe_x540.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+  *
+  * Intel 10 Gigabit PCI Express Linux driver
+diff --git a/drivers/net/ethernet/intel/ixgbevf/Makefile b/drivers/net/ethernet/intel/ixgbevf/Makefile
+index 4ce4c97ef5ad..bb47814cfa90 100644
+--- a/drivers/net/ethernet/intel/ixgbevf/Makefile
++++ b/drivers/net/ethernet/intel/ixgbevf/Makefile
+@@ -1,3 +1,4 @@
++# SPDX-License-Identifier: GPL-2.0
+ ################################################################################
+ #
+ # Intel 82599 Virtual Function driver
+diff --git a/drivers/net/ethernet/intel/ixgbevf/defines.h b/drivers/net/ethernet/intel/ixgbevf/defines.h
+index 8617cae2f801..71c828842b11 100644
+--- a/drivers/net/ethernet/intel/ixgbevf/defines.h
++++ b/drivers/net/ethernet/intel/ixgbevf/defines.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel 82599 Virtual Function driver
+diff --git a/drivers/net/ethernet/intel/ixgbevf/ixgbevf.h b/drivers/net/ethernet/intel/ixgbevf/ixgbevf.h
+index f65ca156af2d..c06ea4dc49a0 100644
+--- a/drivers/net/ethernet/intel/ixgbevf/ixgbevf.h
++++ b/drivers/net/ethernet/intel/ixgbevf/ixgbevf.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel 82599 Virtual Function driver
+diff --git a/drivers/net/ethernet/intel/ixgbevf/mbx.h b/drivers/net/ethernet/intel/ixgbevf/mbx.h
+index bc0442acae78..5ec947fe3d09 100644
+--- a/drivers/net/ethernet/intel/ixgbevf/mbx.h
++++ b/drivers/net/ethernet/intel/ixgbevf/mbx.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel 82599 Virtual Function driver
+diff --git a/drivers/net/ethernet/intel/ixgbevf/regs.h b/drivers/net/ethernet/intel/ixgbevf/regs.h
+index 2764fd16261f..278f73980501 100644
+--- a/drivers/net/ethernet/intel/ixgbevf/regs.h
++++ b/drivers/net/ethernet/intel/ixgbevf/regs.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel 82599 Virtual Function driver
+diff --git a/drivers/net/ethernet/intel/ixgbevf/vf.h b/drivers/net/ethernet/intel/ixgbevf/vf.h
+index c651fefcc3d2..194fbdaa4519 100644
+--- a/drivers/net/ethernet/intel/ixgbevf/vf.h
++++ b/drivers/net/ethernet/intel/ixgbevf/vf.h
+@@ -1,3 +1,4 @@
++/* SPDX-License-Identifier: GPL-2.0 */
+ /*******************************************************************************
+ 
+   Intel 82599 Virtual Function driver
+-- 
+2.20.1
+

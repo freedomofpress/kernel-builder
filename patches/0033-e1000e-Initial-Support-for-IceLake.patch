@@ -1,0 +1,52 @@
+From 48f76b68f9fca4e1d5bbb1755d14e8e8e09bdd5b Mon Sep 17 00:00:00 2001
+From: Sasha Neftin <sasha.neftin@intel.com>
+Date: Mon, 17 Jul 2017 15:13:39 -0700
+Subject: [PATCH] e1000e: Initial Support for IceLake
+
+i219 (8) and i219 (9) are the next LOM generations that will be available
+on the next Intel Client platform (IceLake).
+This patch provides the initial support for these devices
+
+Signed-off-by: Sasha Neftin <sasha.neftin@intel.com>
+Reviewed-by: Raanan Avargil <raanan.avargil@intel.com>
+Reviewed-by: Dima Ruinskiy <dima.ruinskiy@intel.com>
+Tested-by: Aaron Brown <aaron.f.brown@intel.com>
+Signed-off-by: Jeff Kirsher <jeffrey.t.kirsher@intel.com>
+---
+ drivers/net/ethernet/intel/e1000e/hw.h     | 4 ++++
+ drivers/net/ethernet/intel/e1000e/netdev.c | 4 ++++
+ 2 files changed, 8 insertions(+)
+
+diff --git a/drivers/net/ethernet/intel/e1000e/hw.h b/drivers/net/ethernet/intel/e1000e/hw.h
+index 66bd5060a65b..d803b1a12349 100644
+--- a/drivers/net/ethernet/intel/e1000e/hw.h
++++ b/drivers/net/ethernet/intel/e1000e/hw.h
+@@ -100,6 +100,10 @@ struct e1000_hw;
+ #define E1000_DEV_ID_PCH_CNP_I219_V6		0x15BE
+ #define E1000_DEV_ID_PCH_CNP_I219_LM7		0x15BB
+ #define E1000_DEV_ID_PCH_CNP_I219_V7		0x15BC
++#define E1000_DEV_ID_PCH_ICP_I219_LM8		0x15DF
++#define E1000_DEV_ID_PCH_ICP_I219_V8		0x15E0
++#define E1000_DEV_ID_PCH_ICP_I219_LM9		0x15E1
++#define E1000_DEV_ID_PCH_ICP_I219_V9		0x15E2
+ 
+ #define E1000_REVISION_4	4
+ 
+diff --git a/drivers/net/ethernet/intel/e1000e/netdev.c b/drivers/net/ethernet/intel/e1000e/netdev.c
+index 2dcb5463d9b8..327dfe5bedc0 100644
+--- a/drivers/net/ethernet/intel/e1000e/netdev.c
++++ b/drivers/net/ethernet/intel/e1000e/netdev.c
+@@ -7544,6 +7544,10 @@ static const struct pci_device_id e1000_pci_tbl[] = {
+ 	{ PCI_VDEVICE(INTEL, E1000_DEV_ID_PCH_CNP_I219_V6), board_pch_cnp },
+ 	{ PCI_VDEVICE(INTEL, E1000_DEV_ID_PCH_CNP_I219_LM7), board_pch_cnp },
+ 	{ PCI_VDEVICE(INTEL, E1000_DEV_ID_PCH_CNP_I219_V7), board_pch_cnp },
++	{ PCI_VDEVICE(INTEL, E1000_DEV_ID_PCH_ICP_I219_LM8), board_pch_cnp },
++	{ PCI_VDEVICE(INTEL, E1000_DEV_ID_PCH_ICP_I219_V8), board_pch_cnp },
++	{ PCI_VDEVICE(INTEL, E1000_DEV_ID_PCH_ICP_I219_LM9), board_pch_cnp },
++	{ PCI_VDEVICE(INTEL, E1000_DEV_ID_PCH_ICP_I219_V9), board_pch_cnp },
+ 
+ 	{ 0, 0, 0, 0, 0, 0, 0 }	/* terminate list */
+ };
+-- 
+2.20.1
+

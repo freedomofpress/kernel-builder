@@ -1,7 +1,7 @@
 From f3ed935de059b83394c3ecf2c64c93b57c8915fe Mon Sep 17 00:00:00 2001
 From: Raanan Avargil <raanan.avargil@intel.com>
 Date: Tue, 20 Oct 2015 17:13:01 +0300
-Subject: e1000e: initial support for i219-LM (3)
+Subject: [PATCH] e1000e: initial support for i219-LM (3)
 
 i219-LM (3) is a LOM that will be available on systems with the
 Lewisburg Platform Controller Hub (PCH) chipset from Intel.
@@ -12,7 +12,7 @@ Tested-by: Aaron Brown <aaron.f.brown@intel.com>
 Signed-off-by: Jeff Kirsher <jeffrey.t.kirsher@intel.com>
 ---
  drivers/net/ethernet/intel/e1000e/hw.h      |  1 +
- drivers/net/ethernet/intel/e1000e/ich8lan.c | 43 +++++++++++++++++++++--------
+ drivers/net/ethernet/intel/e1000e/ich8lan.c | 43 +++++++++++++++------
  drivers/net/ethernet/intel/e1000e/netdev.c  |  1 +
  3 files changed, 34 insertions(+), 11 deletions(-)
 
@@ -102,5 +102,5 @@ index 772447306c13..775e38910681 100644
  	{ 0, 0, 0, 0, 0, 0, 0 }	/* terminate list */
  };
 -- 
-cgit 1.2-0.3.lf.el7
+2.20.1
 

@@ -4,7 +4,7 @@ IMG_NAME = quay.io/conorsch/kernel-builder
 .PHONY: vanilla
 vanilla: ## Builds latest stable kernel, unpatched
 	# Include reproducibility patch, for Debian changelog timestamp
-	LINUX_LOCAL_PATCHES_PATH="$(PWD)/patches/00-debian-reproducibility.patch" \
+	LINUX_LOCAL_PATCHES_PATH="$(PWD)/patches/0000-debian-reproducibility.patch" \
 	./scripts/build-kernel-wrapper
 
 .PHONY: grsec
