@@ -2,7 +2,7 @@ FROM debian:stable
 
 ARG UID=1000
 ARG GID=1000
-ARG USERNAME=kernel-builder
+ARG USERNAME=user
 ENV KBUILD_BUILD_USER "$USERNAME"
 ENV KBUILD_BUILD_HOST "kernel-builder"
 
@@ -21,8 +21,8 @@ RUN groupadd -g ${GID} ${USERNAME} && useradd -m -d /home/${USERNAME} -g ${GID} 
 COPY build-kernel.sh /usr/local/bin/build-kernel.sh
 COPY grsecurity-urls.py /usr/local/bin/grsecurity-urls.py
 
-RUN mkdir -p -m 0755 /kernel /patches /output
-RUN chown ${USERNAME}:${USERNAME} /kernel /patches /output
+RUN mkdir -p -m 0755 /kernel /patches-grsec /output
+RUN chown ${USERNAME}:${USERNAME} /kernel /patches-grsec /output
 WORKDIR /kernel
 
 # VOLUME ["/kernel"]
