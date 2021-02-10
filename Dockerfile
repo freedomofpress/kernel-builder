@@ -1,4 +1,5 @@
-FROM debian:stable
+# debian:buster 2021-02-10
+FROM debian@sha256:1092695e843ad975267131f27a2b523128c4e03d2d96574bbdd7cf949ed51475
 
 ARG UID=1000
 ARG GID=1000
@@ -8,13 +9,27 @@ ENV KBUILD_BUILD_HOST "kernel-builder"
 
 RUN apt-get update && \
     apt-get install -y \
-    git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc wget \
-    flex curl bison rsync kmod cpio libelf-dev liblz4-tool
-
-RUN apt-get install -y python3 python3-requests
-RUN apt-get install -y gnupg
-RUN apt-get install -y gcc-8-plugin-dev
-RUN apt-get install -y lsb-release
+    bc \
+    bison \
+    build-essential \
+    cpio \
+    curl \
+    fakeroot \
+    flex \
+    gcc-8-plugin-dev \
+    git \
+    gnupg \
+    kmod \
+    libelf-dev \
+    liblz4-tool \
+    libssl-dev \
+    lsb-release \
+    ncurses-dev \
+    python3 \
+    python3-requests \
+    rsync \
+    wget \
+    xz-utils
 
 RUN groupadd -g ${GID} ${USERNAME} && useradd -m -d /home/${USERNAME} -g ${GID} -u ${UID} ${USERNAME}
 

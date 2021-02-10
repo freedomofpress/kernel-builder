@@ -38,12 +38,19 @@ at `/config` inside the container. It will be copied into place prior to buildin
 Note that `make olddefconfig` will be run regardless to ensure the latest
 options have been applied.
 
-## Where on my files?
-Check `./build/` on the host machine. You can mount any directory to `/output`
-inside the container, and that's where the packages will be stored. By default,
-the build script attempts to save `.deb` packages and `.tar.gz`, the source tarball.
+## Reproducibile builds
+In the spirit of [reproducible builds], this repo attempts to make fully reproducible
+kernel images. There are some catches, however: a custom kernel patch is included
+to munge the changelog timestamp, and certain kernel config options (notably 
+`CONFIG_GCC_PLUGIN_RANDSTRUCT` or `CONFIG_GRKERNSEC_RANDSTRUCT`) will prevent reproducibility.
+For more info, see the [kernel docs on reproducibility].
 
-## Rereferences
+Additionally, the script to fetch grsecurity patches works by choosing the most recent patch
+available. If you wish to rebuild an older kernel version, you'll need to rebuild from the
+original source tarball, and set environment variables such as `SOURCE_DATE_EPOCH`. Even then,
+structure randomization may prevent an identical build.
+
+## References
 
 These configurations were developed by [Freedom of the Press Foundation] for
 use in all [SecureDrop] instances. Experienced sysadmins can leverage these
@@ -56,3 +63,5 @@ https://github.com/freedomofpress/ansible-role-grsecurity-build/.
 [SecureDrop]: https://securedrop.org
 [grsecurity]: https://grsecurity.net/
 [grsecurity subscription]: https://grsecurity.net/business_support.php
+[reproducible builds]: https://reproducible-builds.org/
+[kernel docs on reproducibility]: https://www.kernel.org/doc/html/latest/kbuild/reproducible-builds.html

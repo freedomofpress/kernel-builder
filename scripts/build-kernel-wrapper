@@ -12,6 +12,14 @@ export SOURCE_DATE_EPOCH
 export KBUILD_BUILD_TIMESTAMP="@${SOURCE_DATE_EPOCH}"
 export DEB_BUILD_TIMESTAMP="${SOURCE_DATE_EPOCH}"
 
+# Build container image for kernel dependencies
+IMG_NAME="fpf.local/kernel-builder"
+docker build -t "$IMG_NAME" \
+    --build-arg UID="$(id -u)" \
+    --build-arg GID="$(id -g)" \
+    .
+
+# Configure local customizations
 local_config_volume_opt=""
 if [[ -n "${LINUX_LOCAL_CONFIG_PATH:-}" ]]; then
     local_config_volume_opt="-v ${LINUX_LOCAL_CONFIG_PATH}:/config:ro"
@@ -21,13 +29,9 @@ if [[ -n "${LINUX_LOCAL_PATCHES_PATH:-}" ]]; then
     local_patches_volume_opt="-v ${LINUX_LOCAL_PATCHES_PATH}:/patches:ro"
 fi
 
-img_name="quay.io/conorsch/kernel-builder"
+# Create output dir
 kernel_dir="$PWD/build"
 mkdir -p -m 755 "$kernel_dir"
-docker build -t "$img_name" \
-    --build-arg UID="$(id -u)" \
-    --build-arg GID="$(id -g)" \
-    .
 
 docker run --rm -t \
     -e GRSECURITY_USERNAME \
@@ -41,7 +45,7 @@ docker run --rm -t \
     -v "${kernel_dir}:/output" \
     $local_config_volume_opt \
     $local_patches_volume_opt \
-    "$img_name"
+    "$IMG_NAME"
 
 echo "Build complete. Packages can be found at:"
 find "$kernel_dir" -type f | sort

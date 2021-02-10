@@ -1,11 +1,11 @@
 .DEFAULT_GOAL := help
-IMG_NAME = quay.io/conorsch/kernel-builder
+IMG_NAME = fpf.local/kernel-builder
 
 .PHONY: vanilla
 vanilla: ## Builds latest stable kernel, unpatched
 	# Include reproducibility patch, for Debian changelog timestamp
 	LINUX_LOCAL_PATCHES_PATH="$(PWD)/patches/00-debian-reproducibility.patch" \
-	./scripts/build-kernel-wrapper
+		./scripts/build-kernel-wrapper
 
 .PHONY: grsec
 grsec: ## Builds grsecurity-patched kernel (requires credentials)
@@ -21,9 +21,6 @@ reprotest-sd: ## DEBUG Builds SD kernel config without grsec in CI
 		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-securedrop-5.4" \
 		LINUX_LOCAL_PATCHES_PATH="$(PWD)/patches" \
 		./scripts/reproducibility-test
-
-build-image: ## Builds container image
-	docker build -t $(IMG_NAME) .
 
 securedrop-core: build-image ## Builds kernels for SecureDrop servers, 5.4.x
 	GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable4 LOCALVERSION="-securedrop" \
