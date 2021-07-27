@@ -60,7 +60,12 @@ fi
 
 if [[ -e /patches ]]; then
     echo "Applying custom patches for kernel source $LINUX_VERSION"
-    find /patches /patches-grsec -maxdepth 1 -type f -exec patch -p 1 -i {} \;
+    find /patches -maxdepth 1 -type f -exec patch -p 1 -i {} \;
+fi
+
+if [[ -e /patches-grsec && -n "$GRSECURITY" && "$GRSECURITY" = "1" ]]; then
+    echo "Applying grsec patches for kernel source $LINUX_VERSION"
+    find /patches-grsec -maxdepth 1 -type f -exec patch -p 1 -i {} \;
 fi
 
 echo "Building Linux kernel source $LINUX_VERSION"

@@ -28,11 +28,6 @@ securedrop-core: ## Builds kernels for SecureDrop servers, 5.4.x
 		LINUX_LOCAL_PATCHES_PATH="$(PWD)/patches" \
 		./scripts/build-kernel-wrapper
 
-securedrop-core-4.14: ## Builds kernels for SecureDrop servers, 4.14.x
-	GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable3 LOCALVERSION="-securedrop" \
-		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-securedrop-4.14" \
-		./scripts/build-kernel-wrapper
-
 securedrop-workstation: ## Builds kernels for SecureDrop Workstation
 	GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable3 LOCALVERSION="-workstation" \
 		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-workstation-4.14" \
