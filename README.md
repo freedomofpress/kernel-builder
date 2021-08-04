@@ -38,7 +38,40 @@ at `/config` inside the container. It will be copied into place prior to buildin
 Note that `make olddefconfig` will be run regardless to ensure the latest
 options have been applied.
 
-## Reproducibile builds
+## Building kernels in Qubes
+
+Here's how to set up a build environment in [Qubes], suitable for use with [SecureDrop].
+The build requires `docker`, so make sure your TemplateVM has docker configured.
+
+```
+qvm-create sd-kernel-builder --template debian-10 --label purple
+qvm-prefs sd-kernel-builder vcpus $(nproc)
+qvm-volume resize sd-kernel-builder:private 50G
+
+```
+
+Then add the following customization to the AppVM to ensure
+the private volume is used for the build:
+
+```
+$ cat /rw/config/qubes-bind-dirs.d/50_user.conf
+binds+=( '/var/lib/docker' )
+```
+
+And reboot the AppVM. Otherwise, you will need a large system partition. Now build:
+
+```
+rm -rf ~/kernel-builder
+git clone https://github.com/freedomofpress/kernel-builder
+cd kernel-builder
+source ~/grsec-env # credentials for grsecurity access
+make securedrop-workstation # to build Workstation kernels
+# grab a coffee or tea, builds take ~1h with 4 cores.
+sha256sum build/*
+# then copy the terminal history from your emulator and store build log
+```
+
+## Reproducible builds
 In the spirit of [reproducible builds], this repo attempts to make fully reproducible
 kernel images. There are some catches, however: a custom kernel patch is included
 to munge the changelog timestamp, and certain kernel config options (notably 
@@ -65,3 +98,4 @@ https://github.com/freedomofpress/ansible-role-grsecurity-build/.
 [grsecurity subscription]: https://grsecurity.net/business_support.php
 [reproducible builds]: https://reproducible-builds.org/
 [kernel docs on reproducibility]: https://www.kernel.org/doc/html/latest/kbuild/reproducible-builds.html
+[Qubes]: https://qubes-os.org
