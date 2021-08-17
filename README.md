@@ -16,10 +16,13 @@ Export your credentials:
 ```
 export GRSECURITY_USERNAME=foo
 export GRSECURITY_PASSWORD=bar
+export GRSECURITY=1
 make
 ```
 
-The resulting packages will used the patch set.
+The resulting packages will used the patch set. If you're working on SecureDrop,
+request these credentials from a team member, and store them securely
+in your password manager.
 
 ## Including arbitrary patches
 
@@ -51,14 +54,17 @@ qvm-volume resize sd-kernel-builder:private 50G
 ```
 
 Then add the following customization to the AppVM to ensure
-the private volume is used for the build:
+the private volume [bind-dir](https://www.qubes-os.org/doc/bind-dirs/)
+is used for the build:
 
 ```
-$ cat /rw/config/qubes-bind-dirs.d/50_user.conf
-binds+=( '/var/lib/docker' )
+sudo mkdir -p /rw/config/qubes-bind-dirs.d
+echo "binds+=( '/var/lib/docker' )" | sudo tee -a /rw/config/qubes-bind-dirs.d/50_user.conf
 ```
 
-And reboot the AppVM. Otherwise, you will need a large system partition. Now build:
+And reboot the AppVM. Otherwise, you will need a large system partition.
+Finally, make sure you've got the [grsec env vars](##enabling-grsecurity-patches)
+exported in your environment, or set in e.g. `~/grsec-env`, as below. Now build:
 
 ```
 rm -rf ~/kernel-builder
@@ -68,7 +74,8 @@ source ~/grsec-env # credentials for grsecurity access
 make securedrop-workstation # to build Workstation kernels
 # grab a coffee or tea, builds take ~1h with 4 cores.
 sha256sum build/*
-# then copy the terminal history from your emulator and store build log
+# then copy the terminal history from your emulator and store build log,
+# e.g. via Edit->Select All in gnome-terminal
 ```
 
 ## Reproducible builds
