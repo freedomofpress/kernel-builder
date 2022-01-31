@@ -9,7 +9,9 @@ import sys
 from requests.auth import HTTPBasicAuth
 
 
-GRSECURITY_PATCH_TYPES = ["stable", "stable2", "stable3", "stable4"]
+# stable5 corresponds to the 5.10 series patches, which are EOL in Q1 2022, so let's skip it
+# stable6 corresponds to the long-term 5.15 kernel, good until Q4 2024
+GRSECURITY_PATCH_TYPES = ["stable3", "stable4", "stable6"]
 
 
 logging.basicConfig(

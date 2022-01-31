@@ -78,6 +78,10 @@ sha256sum build/*
 # e.g. via Edit->Select All in gnome-terminal
 ```
 
+If your kernel packages are intended for distribution, you *must* retain the kernel source
+tarballs to allow FPF to comply with source requests. Contact the infra team or a SecureDrop
+maintainer to ensure that the tarballs are stored and available.
+
 ## Reproducible builds
 In the spirit of [reproducible builds], this repo attempts to make fully reproducible
 kernel images. There are some catches, however: a custom kernel patch is included
