@@ -39,6 +39,11 @@ securedrop-workstation: ## Builds kernels for SecureDrop Workstation
 		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-workstation-4.14" \
 		./scripts/build-kernel-wrapper
 
+securedrop-workstation-5.15: ## Builds kernels for SecureDrop Workstation, 5.15.x
+	GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable6 LOCALVERSION="-workstation" \
+		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-workstation-5.15" \
+		./scripts/build-kernel-wrapper
+
 .PHONY: help
 help: ## Prints this message and exits.
 	@printf "Subcommands:\n\n"
