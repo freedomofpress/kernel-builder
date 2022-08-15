@@ -35,6 +35,7 @@ RUN groupadd -g ${GID} ${USERNAME} && useradd -m -d /home/${USERNAME} -g ${GID} 
 
 COPY build-kernel.sh /usr/local/bin/build-kernel.sh
 COPY grsecurity-urls.py /usr/local/bin/grsecurity-urls.py
+COPY scripts/mkdebian /usr/local/bin/mkdebian
 
 RUN mkdir -p -m 0755 /kernel /patches-grsec /output
 RUN chown ${USERNAME}:${USERNAME} /kernel /patches-grsec /output

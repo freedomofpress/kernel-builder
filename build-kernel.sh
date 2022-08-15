@@ -68,6 +68,9 @@ if [[ -e /patches-grsec && -n "$GRSECURITY" && "$GRSECURITY" = "1" ]]; then
     find /patches-grsec -maxdepth 1 -type f -exec patch -p 1 -i {} \;
 fi
 
+echo "Copying in our mkdebian"
+cp /usr/local/bin/mkdebian scripts/package/mkdebian
+
 echo "Building Linux kernel source $LINUX_VERSION"
 make olddefconfig
 
