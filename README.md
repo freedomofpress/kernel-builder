@@ -24,14 +24,6 @@ The resulting packages will used the patch set. If you're working on SecureDrop,
 request these credentials from a team member, and store them securely
 in your password manager.
 
-## Including arbitrary patches
-
-You can mount in any set of patches to be applied to the kernel
-source prior to building. Store the patches in a directory,
-such as `./patches/`, and those will be mounted into the container at `/patches/`.
-The build script will loop over all files in that dir and apply each
-patch prior to building.
-
 ## Using a custom kernel config
 
 Since the build uses docker, the host machine's kernel and config are visible
