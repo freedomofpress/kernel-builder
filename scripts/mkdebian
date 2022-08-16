@@ -202,6 +202,36 @@ Description: Linux support headers for userspace development
 Multi-Arch: same
 EOF
 
+if [ "$LOCALVERSION" = "-workstation" ]; then
+    metapackage="securedrop-workstation-grsec"
+cat <<EOF >> debian/control
+
+Package: securedrop-workstation-grsec
+Section: admin
+Architecture: $debarch
+Pre-Depends: qubes-kernel-vm-support (>=4.0.31)
+Depends: $packagename-$version, libelf-dev, paxctld
+Description: Linux for SecureDrop Workstation template (meta-package)
+ Metapackage providing a grsecurity-patched Linux kernel for use in SecureDrop
+ Workstation Qubes templates. Depends on the most recently built patched kernel
+ maintained by FPF.
+
+EOF
+else
+    metapackage="securedrop-grsec"
+cat <<EOF >> debian/control
+
+Package: securedrop-grsec
+Section: admin
+Architecture: $debarch
+Depends: $packagename-$version, intel-microcode, paxctld
+Description: Metapackage providing a grsecurity-patched Linux kernel for use
+ with SecureDrop. Depends on the most recently built patched kernel maintained
+ by FPF. Package also includes sysctl and PaX flags calls for GRUB.
+
+EOF
+fi
+
 if is_enabled CONFIG_MODULES; then
 cat <<EOF >> debian/control
 
@@ -242,6 +272,10 @@ binary-indep:
 binary-arch: build-arch
 	\$(MAKE) KERNELRELEASE=${version} ARCH=${ARCH} \
 	KBUILD_BUILD_VERSION=${revision} -f \$(srctree)/Makefile intdeb-pkg
+	sed -i s/#DEB_VERSION_UPSTREAM#/${version}/ debian/$metapackage/DEBIAN/postinst
+	chmod 775 debian/$metapackage/DEBIAN/postinst
+	dpkg-gencontrol -p$metapackage -P"debian/$metapackage"
+	dpkg-deb --root-owner-group --build "debian/$metapackage" ..
 
 clean:
 	rm -rf debian/*tmp debian/files

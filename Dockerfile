@@ -37,6 +37,9 @@ COPY build-kernel.sh /usr/local/bin/build-kernel.sh
 COPY grsecurity-urls.py /usr/local/bin/grsecurity-urls.py
 COPY scripts/mkdebian /usr/local/bin/mkdebian
 
+COPY securedrop-grsec /securedrop-grsec
+COPY securedrop-workstation-grsec /securedrop-workstation-grsec
+
 RUN mkdir -p -m 0755 /kernel /patches-grsec /output
 RUN chown ${USERNAME}:${USERNAME} /kernel /patches-grsec /output
 WORKDIR /kernel
