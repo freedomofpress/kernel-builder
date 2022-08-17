@@ -18,25 +18,14 @@ reprotest: ## Builds simple kernel multiple times to confirm reproducibility
 .PHONY: reprotest-sd
 reprotest-sd: ## DEBUG Builds SD kernel config without grsec in CI
 	GRSECURITY=0 LOCALVERSION="-securedrop" \
-		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-securedrop-5.4" \
+		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-securedrop-5.15" \
 		LINUX_LOCAL_PATCHES_PATH="$(PWD)/patches" \
 		./scripts/reproducibility-test
-
-securedrop-core: ## Builds kernels for SecureDrop servers, 5.4.x
-	GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable4 LOCALVERSION="-securedrop" \
-		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-securedrop-5.4" \
-		LINUX_LOCAL_PATCHES_PATH="$(PWD)/patches" \
-		./scripts/build-kernel-wrapper
 
 securedrop-core-5.15: ## Builds kernels for SecureDrop servers, 5.15.x
 	GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable6 LOCALVERSION="-securedrop" \
 		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-securedrop-5.15" \
 		LINUX_LOCAL_PATCHES_PATH="$(PWD)/patches" \
-		./scripts/build-kernel-wrapper
-
-securedrop-workstation: ## Builds kernels for SecureDrop Workstation
-	GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable3 LOCALVERSION="-workstation" \
-		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-workstation-4.14" \
 		./scripts/build-kernel-wrapper
 
 securedrop-workstation-5.15: ## Builds kernels for SecureDrop Workstation, 5.15.x
