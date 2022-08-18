@@ -102,6 +102,15 @@ available. If you wish to rebuild an older kernel version, you'll need to rebuil
 original source tarball, and set environment variables such as `SOURCE_DATE_EPOCH`. Even then,
 structure randomization may prevent an identical build.
 
+## Building your own kernel
+Please see the [SOURCE_OFFER] for details on how to get the source for kernels we've published. If
+you've received a source tarball, you should be able to treat it the same as an upstream
+kernel tarball. If you're unsure how to build from source, the documentation from the [kernelnewbies.org]
+site may be useful.
+
+Note that despite using the same exact source, your kernel will not be bit-for-bit identical to the published
+SecureDrop kernels because of the above-mentioned randomization of struct fields.
+
 ## References
 
 These configurations were developed by [Freedom of the Press Foundation] for
@@ -118,3 +127,5 @@ https://github.com/freedomofpress/ansible-role-grsecurity-build/.
 [reproducible builds]: https://reproducible-builds.org/
 [kernel docs on reproducibility]: https://www.kernel.org/doc/html/latest/kbuild/reproducible-builds.html
 [Qubes]: https://qubes-os.org
+[SOURCE_OFFER]: https://github.com/freedomofpress/securedrop/blob/develop/SOURCE_OFFER
+[kernelnewbies.org]: https://kernelnewbies.org/KernelBuild
