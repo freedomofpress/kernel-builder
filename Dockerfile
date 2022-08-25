@@ -18,7 +18,6 @@ RUN apt-get update && \
     flex \
     gcc-8-plugin-dev \
     git \
-    gnupg \
     kmod \
     libelf-dev \
     liblz4-tool \
@@ -43,7 +42,6 @@ WORKDIR /kernel
 # VOLUME ["/kernel"]
 
 USER ${USERNAME}
-COPY pubkeys/ /tmp/pubkeys
-RUN gpg --import --quiet /tmp/pubkeys/*
+COPY pubkeys/ /pubkeys
 
 CMD ["/usr/local/bin/build-kernel.sh"]

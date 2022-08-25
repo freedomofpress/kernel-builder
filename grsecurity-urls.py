@@ -107,7 +107,7 @@ class GrsecurityPatch:
         """
         patch_file = "/tmp/" + self.patch_name
         sig_file = patch_file + ".sig"
-        cmd = "gpg --verify {} {}".format(sig_file, patch_file).split()
+        cmd = "gpgv --keyring /pubkeys/spender.gpg {} {}".format(sig_file, patch_file).split()
         with open(os.devnull, "w") as f:
             subprocess.check_call(cmd, stdout=f, stderr=f)
 
