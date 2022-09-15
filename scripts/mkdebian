@@ -184,7 +184,7 @@ Priority: optional
 Maintainer: $maintainer
 Rules-Requires-Root: no
 Build-Depends: bc, rsync, kmod, cpio, bison, flex | flex:native $extra_build_depends
-Homepage: https://www.kernel.org/
+Homepage: https://securedrop.org/
 
 Package: $packagename-$version
 Architecture: $debarch

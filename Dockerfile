@@ -3,9 +3,10 @@ FROM debian@sha256:94ccfd1c5115a6903cbb415f043a0b04e307be3f37b768cf6d6d3edff0021
 
 ARG UID=1000
 ARG GID=1000
-ARG USERNAME=user
+ARG USERNAME=securedrop
 ENV KBUILD_BUILD_USER "$USERNAME"
-ENV KBUILD_BUILD_HOST "kernel-builder"
+ENV KBUILD_BUILD_HOST "freedom.press"
+ENV DEBFULLNAME "SecureDrop Team"
 
 RUN apt-get update && \
     apt-get install -y \
