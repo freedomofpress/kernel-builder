@@ -3,9 +3,7 @@ IMG_NAME = fpf.local/kernel-builder
 
 .PHONY: vanilla
 vanilla: ## Builds latest stable kernel, unpatched
-	# Include reproducibility patch, for Debian changelog timestamp
-	LINUX_LOCAL_PATCHES_PATH="$(PWD)/patches/00-debian-reproducibility.patch" \
-		./scripts/build-kernel-wrapper
+	./scripts/build-kernel-wrapper
 
 .PHONY: grsec
 grsec: ## Builds grsecurity-patched kernel (requires credentials)

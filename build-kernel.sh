@@ -9,6 +9,7 @@ set -o pipefail
 GRSECURITY="${GRSECURITY:-}"
 LINUX_VERSION="${LINUX_VERSION:-}"
 LINUX_CUSTOM_CONFIG="${LINUX_CUSTOM_CONFIG:-/config}"
+LOCALVERSION="${LOCALVERSION:-}"
 export SOURCE_DATE_EPOCH
 export KBUILD_BUILD_TIMESTAMP
 export DEB_BUILD_TIMESTAMP
@@ -59,14 +60,22 @@ if [[ -e "$LINUX_CUSTOM_CONFIG" ]]; then
     cp "$LINUX_CUSTOM_CONFIG" .config
 fi
 
-if [[ -e /patches ]]; then
-    echo "Applying custom patches for kernel source $LINUX_VERSION"
-    find /patches -maxdepth 1 -type f -exec patch -p 1 -i {} \;
-fi
-
 if [[ -e /patches-grsec && -n "$GRSECURITY" && "$GRSECURITY" = "1" ]]; then
     echo "Applying grsec patches for kernel source $LINUX_VERSION"
     find /patches-grsec -maxdepth 1 -type f -exec patch -p 1 -i {} \;
+fi
+
+echo "Copying in our mkdebian"
+cp /usr/local/bin/mkdebian scripts/package/mkdebian
+
+if [[ "$LOCALVERSION" = "-workstation" ]]; then
+    echo "Copying in our securedrop-workstation-grsec"
+    mkdir -p debian/securedrop-workstation-grsec
+    cp -Rv /securedrop-workstation-grsec/* debian/securedrop-workstation-grsec/
+else
+    echo "Copying in our securedrop-grsec"
+    mkdir -p debian/securedrop-grsec
+    cp -Rv /securedrop-grsec/* debian/securedrop-grsec/
 fi
 
 echo "Building Linux kernel source $LINUX_VERSION"
