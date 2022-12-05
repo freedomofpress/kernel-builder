@@ -76,7 +76,7 @@ Development/staging packages are placed on apt-test.freedom.press for installati
 
 ⚠️ Before you add a package to one of our apt repos, you *must* upload the kernel source tarball to our S3 bucket following the instructions below.
 
-1. Add a detached signature to the kernel source tarball using the prod signing key (use `.sig` as the extension for the signature file)
+1. Add a detached signature to the kernel source tarball using a staff (`*@freedom.press`) GPG key.
 2. If you do not have an AWS account and you are a maintainer, ask someone from the infrastructure team to set one up for you. They will provide you with instructions on where and how your credentials should be stored in Qubes.
 3. Now hop over to our private wiki page on how to use a script to upload the kernel source tarball to our S3 bucket and verify that your upload was successful. There, you'll also learn how to later respond to a source request email sent to `source-offer@freedom.press`.
 4. Now you can submit a `securedrop-workstation-grsec` changelog PR in `securedrop-debian-packaging` and a .deb LFS PR to https://github.com/freedomofpress/securedrop-dev-packages-lfs, which another maintainer reviews and merges, thereby deploying the new packages to https://apt-test.freedom.press.
