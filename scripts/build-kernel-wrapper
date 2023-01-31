@@ -45,7 +45,7 @@ docker run --rm -t \
     -e KBUILD_BUILD_TIMESTAMP \
     -e DEB_BUILD_TIMESTAMP \
     -e LOCALVERSION \
-    -v "${kernel_dir}:/output" \
+    -v "${kernel_dir}:/output:Z" \
     $local_config_volume_opt \
     $local_patches_volume_opt \
     "$IMG_NAME"
