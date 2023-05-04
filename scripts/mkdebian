@@ -149,7 +149,7 @@ packagetimestamp="$(date -R $packagetimestamp_opts)"
 
 # Generate a simple changelog template
 cat <<EOF > debian/changelog
-$sourcename ($packageversion) $distribution; urgency=low
+$sourcename (5.15.89-grsec-securedrop-2) $distribution; urgency=low
 
   * Custom built Linux kernel.
 
@@ -224,7 +224,7 @@ cat <<EOF >> debian/control
 Package: securedrop-grsec
 Section: admin
 Architecture: $debarch
-Depends: $packagename-$version, intel-microcode, paxctld
+Depends: linux-image-5.15.89-grsec-securedrop, linux-image-5.15.81-grsec-securedrop, intel-microcode, paxctld
 Description: Metapackage providing a grsecurity-patched Linux kernel for use
  with SecureDrop. Depends on the most recently built patched kernel maintained
  by FPF. Package also includes sysctl and PaX flags calls for GRUB.
@@ -263,15 +263,15 @@ srctree ?= .
 
 build-indep:
 build-arch:
-	\$(MAKE) KERNELRELEASE=${version} ARCH=${ARCH} \
-	KBUILD_BUILD_VERSION=${revision} -f \$(srctree)/Makefile
+	#\$(MAKE) KERNELRELEASE=${version} ARCH=${ARCH} \
+	#KBUILD_BUILD_VERSION=${revision} -f \$(srctree)/Makefile
 
 build: build-arch
 
 binary-indep:
 binary-arch: build-arch
-	\$(MAKE) KERNELRELEASE=${version} ARCH=${ARCH} \
-	KBUILD_BUILD_VERSION=${revision} -f \$(srctree)/Makefile intdeb-pkg
+	#\$(MAKE) KERNELRELEASE=${version} ARCH=${ARCH} \
+	#KBUILD_BUILD_VERSION=${revision} -f \$(srctree)/Makefile intdeb-pkg
 	sed -i s/#DEB_VERSION_UPSTREAM#/${version}/ debian/$metapackage/DEBIAN/postinst
 	chmod 775 debian/$metapackage/DEBIAN/postinst
 	dpkg-gencontrol -p$metapackage -P"debian/$metapackage"
