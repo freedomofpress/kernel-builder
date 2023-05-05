@@ -86,5 +86,5 @@ make -j $VCPUS deb-pkg
 
 echo "Storing build artifacts for $LINUX_VERSION"
 if [[ -d /output ]]; then
-    rsync -a --info=progress2 ../*.deb ../*.tar.gz /output/
+    rsync -a --info=progress2 ../*.{buildinfo,changes,dsc,deb,tar.gz} /output/
 fi
