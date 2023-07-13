@@ -224,7 +224,8 @@ cat <<EOF >> debian/control
 Package: securedrop-grsec
 Section: admin
 Architecture: $debarch
-Depends: $packagename-$version, intel-microcode, paxctld
+Depends: $packagename-$version, intel-microcode, paxctld,
+ linux-image-5.15.89-grsec-securedrop
 Description: Metapackage providing a grsecurity-patched Linux kernel for use
  with SecureDrop. Depends on the most recently built patched kernel maintained
  by FPF. Package also includes sysctl and PaX flags calls for GRUB.
