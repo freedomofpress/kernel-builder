@@ -1,7 +1,7 @@
 ---
 version: 2
 jobs:
-  # Build recent stable Linux kernel, with no patches
+  # Build Linux kernel, with no patches
   vanilla:
     machine:
       image: ubuntu-2004:202010-01

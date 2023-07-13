@@ -8,6 +8,7 @@ set -o pipefail
 # Can be renabled vai env var or cli flag.
 GRSECURITY="${GRSECURITY:-}"
 LINUX_VERSION="${LINUX_VERSION:-}"
+LINUX_MAJOR_VERSION="${LINUX_MAJOR_VERSION:-}"
 LINUX_CUSTOM_CONFIG="${LINUX_CUSTOM_CONFIG:-/config}"
 LOCALVERSION="${LOCALVERSION:-}"
 export SOURCE_DATE_EPOCH
@@ -42,12 +43,18 @@ else
 fi
 
 if [[ -z "$LINUX_VERSION" ]]; then
-    LINUX_VERSION="$(curl -s https://www.kernel.org/ | grep -m1 -F stable: -A1 | tail -n1 | grep -oP '[\d\.]+')"
+    if [[ -z "$LINUX_MAJOR_VERSION" ]]; then
+        echo "ERROR: \$LINUX_MAJOR_VERSION must be set"
+        exit 1
+    fi
+    # Get the latest patch version of this version series from kernel.org
+    LINUX_VERSION="$(curl -s https://www.kernel.org/ | grep -m1 -F "$LINUX_MAJOR_VERSION" -A1 | head -n1 | grep -oP '[\d\.]+')"
 fi
-LINUX_MAJOR_VERSION="$(cut -d. -f1 <<< "$LINUX_VERSION")"
 
+# 5.15.120 -> 5
+FOLDER="$(cut -d. -f1 <<< "$LINUX_VERSION").x"
 echo "Fetching Linux kernel source $LINUX_VERSION"
-wget https://cdn.kernel.org/pub/linux/kernel/v${LINUX_MAJOR_VERSION}.x/linux-${LINUX_VERSION}.tar.{xz,sign}
+wget https://cdn.kernel.org/pub/linux/kernel/v${FOLDER}/linux-${LINUX_VERSION}.tar.{xz,sign}
 
 echo "Extracting Linux kernel source $LINUX_VERSION"
 xz -d -v linux-${LINUX_VERSION}.tar.xz
