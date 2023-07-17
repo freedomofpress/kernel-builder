@@ -89,7 +89,7 @@ echo "Building Linux kernel source $LINUX_VERSION"
 make olddefconfig
 
 VCPUS="$(nproc)"
-make -j $VCPUS deb-pkg
+make EXTRAVERSION="-1" -j $VCPUS deb-pkg
 
 echo "Storing build artifacts for $LINUX_VERSION"
 if [[ -d /output ]]; then
