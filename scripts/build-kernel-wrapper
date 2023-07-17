@@ -44,6 +44,7 @@ docker run --rm -t \
     -e SOURCE_DATE_EPOCH \
     -e KBUILD_BUILD_TIMESTAMP \
     -e DEB_BUILD_TIMESTAMP \
+    -e LINUX_MAJOR_VERSION \
     -e LOCALVERSION \
     -v "${kernel_dir}:/output:Z" \
     $local_config_volume_opt \

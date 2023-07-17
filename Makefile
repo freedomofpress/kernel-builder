@@ -3,7 +3,7 @@ IMG_NAME = fpf.local/kernel-builder
 
 .PHONY: vanilla
 vanilla: ## Builds latest stable kernel, unpatched
-	./scripts/build-kernel-wrapper
+	LINUX_MAJOR_VERSION="5.15" ./scripts/build-kernel-wrapper
 
 .PHONY: grsec
 grsec: ## Builds grsecurity-patched kernel (requires credentials)
@@ -11,7 +11,7 @@ grsec: ## Builds grsecurity-patched kernel (requires credentials)
 
 .PHONY: reprotest
 reprotest: ## Builds simple kernel multiple times to confirm reproducibility
-	./scripts/reproducibility-test
+	LINUX_MAJOR_VERSION="5.15" ./scripts/reproducibility-test
 
 .PHONY: reprotest-sd
 reprotest-sd: ## DEBUG Builds SD kernel config without grsec in CI
