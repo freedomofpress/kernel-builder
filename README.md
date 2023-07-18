@@ -39,7 +39,7 @@ Here's how to set up a build environment in [Qubes], suitable for use with [Secu
 The build requires `docker`, so make sure your TemplateVM has docker configured.
 
 ```
-qvm-create sd-kernel-builder --template debian-10 --label purple
+qvm-create sd-kernel-builder --template debian-11 --label purple
 qvm-prefs sd-kernel-builder vcpus $(nproc)
 qvm-volume resize sd-kernel-builder:private 50G
 
