@@ -11,6 +11,7 @@ SOURCE_DATE_EPOCH="1309379017"
 export SOURCE_DATE_EPOCH
 export KBUILD_BUILD_TIMESTAMP="@${SOURCE_DATE_EPOCH}"
 export DEB_BUILD_TIMESTAMP="${SOURCE_DATE_EPOCH}"
+export TERM=dumb  # to omit control characters from "script" transcripts
 
 # Build container image for kernel dependencies
 IMG_NAME="fpf.local/kernel-builder"
@@ -46,6 +47,7 @@ docker run --rm -t \
     -e DEB_BUILD_TIMESTAMP \
     -e LINUX_MAJOR_VERSION \
     -e LOCALVERSION \
+    -e TERM \
     -v "${kernel_dir}:/output:Z" \
     $local_config_volume_opt \
     $local_patches_volume_opt \
