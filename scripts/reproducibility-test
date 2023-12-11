@@ -4,6 +4,7 @@ set -u
 set -o pipefail
 set -x
 
+echo "XKCD scripts/reproducibility-test 1"
 
 # Full list of reprotest options, for reference
 # "+environment, +build_path, +kernel, +aslr, +num_cpus, +time,
@@ -15,14 +16,19 @@ set -x
 #   - time
 #   - domain_host
 
+echo "XKCD scripts/reproducibility-test 2"
 
 # If TERM is not set, diffoscope will fail with "setupterm: could not find terminfo database".
 # Set TERM to someting if it's unset, mostly useful for CI.
 TERM="${TERM:-xterm-256color}"
 export TERM
 
+echo "XKCD scripts/reproducibility-test 3"
+
 # Support overriding the build command
 reprotest_build_cmd="${1:-make vanilla}"
+
+echo "XKCD scripts/reproducibility-test 4"
 
 echo "Running reprotest with cmd: '$reprotest_build_cmd'"
 reprotest -c "$reprotest_build_cmd" \

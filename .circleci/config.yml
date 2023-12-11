@@ -18,6 +18,7 @@ jobs:
       image: ubuntu-2004:202010-01
     steps:
       - checkout
+      - run: env
       - run: sudo apt-get update && sudo apt-get install -y make build-essential reprotest
       - run: make reprotest
 

@@ -1,0 +1,30 @@
+---
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  vanilla:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: sudo apt-get update && sudo apt-get install -y make build-essential
+      - run: make vanilla
+  reproducibility:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: env
+      - run: |
+          sudo mkdir /nonexistent
+          sudo mkdir /nonexistent/second-build
+      - run: |
+          ACTIONS_RUNNER=$USER sudo chown -R $ACTIONS_RUNNER: /nonexistent
+      - run: sudo apt-get update && sudo apt-get install -y make build-essential reprotest
+      - run: make reprotest
+  # reproducibility-securedrop:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - run: sudo apt-get update && sudo apt-get install -y make build-essential reprotest
+  #     - run: make reprotest-sd

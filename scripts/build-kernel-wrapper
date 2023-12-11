@@ -1,9 +1,12 @@
 #!/bin/bash
 
+echo "XKCD scripts/build-kernel-wrapper 1"
+
 set -e
 set -u
 set -o pipefail
 
+echo "XKCD scripts/build-kernel-wrapper 2"
 
 # SOURCE_DATE_EPOCH="$(git log -1 --pretty=%ct)"
 # DEBUG: setting constant value to make eval easier
@@ -13,6 +16,10 @@ export KBUILD_BUILD_TIMESTAMP="@${SOURCE_DATE_EPOCH}"
 export DEB_BUILD_TIMESTAMP="${SOURCE_DATE_EPOCH}"
 export TERM=dumb  # to omit control characters from "script" transcripts
 
+echo "XKCD scripts/build-kernel-wrapper 3"
+echo $PWD
+env
+
 # Build container image for kernel dependencies
 IMG_NAME="fpf.local/kernel-builder"
 docker build -t "$IMG_NAME" \
@@ -20,19 +27,36 @@ docker build -t "$IMG_NAME" \
     --build-arg GID="$(id -g)" \
     .
 
+echo "XKCD scripts/build-kernel-wrapper 4"
+echo $PWD
+env
+
 # Configure local customizations
 local_config_volume_opt=""
 if [[ -n "${LINUX_LOCAL_CONFIG_PATH:-}" ]]; then
     local_config_volume_opt="-v ${LINUX_LOCAL_CONFIG_PATH}:/config:ro"
 fi
+
+echo "XKCD scripts/build-kernel-wrapper 5"
+
 local_patches_volume_opt=""
 if [[ -n "${LINUX_LOCAL_PATCHES_PATH:-}" ]]; then
     local_patches_volume_opt="-v ${LINUX_LOCAL_PATCHES_PATH}:/patches:ro"
 fi
 
+echo "XKCD scripts/build-kernel-wrapper 6"
+
+echo $PWD
+env
+
 # Create output dir
 kernel_dir="$PWD/build"
 mkdir -p -m 755 "$kernel_dir"
+
+echo "XKCD scripts/build-kernel-wrapper 7"
+
+echo $PWD
+env
 
 # TODO: It'd be great to pass `-i` here so the builds can be cancelled,
 # but that breaks reprotest. Pass it conditionally, depending on whether
@@ -52,6 +76,9 @@ docker run --rm -t \
     $local_config_volume_opt \
     $local_patches_volume_opt \
     "$IMG_NAME"
+
+echo "XKCD scripts/build-kernel-wrapper 8"
+
 
 echo "Build complete. Packages can be found at:"
 find "$kernel_dir" -type f | sort
