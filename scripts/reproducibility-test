@@ -26,5 +26,4 @@ reprotest_build_cmd="${1:-make vanilla}"
 
 echo "Running reprotest with cmd: '$reprotest_build_cmd'"
 reprotest -c "$reprotest_build_cmd" \
-    --vary "+all, -fileordering, -aslr, -time, -domain_host" \
     "." "build/linux-image*.deb"
