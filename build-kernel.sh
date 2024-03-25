@@ -73,7 +73,11 @@ if [[ -e /patches-grsec && -n "$GRSECURITY" && "$GRSECURITY" = "1" ]]; then
 fi
 
 echo "Copying in our mkdebian"
-cp /usr/local/bin/mkdebian scripts/package/mkdebian
+cp "/scripts/mkdebian-${LINUX_MAJOR_VERSION}" scripts/package/mkdebian
+if [[ -f "/scripts/rules-${LINUX_MAJOR_VERSION}" ]]; then
+    echo "Copying in our debian/rules"
+    cp "/scripts/rules-${LINUX_MAJOR_VERSION}" scripts/package/debian/rules
+fi
 
 if [[ "$LOCALVERSION" = "-workstation" ]]; then
     echo "Copying in our securedrop-workstation-grsec"

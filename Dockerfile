@@ -35,7 +35,7 @@ RUN groupadd -g ${GID} ${USERNAME} && useradd -m -d /home/${USERNAME} -g ${GID} 
 
 COPY build-kernel.sh /usr/local/bin/build-kernel.sh
 COPY grsecurity-urls.py /usr/local/bin/grsecurity-urls.py
-COPY scripts/mkdebian /usr/local/bin/mkdebian
+COPY scripts/ /scripts
 
 COPY securedrop-grsec /securedrop-grsec
 COPY securedrop-workstation-grsec /securedrop-workstation-grsec
