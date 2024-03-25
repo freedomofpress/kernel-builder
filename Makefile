@@ -12,6 +12,16 @@ vanilla: ## Builds latest stable kernel, unpatched
 		--return \
 		$(OUT)
 
+.PHONY: tiny-6.6
+tiny-6.6: OUT:=$(SCRIPT_OUTPUT_PREFIX)-tiny-6.6.$(SCRIPT_OUTPUT_EXT)
+tiny-6.6: ## Builds latest 6.6 kernel, unpatched
+	LINUX_MAJOR_VERSION="6.6" LOCALVERSION="tiny" \
+		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/tinyconfig-6.6" \
+		script \
+		--command ./scripts/build-kernel-wrapper \
+		--return \
+		$(OUT)
+
 .PHONY: grsec
 grsec: OUT:=$(SCRIPT_OUTPUT_PREFIX)-grsec.$(SCRIPT_OUTPUT_EXT)
 grsec: ## Builds grsecurity-patched kernel (requires credentials)
@@ -27,14 +37,14 @@ reprotest: ## Builds simple kernel multiple times to confirm reproducibility
 
 .PHONY: reprotest-sd
 reprotest-sd: ## DEBUG Builds SD kernel config without grsec in CI
-	GRSECURITY=0 LOCALVERSION="-securedrop" \
+	GRSECURITY=0 LOCALVERSION="securedrop" \
 		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-securedrop-5.15" \
 		LINUX_LOCAL_PATCHES_PATH="$(PWD)/patches" \
 		./scripts/reproducibility-test
 
 securedrop-core-5.15: OUT:=$(SCRIPT_OUTPUT_PREFIX)-securedrop-core-5.15.$(SCRIPT_OUTPUT_EXT)
 securedrop-core-5.15: ## Builds kernels for SecureDrop servers, 5.15.x
-	GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable6 LOCALVERSION="-securedrop" \
+	GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable6 LOCALVERSION="securedrop" \
 		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-securedrop-5.15" \
 		LINUX_LOCAL_PATCHES_PATH="$(PWD)/patches" \
 		script \
@@ -53,7 +63,7 @@ securedrop-workstation-5.15: ## Builds kernels for SecureDrop Workstation, 5.15.
 
 securedrop-workstation-6.6: OUT:=$(SCRIPT_OUTPUT_PREFIX)-securedrop-workstation-6.6.$(SCRIPT_OUTPUT_EXT)
 securedrop-workstation-6.6: ## Builds kernels for SecureDrop Workstation, 6.6.x
-	GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable9 LOCALVERSION="-workstation" \
+	GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable9 LOCALVERSION="workstation" \
 		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-workstation-6.6" \
 		script \
 		--command ./scripts/build-kernel-wrapper \
