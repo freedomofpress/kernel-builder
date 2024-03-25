@@ -1,5 +1,5 @@
 # debian:buster 2021-12-20
-FROM debian@sha256:94ccfd1c5115a6903cbb415f043a0b04e307be3f37b768cf6d6d3edff0021da3
+FROM debian:bookworm
 
 ARG UID=1000
 ARG GID=1000
@@ -17,7 +17,7 @@ RUN apt-get update && \
     curl \
     fakeroot \
     flex \
-    gcc-8-plugin-dev \
+    gcc-12-plugin-dev \
     git \
     kmod \
     libelf-dev \
