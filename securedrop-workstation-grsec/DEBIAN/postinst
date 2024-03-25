@@ -2,9 +2,8 @@
 # postinst script for securedrop-workstation-grsec
 #
 # see: dh_installdeb(1)
-
 set -e
-
+set -x
 # summary of how this script can be called:
 #        * <postinst> `configure' <most-recently-configured-version>
 #        * <old-postinst> `abort-upgrade' <new version>
@@ -17,9 +16,8 @@ set -e
 # for details, see https://www.debian.org/doc/debian-policy/ or
 # the debian-policy package
 
-
 # Pin current version of custom kernel
-GRSEC_VERSION='#DEB_VERSION_UPSTREAM#'
+GRSEC_VERSION="#DEB_VERSION_UPSTREAM#"
 
 # Sets default grub boot parameter to the kernel version specified
 # by $GRSEC_VERSION because the default bullseye kernels have
