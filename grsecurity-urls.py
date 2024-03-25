@@ -9,8 +9,12 @@ import sys
 from requests.auth import HTTPBasicAuth
 
 
-# stable6 corresponds to the long-term 5.15 kernel, good until Q4 2024
-GRSECURITY_PATCH_TYPES = ["stable6"]
+GRSECURITY_PATCH_TYPES = [
+    # stable6 corresponds to the long-term 5.15 kernel, good until Q4 2025
+    "stable6",
+    # stable9 corresponds to the long-term 6.6 kernel, good until Q4 2026
+    "stable9",
+]
 
 
 logging.basicConfig(
@@ -41,7 +45,8 @@ def parse_args():
 
 class GrsecurityPatch:
     def __init__(self, patch_type):
-        assert patch_type in GRSECURITY_PATCH_TYPES
+        if patch_type not in GRSECURITY_PATCH_TYPES:
+            raise RuntimeError(f"Invalid --patch-type: '{patch_type}'")
         self.patch_type = patch_type
         self.download_prefix = (
             "https://grsecurity.net/download-restrict/download-redirect.php?file="
@@ -55,7 +60,7 @@ class GrsecurityPatch:
     def patch_name(self):
         patch_name_url = "https://grsecurity.net/latest_{}_patch".format(self.patch_type)
         r = requests.get(patch_name_url)
-        assert r.ok
+        r.raise_for_status()
         patch_name = r.content.rstrip().decode("utf-8")
         return patch_name
 
