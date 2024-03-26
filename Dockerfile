@@ -15,9 +15,11 @@ RUN apt-get update && \
     build-essential \
     cpio \
     curl \
+    debhelper \
     fakeroot \
     flex \
     gcc-12-plugin-dev \
+    gettext-base \
     git \
     kmod \
     libelf-dev \
@@ -25,6 +27,7 @@ RUN apt-get update && \
     libssl-dev \
     lsb-release \
     ncurses-dev \
+    pigz \
     python3 \
     python3-requests \
     rsync \
@@ -35,10 +38,7 @@ RUN groupadd -g ${GID} ${USERNAME} && useradd -m -d /home/${USERNAME} -g ${GID} 
 
 COPY build-kernel.sh /usr/local/bin/build-kernel.sh
 COPY grsecurity-urls.py /usr/local/bin/grsecurity-urls.py
-COPY scripts/ /scripts
-
-COPY securedrop-grsec /securedrop-grsec
-COPY securedrop-workstation-grsec /securedrop-workstation-grsec
+COPY debian /debian
 
 RUN mkdir -p -m 0755 /kernel /patches-grsec /output
 RUN chown ${USERNAME}:${USERNAME} /kernel /patches-grsec /output

@@ -1,7 +1,5 @@
 #!/bin/bash
-set -e
-set -u
-set -o pipefail
+set -euxo pipefail
 
 
 # Patching with grsecurity is disabled by default.
@@ -12,8 +10,12 @@ LINUX_MAJOR_VERSION="${LINUX_MAJOR_VERSION:-}"
 LINUX_CUSTOM_CONFIG="${LINUX_CUSTOM_CONFIG:-/config}"
 LOCALVERSION="${LOCALVERSION:-}"
 export SOURCE_DATE_EPOCH
+export SOURCE_DATE_EPOCH_FORMATTED=$(date -R -d @$SOURCE_DATE_EPOCH)
 export KBUILD_BUILD_TIMESTAMP
 export DEB_BUILD_TIMESTAMP
+# Get the current Debian codename so we can vary based on version
+eval "export $(cat /etc/os-release | grep CODENAME)"
+export VERSION_CODENAME
 
 if [[ $# > 0 ]]; then
     x="$1"
@@ -48,6 +50,7 @@ if [[ -z "$LINUX_VERSION" ]]; then
         exit 1
     fi
     # Get the latest patch version of this version series from kernel.org
+    echo "Looking up latest release of $LINUX_MAJOR_VERSION from kernel.org"
     LINUX_VERSION="$(curl -s https://www.kernel.org/ | grep -m1 -F "$LINUX_MAJOR_VERSION" -A1 | head -n1 | grep -oP '[\d\.]+')"
 fi
 
@@ -57,7 +60,7 @@ echo "Fetching Linux kernel source $LINUX_VERSION"
 wget https://cdn.kernel.org/pub/linux/kernel/v${FOLDER}/linux-${LINUX_VERSION}.tar.{xz,sign}
 
 echo "Extracting Linux kernel source $LINUX_VERSION"
-xz -d -v linux-${LINUX_VERSION}.tar.xz
+xz -d -T 0 -v linux-${LINUX_VERSION}.tar.xz
 gpgv --keyring /pubkeys/kroah_hartman.gpg linux-${LINUX_VERSION}.tar.sign linux-${LINUX_VERSION}.tar
 tar -xf linux-${LINUX_VERSION}.tar
 cd linux-${LINUX_VERSION}
@@ -72,28 +75,36 @@ if [[ -e /patches-grsec && -n "$GRSECURITY" && "$GRSECURITY" = "1" ]]; then
     find /patches-grsec -maxdepth 1 -type f -exec patch -p 1 -i {} \;
 fi
 
-echo "Copying in our mkdebian"
-cp "/scripts/mkdebian-${LINUX_MAJOR_VERSION}" scripts/package/mkdebian
-if [[ -f "/scripts/rules-${LINUX_MAJOR_VERSION}" ]]; then
-    echo "Copying in our debian/rules"
-    cp "/scripts/rules-${LINUX_MAJOR_VERSION}" scripts/package/debian/rules
-fi
+# Generate the orig tarball
+#tar --use-compress-program="xz -T 0" -cf ../linux-upstream_${LINUX_VERSION}-grsec-${LOCALVERSION}.orig.tar.xz .
+tar -cf - . | pigz > ../linux-upstream_${LINUX_VERSION}-grsec-${LOCALVERSION}.orig.tar.gz
 
+echo "Copying in our debian/"
+cp -R /debian debian
+
+export PACKAGE_VERSION="${LINUX_VERSION}-grsec-${LOCALVERSION}-1"
+export DEBARCH="amd64"
+
+cat debian/control.in | envsubst > debian/control
+echo "" >> debian/control
 if [[ "$LOCALVERSION" = "-workstation" ]]; then
-    echo "Copying in our securedrop-workstation-grsec"
-    mkdir -p debian/securedrop-workstation-grsec
-    cp -Rv /securedrop-workstation-grsec/* debian/securedrop-workstation-grsec/
+    echo "Generating d/control for workstation"
+    cat debian/control.workstation | envsubst >> debian/control
 else
-    echo "Copying in our securedrop-grsec"
-    mkdir -p debian/securedrop-grsec
-    cp -Rv /securedrop-grsec/* debian/securedrop-grsec/
+    echo "Generating d/control for server"
+    cat debian/control.server | envsubst >> debian/control
 fi
+cat debian/changelog.in | envsubst > debian/changelog
+
+cat <<EOF > debian/rules.vars
+ARCH := x86
+KERNELRELEASE := ${LINUX_VERSION}
+EOF
 
 echo "Building Linux kernel source $LINUX_VERSION"
-make olddefconfig
 
-VCPUS="$(nproc)"
-make EXTRAVERSION="-1" -j $VCPUS deb-pkg
+# TODO set parallel build here
+dpkg-buildpackage -uc -us
 
 echo "Storing build artifacts for $LINUX_VERSION"
 if [[ -d /output ]]; then

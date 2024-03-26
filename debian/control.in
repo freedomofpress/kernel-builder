@@ -1,0 +1,36 @@
+Source: linux-upstream
+Section: kernel
+Priority: optional
+Maintainer: SecureDrop Team <securedrop@freedom.press>
+Rules-Requires-Root: no
+Build-Depends: bc, debhelper, rsync, kmod, cpio, bison, flex, libelf-dev, libssl-dev
+Homepage: https://securedrop.org/
+
+Package: linux-image-${PACKAGE_VERSION}
+Architecture: ${DEBARCH}
+Description: Linux kernel, version ${PACKAGE_VERSION}
+ This package contains the Linux kernel, modules and corresponding other
+ files, version: ${PACKAGE_VERSION}.
+
+Package: linux-libc-dev
+Section: devel
+Provides: linux-kernel-headers
+Architecture: ${DEBARCH}
+Description: Linux support headers for userspace development
+ This package provides userspaces headers from the Linux kernel.  These headers
+ are used by the installed headers for GNU glibc and other system libraries.
+Multi-Arch: same
+
+Package: linux-headers-${PACKAGE_VERSION}
+Architecture: ${DEBARCH}
+Description: Linux kernel headers for ${PACKAGE_VERSION} on ${DEBARCH}
+ This package provides kernel header files for ${PACKAGE_VERSION} on ${DEBARCH}
+ .
+ This is useful for people who need to build external modules
+
+Package: linux-image-${PACKAGE_VERSION}-dbg
+Section: debug
+Architecture: ${DEBARCH}
+Description: Linux kernel debugging symbols for ${PACKAGE_VERSION}
+ This package will come in handy if you need to debug the kernel. It provides
+ all the necessary debug symbols for the kernel and its modules.
