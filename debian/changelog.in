@@ -1,4 +1,4 @@
-linux-upstream (${PACKAGE_VERSION}) ${VERSION_CODENAME}; urgency=low
+linux-upstream (${LINUX_BUILD_VERSION}-${VERSION_SUFFIX}-${BUILD_VERSION}) ${VERSION_CODENAME}; urgency=low
 
   * Custom built Linux kernel.
 

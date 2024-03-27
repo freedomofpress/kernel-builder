@@ -8,7 +8,10 @@ GRSECURITY="${GRSECURITY:-}"
 LINUX_VERSION="${LINUX_VERSION:-}"
 LINUX_MAJOR_VERSION="${LINUX_MAJOR_VERSION:-}"
 LINUX_CUSTOM_CONFIG="${LINUX_CUSTOM_CONFIG:-/config}"
+# "securedrop" or "workstation" (or "tiny" in CI)
 LOCALVERSION="${LOCALVERSION:-}"
+# Increment this if we need to rebuild the same kernel version for whatever reason
+export BUILD_VERSION="${BUILD_VERSION:-1}"
 export SOURCE_DATE_EPOCH
 export SOURCE_DATE_EPOCH_FORMATTED=$(date -R -d @$SOURCE_DATE_EPOCH)
 export KBUILD_BUILD_TIMESTAMP
@@ -53,6 +56,7 @@ if [[ -z "$LINUX_VERSION" ]]; then
     echo "Looking up latest release of $LINUX_MAJOR_VERSION from kernel.org"
     LINUX_VERSION="$(curl -s https://www.kernel.org/ | grep -m1 -F "$LINUX_MAJOR_VERSION" -A1 | head -n1 | grep -oP '[\d\.]+')"
 fi
+export LINUX_VERSION
 
 # 5.15.120 -> 5
 FOLDER="$(cut -d. -f1 <<< "$LINUX_VERSION").x"
@@ -82,7 +86,12 @@ tar -cf - . | pigz > ../linux-upstream_${LINUX_VERSION}-grsec-${LOCALVERSION}.or
 echo "Copying in our debian/"
 cp -R /debian debian
 
-export PACKAGE_VERSION="${LINUX_VERSION}-grsec-${LOCALVERSION}-1"
+export LINUX_BUILD_VERSION="${LINUX_VERSION}-${BUILD_VERSION}"
+if [[ -n "$GRSECURITY" && "$GRSECURITY" = "1" ]]; then
+    export VERSION_SUFFIX="grsec-${LOCALVERSION}"
+else
+    export VERSION_SUFFIX="${LOCALVERSION}"
+fi
 export DEBARCH="amd64"
 
 cat debian/control.in | envsubst > debian/control
