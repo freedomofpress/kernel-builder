@@ -79,19 +79,20 @@ if [[ -e /patches-grsec && -n "$GRSECURITY" && "$GRSECURITY" = "1" ]]; then
     find /patches-grsec -maxdepth 1 -type f -exec patch -p 1 -i {} \;
 fi
 
-# Generate the orig tarball
-#tar --use-compress-program="xz -T 0" -cf ../linux-upstream_${LINUX_VERSION}-grsec-${LOCALVERSION}.orig.tar.xz .
-tar -cf - . | pigz > ../linux-upstream_${LINUX_VERSION}-grsec-${LOCALVERSION}.orig.tar.gz
-
-echo "Copying in our debian/"
-cp -R /debian debian
-
 export LINUX_BUILD_VERSION="${LINUX_VERSION}-${BUILD_VERSION}"
 if [[ -n "$GRSECURITY" && "$GRSECURITY" = "1" ]]; then
     export VERSION_SUFFIX="grsec-${LOCALVERSION}"
 else
     export VERSION_SUFFIX="${LOCALVERSION}"
 fi
+
+# Generate the orig tarball
+#tar --use-compress-program="xz -T 0" -cf ../linux-upstream_${LINUX_VERSION}-grsec-${LOCALVERSION}.orig.tar.xz .
+tar -cf - . | pigz > ../linux-upstream_${LINUX_BUILD_VERSION}-${VERSION_SUFFIX}}.orig.tar.gz
+
+echo "Copying in our debian/"
+cp -R /debian debian
+
 export DEBARCH="amd64"
 
 cat debian/control.in | envsubst > debian/control
