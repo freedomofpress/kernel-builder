@@ -87,8 +87,7 @@ else
 fi
 
 # Generate the orig tarball
-#tar --use-compress-program="xz -T 0" -cf ../linux-upstream_${LINUX_VERSION}-grsec-${LOCALVERSION}.orig.tar.xz .
-tar -cf - . | pigz > ../linux-upstream_${LINUX_BUILD_VERSION}-${VERSION_SUFFIX}}.orig.tar.gz
+tar --use-compress-program="xz -T 0" -cf ../linux-upstream_${LINUX_BUILD_VERSION}-${VERSION_SUFFIX}.orig.tar.xz .
 
 echo "Copying in our debian/"
 cp -R /debian debian
@@ -118,5 +117,5 @@ dpkg-buildpackage -uc -us
 
 echo "Storing build artifacts for $LINUX_VERSION"
 if [[ -d /output ]]; then
-    rsync -a --info=progress2 ../*.{buildinfo,changes,dsc,deb,tar.gz} /output/
+    rsync -a --info=progress2 ../*.{buildinfo,changes,dsc,deb,tar.xz} /output/
 fi

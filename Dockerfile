@@ -27,7 +27,6 @@ RUN apt-get update && \
     libssl-dev \
     lsb-release \
     ncurses-dev \
-    pigz \
     python3 \
     python3-requests \
     rsync \
