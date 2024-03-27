@@ -34,10 +34,13 @@ fi
 kernel_dir="$PWD/build"
 mkdir -p -m 755 "$kernel_dir"
 
-# TODO: It'd be great to pass `-i` here so the builds can be cancelled,
-# but that breaks reprotest. Pass it conditionally, depending on whether
-# there's an interactive session available.
-docker run --rm -t \
+DOCKER_RUN_ARGUMENTS=""
+# Pass -it if we're a tty
+if test -t 0; then
+    DOCKER_RUN_ARGUMENTS="${DOCKER_RUN_ARGUMENTS} -it"
+fi
+
+docker run --rm $DOCKER_RUN_ARGUMENTS \
     -e GRSECURITY_USERNAME \
     -e GRSECURITY_PASSWORD \
     -e GRSECURITY_PATCH_TYPE \

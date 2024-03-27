@@ -1,0 +1,5 @@
+linux-upstream (${LINUX_BUILD_VERSION}-${VERSION_SUFFIX}-${BUILD_VERSION}) ${VERSION_CODENAME}; urgency=low
+
+  * Custom built Linux kernel.
+
+ -- SecureDrop Team <securedrop@freedom.press>  ${SOURCE_DATE_EPOCH_FORMATTED}

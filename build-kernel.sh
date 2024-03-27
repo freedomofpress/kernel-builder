@@ -1,7 +1,5 @@
 #!/bin/bash
-set -e
-set -u
-set -o pipefail
+set -euxo pipefail
 
 
 # Patching with grsecurity is disabled by default.
@@ -10,10 +8,17 @@ GRSECURITY="${GRSECURITY:-}"
 LINUX_VERSION="${LINUX_VERSION:-}"
 LINUX_MAJOR_VERSION="${LINUX_MAJOR_VERSION:-}"
 LINUX_CUSTOM_CONFIG="${LINUX_CUSTOM_CONFIG:-/config}"
+# "securedrop" or "workstation" (or "tiny" in CI)
 LOCALVERSION="${LOCALVERSION:-}"
+# Increment this if we need to rebuild the same kernel version for whatever reason
+export BUILD_VERSION="${BUILD_VERSION:-1}"
 export SOURCE_DATE_EPOCH
+export SOURCE_DATE_EPOCH_FORMATTED=$(date -R -d @$SOURCE_DATE_EPOCH)
 export KBUILD_BUILD_TIMESTAMP
 export DEB_BUILD_TIMESTAMP
+# Get the current Debian codename so we can vary based on version
+eval "export $(cat /etc/os-release | grep CODENAME)"
+export VERSION_CODENAME
 
 if [[ $# > 0 ]]; then
     x="$1"
@@ -48,8 +53,10 @@ if [[ -z "$LINUX_VERSION" ]]; then
         exit 1
     fi
     # Get the latest patch version of this version series from kernel.org
+    echo "Looking up latest release of $LINUX_MAJOR_VERSION from kernel.org"
     LINUX_VERSION="$(curl -s https://www.kernel.org/ | grep -m1 -F "$LINUX_MAJOR_VERSION" -A1 | head -n1 | grep -oP '[\d\.]+')"
 fi
+export LINUX_VERSION
 
 # 5.15.120 -> 5
 FOLDER="$(cut -d. -f1 <<< "$LINUX_VERSION").x"
@@ -57,7 +64,7 @@ echo "Fetching Linux kernel source $LINUX_VERSION"
 wget https://cdn.kernel.org/pub/linux/kernel/v${FOLDER}/linux-${LINUX_VERSION}.tar.{xz,sign}
 
 echo "Extracting Linux kernel source $LINUX_VERSION"
-xz -d -v linux-${LINUX_VERSION}.tar.xz
+xz -d -T 0 -v linux-${LINUX_VERSION}.tar.xz
 gpgv --keyring /pubkeys/kroah_hartman.gpg linux-${LINUX_VERSION}.tar.sign linux-${LINUX_VERSION}.tar
 tar -xf linux-${LINUX_VERSION}.tar
 cd linux-${LINUX_VERSION}
@@ -72,26 +79,43 @@ if [[ -e /patches-grsec && -n "$GRSECURITY" && "$GRSECURITY" = "1" ]]; then
     find /patches-grsec -maxdepth 1 -type f -exec patch -p 1 -i {} \;
 fi
 
-echo "Copying in our mkdebian"
-cp /usr/local/bin/mkdebian scripts/package/mkdebian
-
-if [[ "$LOCALVERSION" = "-workstation" ]]; then
-    echo "Copying in our securedrop-workstation-grsec"
-    mkdir -p debian/securedrop-workstation-grsec
-    cp -Rv /securedrop-workstation-grsec/* debian/securedrop-workstation-grsec/
+export LINUX_BUILD_VERSION="${LINUX_VERSION}-${BUILD_VERSION}"
+if [[ -n "$GRSECURITY" && "$GRSECURITY" = "1" ]]; then
+    export VERSION_SUFFIX="grsec-${LOCALVERSION}"
 else
-    echo "Copying in our securedrop-grsec"
-    mkdir -p debian/securedrop-grsec
-    cp -Rv /securedrop-grsec/* debian/securedrop-grsec/
+    export VERSION_SUFFIX="${LOCALVERSION}"
 fi
 
-echo "Building Linux kernel source $LINUX_VERSION"
-make olddefconfig
+# Generate the orig tarball
+tar --use-compress-program="xz -T 0" -cf ../linux-upstream_${LINUX_BUILD_VERSION}-${VERSION_SUFFIX}.orig.tar.xz .
 
-VCPUS="$(nproc)"
-make EXTRAVERSION="-1" -j $VCPUS deb-pkg
+echo "Copying in our debian/"
+cp -R /debian debian
+
+export DEBARCH="amd64"
+
+cat debian/control.in | envsubst > debian/control
+echo "" >> debian/control
+if [[ "$LOCALVERSION" = "workstation" ]]; then
+    echo "Generating d/control for workstation"
+    cat debian/control.workstation | envsubst >> debian/control
+else
+    echo "Generating d/control for server"
+    cat debian/control.server | envsubst >> debian/control
+fi
+cat debian/changelog.in | envsubst > debian/changelog
+
+cat <<EOF > debian/rules.vars
+ARCH := x86
+KERNELRELEASE := ${LINUX_VERSION}
+EOF
+
+echo "Building Linux kernel source $LINUX_VERSION"
+
+# TODO set parallel build here
+dpkg-buildpackage -uc -us
 
 echo "Storing build artifacts for $LINUX_VERSION"
 if [[ -d /output ]]; then
-    rsync -a --info=progress2 ../*.{buildinfo,changes,dsc,deb,tar.gz} /output/
+    rsync -a --info=progress2 ../*.{buildinfo,changes,dsc,deb,tar.xz} /output/
 fi

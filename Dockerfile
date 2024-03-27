@@ -1,5 +1,5 @@
 # debian:buster 2021-12-20
-FROM debian@sha256:94ccfd1c5115a6903cbb415f043a0b04e307be3f37b768cf6d6d3edff0021da3
+FROM debian:bookworm
 
 ARG UID=1000
 ARG GID=1000
@@ -15,9 +15,11 @@ RUN apt-get update && \
     build-essential \
     cpio \
     curl \
+    debhelper \
     fakeroot \
     flex \
-    gcc-8-plugin-dev \
+    gcc-12-plugin-dev \
+    gettext-base \
     git \
     kmod \
     libelf-dev \
@@ -35,10 +37,7 @@ RUN groupadd -g ${GID} ${USERNAME} && useradd -m -d /home/${USERNAME} -g ${GID} 
 
 COPY build-kernel.sh /usr/local/bin/build-kernel.sh
 COPY grsecurity-urls.py /usr/local/bin/grsecurity-urls.py
-COPY scripts/mkdebian /usr/local/bin/mkdebian
-
-COPY securedrop-grsec /securedrop-grsec
-COPY securedrop-workstation-grsec /securedrop-workstation-grsec
+COPY debian /debian
 
 RUN mkdir -p -m 0755 /kernel /patches-grsec /output
 RUN chown ${USERNAME}:${USERNAME} /kernel /patches-grsec /output
