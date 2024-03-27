@@ -87,7 +87,7 @@ export DEBARCH="amd64"
 
 cat debian/control.in | envsubst > debian/control
 echo "" >> debian/control
-if [[ "$LOCALVERSION" = "-workstation" ]]; then
+if [[ "$LOCALVERSION" = "workstation" ]]; then
     echo "Generating d/control for workstation"
     cat debian/control.workstation | envsubst >> debian/control
 else
