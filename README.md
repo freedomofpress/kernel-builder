@@ -1,12 +1,18 @@
 # kernel-builder
 
-A small suite of tools to build a Linux kernel, optionally patched with [grsecurity].
+A suite of tools to build a Debian-packaged Linux kernel, optionally patched with [grsecurity]
+for the [SecureDrop](https://securedrop.org/) project.
 
-## Getting started
+## Prerequistes
 
-Make sure you have docker installed. Then just run `make`.
-The script will look up the most recent stable Linux version from https://www.kernel.org
-and build that. Artifacts will be available in `./build/` afterward.
+* Docker
+* GNU make
+
+## Using
+
+Select which config flavor you want to build and run `make <config>`. The script will
+automatically fetch the most recent Linux version for that flavor, patch if necessary,
+and leave built packages in `./build/`.
 
 ## Enabling grsecurity patches
 
@@ -17,21 +23,12 @@ Export your credentials:
 export GRSECURITY_USERNAME=foo
 export GRSECURITY_PASSWORD=bar
 export GRSECURITY=1
-make
+make <config>
 ```
 
-The resulting packages will used the patch set. If you're working on SecureDrop,
+The resulting packages will use the grsecurity patch set. If you're working on SecureDrop,
 request these credentials from a team member, and store them securely
 in your password manager.
-
-## Using a custom kernel config
-
-Since the build uses docker, the host machine's kernel and config are visible
-to the build environment, and will be included via `make olddefconfig` prior
-to building. If you wish to provide a different kernel config, mount the file
-at `/config` inside the container. It will be copied into place prior to building.
-Note that `make olddefconfig` will be run regardless to ensure the latest
-options have been applied.
 
 ## Building kernels in Qubes
 
@@ -66,26 +63,33 @@ source ~/grsec-env # credentials for grsecurity access
 make securedrop-workstation # to build Workstation kernels
 # grab a coffee or tea, builds take ~1h with 4 cores.
 sha256sum build/*
-# then copy the terminal history from your emulator and store build log,
-# e.g. via Edit->Select All in gnome-terminal
 ```
+
+The build output will automatically be captured in a log file.
 
 ## Release
 
-Development/staging packages are placed on apt-test.freedom.press for installation in Debian-based TemplateVMs, and production packages are placed on apt.freedom.press.
+Packages are first placed on apt-test.freedom.press for [QA testing and validation](https://developers.securedrop.org/en/latest/kernel.html), and then promoted to apt.freedom.press.
 
-⚠️ Before you add a package to one of our apt repos, you *must* upload the kernel source tarball to our S3 bucket following the instructions below.
+⚠️ Before you add a package to one of our apt repos, you *must* upload the kernel source tarball internally following the instructions below.
 
 1. Add a detached signature to the kernel source tarball using a staff (`*@freedom.press`) GPG key.
-2. If you do not have an AWS account and you are a maintainer, ask someone from the infrastructure team to set one up for you. They will provide you with instructions on where and how your credentials should be stored in Qubes.
-3. Now hop over to our private wiki page on how to use a script to upload the kernel source tarball to our S3 bucket and verify that your upload was successful. There, you'll also learn how to later respond to a source request email sent to `source-offer@freedom.press`.
-4. Now you can submit a `securedrop-workstation-grsec` changelog PR in `securedrop-debian-packaging` and a .deb LFS PR to https://github.com/freedomofpress/securedrop-dev-packages-lfs, which another maintainer reviews and merges, thereby deploying the new packages to https://apt-test.freedom.press.
-5. After QA, the same kernel packages on `apt-test` can be promoted to prod by submitting a .deb LFS PR to https://github.com/freedomofpress/securedrop-debian-packages-lfs.
+2. Now hop over to our private wiki page on how to use a script to upload the kernel source tarball internally and verify that your upload was successful.
+3. You can now propose your packages for inclusion in the `apt-test` repository.
+4. After QA, the same kernel packages on `apt-test` can be promoted to prod.
+
+## Architecture
+
+This builds on the `make deb-pkg` command in Linux. The upstream command dynamically
+generates a `debian/` directory and then executes it. Instead, we prepare and commit
+the `debian/` directory so we can customize the packages and add in our metadata.
+Our `debian/rules` is roughly the same as what would be generated, except it has some compat
+to handle different versions. Future updates of major kernel versions may require adjusting
+`debian/rules` if upstream has also made changes.
 
 ## Reproducible builds
 In the spirit of [reproducible builds], this repo attempts to make fully reproducible
-kernel images. There are some catches, however: a custom kernel patch is included
-to munge the changelog timestamp, and certain kernel config options (notably 
+kernel images. There are some catches, however: certain kernel config options (notably
 `CONFIG_GCC_PLUGIN_RANDSTRUCT` or `CONFIG_GRKERNSEC_RANDSTRUCT`) will prevent reproducibility.
 For more info, see the [kernel docs on reproducibility].
 
@@ -107,10 +111,10 @@ SecureDrop kernels because of the above-mentioned randomization of struct fields
 
 These configurations were developed by [Freedom of the Press Foundation] for
 use in all [SecureDrop] instances. Experienced sysadmins can leverage these
-roles to compile custom kernels for SecureDrop or non-SecureDrop projects.
+scripts to compile custom kernels for SecureDrop or non-SecureDrop projects.
 
 The logic here is intended to supersede the legacy build logic at
-https://github.com/freedomofpress/ansible-role-grsecurity-build/.
+https://github.com/freedomofpres s/ansible-role-grsecurity-build/.
 
 [Freedom of the Press Foundation]: https://freedom.press
 [SecureDrop]: https://securedrop.org
