@@ -9,6 +9,9 @@ include debian/rules.vars
 # and then reversing back (n.b. only needed for 5.15 support)
 DEBIAN_REVISION=$(shell echo $(DEB_VERSION) | rev | cut -d'-' -f1 | rev)
 
+# Where to find the configuration
+export KCONFIG_CONFIG=debian/kconfig
+
 srctree ?= .
 
 ifneq (,$(filter-out parallel=1,$(filter parallel=%,$(DEB_BUILD_OPTIONS))))

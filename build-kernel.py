@@ -86,8 +86,10 @@ def main():
         ]
     )
     print(f"Extracting Linux kernel source {linux_version}")
+    # We'll reuse the original tarball if we're not patching it
+    keep_xz = ["--keep"] if not grsecurity else []
     subprocess.check_call(
-        ["xz", "-d", "-T", "0", "-v", f"linux-{linux_version}.tar.xz"]
+        ["xz", "-d", "-T", "0", "-v", f"linux-{linux_version}.tar.xz"] + keep_xz
     )
     subprocess.check_call(
         [
@@ -101,9 +103,6 @@ def main():
     shutil.unpack_archive(
         f"linux-{linux_version}.tar"
     )
-    # Copy custom /config
-    print("Copying custom config for kernel source", linux_version)
-    shutil.copy("/config", f"linux-{linux_version}/.config")
 
     # Apply grsec patches
     if grsecurity:
@@ -113,19 +112,24 @@ def main():
             cwd=f"linux-{linux_version}",
         )
 
-    # Generate orig tarball
-    print("Generating orig tarball")
+    # If we applied grsec patches, we need to generate a new orig tarball,
+    # otherwise we can re-use the upstream one
     linux_build_version = f"{linux_version}-{build_version}"
     version_suffix = ("grsec-" if grsecurity else "") + local_version
-    subprocess.check_call(
-        [
-            "tar",
-            "--use-compress-program=xz -T 0",
-            "-cf",
-            f"linux-upstream_{linux_build_version}-{version_suffix}.orig.tar.xz",
-            f"linux-{linux_version}",
-        ]
-    )
+    orig_tarball = f"linux-upstream_{linux_build_version}-{version_suffix}.orig.tar.xz"
+    if grsecurity:
+        print("Generating orig tarball")
+        subprocess.check_call(
+            [
+                "tar",
+                "--use-compress-program=xz -T 0",
+                "-cf",
+                orig_tarball,
+                f"linux-{linux_version}",
+            ]
+        )
+    else:
+        shutil.copy(f"linux-{linux_version}.tar.xz", orig_tarball)
 
     os.chdir(f"linux-{linux_version}")
     # Copy debian/
@@ -148,6 +152,10 @@ def main():
     render_template("debian/control", template_variables)
     render_template("debian/changelog", template_variables)
     render_template("debian/rules.vars", template_variables)
+
+    # Copy custom /config
+    print("Copying custom config for kernel source", linux_version)
+    shutil.copy("/config", "debian/kconfig")
 
     # Building Linux kernel source
     print("Building Linux kernel source", linux_version)
