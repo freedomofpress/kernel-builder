@@ -143,6 +143,8 @@ def main():
         "local_version": local_version,
     }
 
+    # TODO: d/arch is only needed for 5.15 kernels
+    render_template("debian/arch", template_variables)
     render_template("debian/control", template_variables)
     render_template("debian/changelog", template_variables)
     render_template("debian/rules.vars", template_variables)

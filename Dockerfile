@@ -1,5 +1,5 @@
-# debian:buster 2021-12-20
-FROM debian:bookworm
+ARG BUILD_DISTRO=bookworm
+FROM debian:$BUILD_DISTRO
 
 ARG UID=1000
 ARG GID=1000
@@ -17,7 +17,6 @@ RUN apt-get update && \
     debhelper \
     fakeroot \
     flex \
-    gcc-12-plugin-dev \
     git \
     kmod \
     libelf-dev \
@@ -30,6 +29,9 @@ RUN apt-get update && \
     rsync \
     wget \
     xz-utils
+# See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=657962, there's no
+# unversioned name for this package
+RUN apt-get install --yes gcc-$(gcc -dumpversion)-plugin-dev
 
 RUN groupadd -g ${GID} ${USERNAME} && useradd -m -d /home/${USERNAME} -g ${GID} -u ${UID} ${USERNAME}
 

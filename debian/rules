@@ -2,7 +2,12 @@
 # SPDX-License-Identifier: GPL-2.0-only
 # fork of <https://github.com/torvalds/linux/blob/v6.6/scripts/package/debian/rules>
 
+include /usr/share/dpkg/pkg-info.mk
 include debian/rules.vars
+
+# Get the part after the final dash by reversing, taking up to the first dash
+# and then reversing back (n.b. only needed for 5.15 support)
+DEBIAN_REVISION=$(shell echo $(DEB_VERSION) | rev | cut -d'-' -f1 | rev)
 
 srctree ?= .
 
@@ -19,9 +24,14 @@ METAPACKGE := $(shell dh_listpackages | grep "securedrop")
 binary: binary-arch binary-indep
 binary-indep: build-indep
 binary-arch: build-arch
+ifeq ($(findstring 5.15.,$(DEB_VERSION_UPSTREAM)),5.15.)
+	$(MAKE) KERNELRELEASE=$(KERNELRELEASE) ARCH=$(ARCH) \
+	KBUILD_BUILD_VERSION=$(DEBIAN_REVISION) -f $(srctree)/Makefile intdeb-pkg
+else
 	$(MAKE) -f $(srctree)/Makefile ARCH=$(ARCH) \
 	KERNELRELEASE=$(KERNELRELEASE) \
 	run-command KBUILD_RUN_COMMAND=+$(srctree)/scripts/package/builddeb
+endif
 	sed -i s/#DEB_VERSION_UPSTREAM#/$(KERNELRELEASE)/ debian/$(METAPACKGE)/DEBIAN/postinst
 	chmod 775 debian/$(METAPACKGE)/DEBIAN/postinst
 	dpkg-gencontrol -p$(METAPACKGE) -P"debian/$(METAPACKGE)"
@@ -31,10 +41,16 @@ binary-arch: build-arch
 build: build-arch build-indep
 build-indep:
 build-arch:
+ifeq ($(findstring 5.15.,$(DEB_VERSION_UPSTREAM)),5.15.)
+	$(MAKE) olddefconfig
+	$(MAKE) KERNELRELEASE=$(KERNELRELEASE) ARCH=$(ARCH) \
+	KBUILD_BUILD_VERSION=$(DEBIAN_REVISION) -f $(srctree)/Makefile
+else
 	$(MAKE) -f $(srctree)/Makefile ARCH=$(ARCH) \
 	KERNELRELEASE=$(KERNELRELEASE) \
 	$(shell $(srctree)/scripts/package/deb-build-option) \
 	olddefconfig all
+endif
 
 .PHONY: clean
 clean:

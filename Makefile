@@ -3,10 +3,12 @@ IMG_NAME = fpf.local/kernel-builder
 SCRIPT_OUTPUT_PREFIX=$(PWD)/build/$(shell date +%Y%m%d)
 SCRIPT_OUTPUT_EXT=log
 
-.PHONY: vanilla
-vanilla: OUT:=$(SCRIPT_OUTPUT_PREFIX)-vanilla.$(SCRIPT_OUTPUT_EXT)
-vanilla: ## Builds latest stable kernel, unpatched
-	LINUX_MAJOR_VERSION="5.15" \
+.PHONY: tiny-5.15
+tiny-5.15: OUT:=$(SCRIPT_OUTPUT_PREFIX)-tiny-5.15.$(SCRIPT_OUTPUT_EXT)
+tiny-5.15: ## Builds latest 5.15 kernel, unpatched
+	LINUX_MAJOR_VERSION="5.15" LOCALVERSION="tiny" \
+		BUILD_DISTRO="buster" \
+		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/tinyconfig-5.15" \
 		script \
 		--command ./scripts/build-kernel-wrapper \
 		--return \
@@ -45,6 +47,7 @@ reprotest-sd: ## DEBUG Builds SD kernel config without grsec in CI
 securedrop-core-5.15: OUT:=$(SCRIPT_OUTPUT_PREFIX)-securedrop-core-5.15.$(SCRIPT_OUTPUT_EXT)
 securedrop-core-5.15: ## Builds kernels for SecureDrop servers, 5.15.x
 	GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable6 LOCALVERSION="securedrop" \
+		BUILD_DISTRO="buster" \
 		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-securedrop-5.15" \
 		LINUX_LOCAL_PATCHES_PATH="$(PWD)/patches" \
 		script \
@@ -55,6 +58,7 @@ securedrop-core-5.15: ## Builds kernels for SecureDrop servers, 5.15.x
 securedrop-workstation-5.15: OUT:=$(SCRIPT_OUTPUT_PREFIX)-securedrop-workstation-5.15.$(SCRIPT_OUTPUT_EXT)
 securedrop-workstation-5.15: ## Builds kernels for SecureDrop Workstation, 5.15.x
 	GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable6 LOCALVERSION="-workstation" \
+		BUILD_DISTRO="buster" \
 		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-workstation-5.15" \
 		script \
 		--command ./scripts/build-kernel-wrapper \
