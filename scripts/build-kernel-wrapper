@@ -52,6 +52,7 @@ docker run --rm $DOCKER_RUN_ARGUMENTS \
     -e DEB_BUILD_TIMESTAMP \
     -e LINUX_MAJOR_VERSION \
     -e LOCALVERSION \
+    -e BUILD_VERSION \
     -e TERM \
     -v "${kernel_dir}:/output:Z" \
     $local_config_volume_opt \
