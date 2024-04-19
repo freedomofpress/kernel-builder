@@ -39,7 +39,8 @@ Description: Linux kernel debugging symbols for {{linux_build_version}}-{{versio
 Package: securedrop-workstation-grsec
 Section: admin
 Architecture: {{debarch}}
-Depends: linux-image-{{linux_build_version}}-{{version_suffix}}, paxctld, qubes-kernel-vm-support
+Pre-Depends: qubes-kernel-vm-support
+Depends: linux-image-{{linux_build_version}}-{{version_suffix}}, paxctld
 Description: Linux for SecureDrop Workstation template (meta-package)
  Metapackage providing a grsecurity-patched Linux kernel for use in SecureDrop
  Workstation Qubes templates. Depends on the most recently built patched kernel
