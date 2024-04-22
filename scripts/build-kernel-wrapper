@@ -12,12 +12,14 @@ export SOURCE_DATE_EPOCH
 export KBUILD_BUILD_TIMESTAMP="@${SOURCE_DATE_EPOCH}"
 export DEB_BUILD_TIMESTAMP="${SOURCE_DATE_EPOCH}"
 export TERM=dumb  # to omit control characters from "script" transcripts
+export BUILD_DISTRO="${BUILD_DISTRO:-bookworm}"
 
 # Build container image for kernel dependencies
 IMG_NAME="fpf.local/kernel-builder"
-docker build -t "$IMG_NAME" \
+docker build -t "${IMG_NAME}-${BUILD_DISTRO}" \
     --build-arg UID="$(id -u)" \
     --build-arg GID="$(id -g)" \
+    --build-arg BUILD_DISTRO="$BUILD_DISTRO" \
     .
 
 # Configure local customizations
@@ -34,10 +36,13 @@ fi
 kernel_dir="$PWD/build"
 mkdir -p -m 755 "$kernel_dir"
 
-# TODO: It'd be great to pass `-i` here so the builds can be cancelled,
-# but that breaks reprotest. Pass it conditionally, depending on whether
-# there's an interactive session available.
-docker run --rm -t \
+DOCKER_RUN_ARGUMENTS=""
+# Pass -it if we're a tty
+if test -t 0; then
+    DOCKER_RUN_ARGUMENTS="${DOCKER_RUN_ARGUMENTS} -it"
+fi
+
+docker run --rm $DOCKER_RUN_ARGUMENTS \
     -e GRSECURITY_USERNAME \
     -e GRSECURITY_PASSWORD \
     -e GRSECURITY_PATCH_TYPE \
@@ -47,11 +52,12 @@ docker run --rm -t \
     -e DEB_BUILD_TIMESTAMP \
     -e LINUX_MAJOR_VERSION \
     -e LOCALVERSION \
+    -e BUILD_VERSION \
     -e TERM \
     -v "${kernel_dir}:/output:Z" \
     $local_config_volume_opt \
     $local_patches_volume_opt \
-    "$IMG_NAME"
+    "${IMG_NAME}-${BUILD_DISTRO}"
 
 echo "Build complete. Packages can be found at:"
 find "$kernel_dir" -type f | sort

@@ -1,0 +1,56 @@
+Source: linux-upstream
+Section: kernel
+Priority: optional
+Maintainer: SecureDrop Team <securedrop@freedom.press>
+Rules-Requires-Root: no
+Build-Depends: bc, debhelper, rsync, kmod, cpio, bison, flex, libelf-dev, libssl-dev
+Homepage: https://securedrop.org/
+
+Package: linux-image-{{linux_build_version}}-{{version_suffix}}
+Architecture: {{debarch}}
+Description: Linux kernel, version {{linux_build_version}}-{{version_suffix}}
+ This package contains the Linux kernel, modules and corresponding other
+ files, version: {{linux_build_version}}-{{version_suffix}}.
+
+Package: linux-libc-dev
+Section: devel
+Provides: linux-kernel-headers
+Architecture: {{debarch}}
+Description: Linux support headers for userspace development
+ This package provides userspaces headers from the Linux kernel.  These headers
+ are used by the installed headers for GNU glibc and other system libraries.
+Multi-Arch: same
+
+Package: linux-headers-{{linux_build_version}}-{{version_suffix}}
+Architecture: {{debarch}}
+Description: Linux kernel headers for {{linux_build_version}}-{{version_suffix}} on {{debarch}}
+ This package provides kernel header files for {{linux_build_version}}-{{version_suffix}} on {{debarch}}
+ .
+ This is useful for people who need to build external modules
+
+Package: linux-image-{{linux_build_version}}-{{version_suffix}}-dbg
+Section: debug
+Architecture: {{debarch}}
+Description: Linux kernel debugging symbols for {{linux_build_version}}-{{version_suffix}}
+ This package will come in handy if you need to debug the kernel. It provides
+ all the necessary debug symbols for the kernel and its modules.
+
+{% if local_version == "workstation" %}
+Package: securedrop-workstation-grsec
+Section: admin
+Architecture: {{debarch}}
+Pre-Depends: qubes-kernel-vm-support
+Depends: linux-image-{{linux_build_version}}-{{version_suffix}}, paxctld
+Description: Linux for SecureDrop Workstation template (meta-package)
+ Metapackage providing a grsecurity-patched Linux kernel for use in SecureDrop
+ Workstation Qubes templates. Depends on the most recently built patched kernel
+ maintained by FPF.
+{% else %}
+Package: securedrop-grsec
+Section: admin
+Architecture: {{debarch}}
+Depends: linux-image-{{linux_build_version}}-{{version_suffix}}, intel-microcode, amd64-microcode, paxctld
+Description: Metapackage providing a grsecurity-patched Linux kernel for use
+ with SecureDrop. Depends on the most recently built patched kernel maintained
+ by FPF. Package also includes sysctl and PaX flags calls for GRUB.
+{% endif %}

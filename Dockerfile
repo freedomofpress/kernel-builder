@@ -1,5 +1,5 @@
-# debian:buster 2021-12-20
-FROM debian@sha256:94ccfd1c5115a6903cbb415f043a0b04e307be3f37b768cf6d6d3edff0021da3
+ARG BUILD_DISTRO=bookworm
+FROM debian:$BUILD_DISTRO
 
 ARG UID=1000
 ARG GID=1000
@@ -14,31 +14,31 @@ RUN apt-get update && \
     bison \
     build-essential \
     cpio \
-    curl \
+    debhelper \
     fakeroot \
     flex \
-    gcc-8-plugin-dev \
     git \
     kmod \
     libelf-dev \
     liblz4-tool \
     libssl-dev \
-    lsb-release \
     ncurses-dev \
     python3 \
+    python3-jinja2 \
     python3-requests \
     rsync \
     wget \
     xz-utils
+# See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=657962, there's no
+# unversioned name for this package
+RUN apt-get install --yes gcc-$(gcc -dumpversion)-plugin-dev
 
 RUN groupadd -g ${GID} ${USERNAME} && useradd -m -d /home/${USERNAME} -g ${GID} -u ${UID} ${USERNAME}
 
-COPY build-kernel.sh /usr/local/bin/build-kernel.sh
+COPY build-kernel.py /usr/local/bin/build-kernel.py
 COPY grsecurity-urls.py /usr/local/bin/grsecurity-urls.py
-COPY scripts/mkdebian /usr/local/bin/mkdebian
-
-COPY securedrop-grsec /securedrop-grsec
-COPY securedrop-workstation-grsec /securedrop-workstation-grsec
+COPY debian /debian
+COPY pubkeys/ /pubkeys
 
 RUN mkdir -p -m 0755 /kernel /patches-grsec /output
 RUN chown ${USERNAME}:${USERNAME} /kernel /patches-grsec /output
@@ -47,6 +47,5 @@ WORKDIR /kernel
 # VOLUME ["/kernel"]
 
 USER ${USERNAME}
-COPY pubkeys/ /pubkeys
 
-CMD ["/usr/local/bin/build-kernel.sh"]
+CMD ["/usr/local/bin/build-kernel.py"]
