@@ -42,12 +42,21 @@ start_paxctld() {
     sleep 1
 }
 
+cleanup_sysctld() {
+    # Remove settings previously set by ansible that are now set via
+    # our sysctl.d/30-securedrop.conf file
+    sed -i '/^vm\.heap_stack_gap/d' /etc/sysctld.conf
+    sed -i '/^net\.ipv4\./d' /etc/sysctld.conf
+}
+
 case "$1" in
     configure)
     # Configure paxctld, required before update-grub runs
     start_paxctld
     # Ensure latest grsec kernel is used on every boot.
     set_grub_default
+    # Remove sysctld configuration
+    cleanup_sysctld
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
