@@ -64,16 +64,6 @@ securedrop-core-6.6: ## Builds kernels for SecureDrop servers, 6.6.x
 		--return \
 		$(OUT)
 
-securedrop-workstation-5.15: OUT:=$(SCRIPT_OUTPUT_PREFIX)-securedrop-workstation-5.15.$(SCRIPT_OUTPUT_EXT)
-securedrop-workstation-5.15: ## Builds kernels for SecureDrop Workstation, 5.15.x
-	GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable6 LOCALVERSION="-workstation" \
-		BUILD_DISTRO="buster" \
-		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-workstation-5.15" \
-		script \
-		--command ./scripts/build-kernel-wrapper \
-		--return \
-		$(OUT)
-
 securedrop-workstation-6.6: OUT:=$(SCRIPT_OUTPUT_PREFIX)-securedrop-workstation-6.6.$(SCRIPT_OUTPUT_EXT)
 securedrop-workstation-6.6: ## Builds kernels for SecureDrop Workstation, 6.6.x
 	GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable9 LOCALVERSION="workstation" \
