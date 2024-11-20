@@ -45,8 +45,10 @@ start_paxctld() {
 cleanup_sysctld() {
     # Remove settings previously set by ansible that are now set via
     # our sysctl.d/30-securedrop.conf file
-    sed -i '/^vm\.heap_stack_gap/d' /etc/sysctld.conf
-    sed -i '/^net\.ipv4\./d' /etc/sysctld.conf
+    if [[ -f /etc/sysctld.conf ]]; then
+        sed -i '/^vm\.heap_stack_gap/d' /etc/sysctld.conf
+        sed -i '/^net\.ipv4\./d' /etc/sysctld.conf
+    fi
 }
 
 case "$1" in
