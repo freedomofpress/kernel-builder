@@ -61,3 +61,6 @@ docker run --rm $DOCKER_RUN_ARGUMENTS \
 
 echo "Build complete. Packages can be found at:"
 find "$kernel_dir" -type f | sort
+
+echo "And sha256sums are:"
+find "$kernel_dir" -type f \( -name "*.deb" -o -name "*.buildinfo" -o -name "*.orig.tar.xz" \) -exec sha256sum {} \;
