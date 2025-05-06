@@ -3,6 +3,17 @@ IMG_NAME = fpf.local/kernel-builder
 SCRIPT_OUTPUT_PREFIX=$(PWD)/build/$(shell date +%Y%m%d)
 SCRIPT_OUTPUT_EXT=log
 
+.PHONY: lint
+lint:  ## Check scripts
+	@poetry run ruff check .
+	@poetry run ruff format --check .
+	@poetry run zizmor .
+
+.PHONY: fix
+fix:  ## Fix scripts
+	@poetry run ruff check . --fix
+	@poetry run ruff format .
+
 .PHONY: tiny-5.15
 tiny-5.15: OUT:=$(SCRIPT_OUTPUT_PREFIX)-tiny-5.15.$(SCRIPT_OUTPUT_EXT)
 tiny-5.15: ## Builds latest 5.15 kernel, unpatched
