@@ -53,7 +53,7 @@ def main():
         print("Will include grsecurity patch for kernel", linux_version)
         with open("/patches-grsec/grsec", "wb") as f:
             # TODO: invoke this through normal Python means
-            subprocess.run(["/usr/local/bin/grsecurity-urls.py"], stdout=f)
+            subprocess.run(["/usr/local/bin/grsecurity-urls.py"], stdout=f, check=True)
     else:
         print("Skipping grsecurity patch set")
 
