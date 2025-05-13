@@ -1,0 +1,62 @@
+[project]
+name = "kernel-builder"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+]
+
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.11.8"
+zizmor = "^1.6.0"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle errors
+    "E",
+    # pyflakes
+    "F",
+    # isort
+    "I",
+    # flake8-gettext
+    "INT",
+    # flake8-pie
+    "PIE",
+    # pylint
+    "PL",
+    # flake8-pytest-style
+    "PT",
+    # flake8-pyi
+    "PYI",
+    # flake8-return
+    "RET",
+    # flake8-bandit
+    "S",
+    # flake8-simplify
+    "SIM",
+    # pyupgrade
+    "UP",
+    # pycodestyle warnings
+    "W",
+    # Unused noqa directive
+    "RUF100",
+]
+ignore = [
+    # Find contextlib.suppress() is harder to read
+    "SIM105",
+    # Find ternary statements harder to read
+    "SIM108",
+    # Flags any subprocess use
+    "S603",
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
