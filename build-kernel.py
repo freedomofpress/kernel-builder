@@ -17,7 +17,7 @@ def render_template(filename, context):
     Path(filename).write_text(rendered_content)
 
 
-def main():
+def main():  # noqa: PLR0915
     # Whether to use grsecurity patches
     grsecurity = os.environ.get("GRSECURITY") == "1"
     # Desired specific Linux version to download (e.g. "5.15.100")
@@ -31,7 +31,7 @@ def main():
 
     source_date_epoch = os.environ["SOURCE_DATE_EPOCH"]
     source_date_epoch_formatted = subprocess.check_output(
-        ["date", "-R", "-d", f"@{source_date_epoch}"], text=True
+        ["/bin/date", "-R", "-d", f"@{source_date_epoch}"], text=True
     ).strip()
     for line in Path("/etc/os-release").read_text().splitlines():
         if line.startswith("VERSION_CODENAME="):
@@ -63,7 +63,7 @@ def main():
             print("ERROR: $LINUX_MAJOR_VERSION must be set")
             sys.exit(1)
         print(f"Looking up latest release of {linux_major_version} from kernel.org")
-        response = requests.get("https://www.kernel.org/")
+        response = requests.get("https://www.kernel.org/")  # noqa: S113
         response.raise_for_status()
         linux_version = re.search(
             rf"<strong>({re.escape(linux_major_version)}\.(\d+?))</strong>",
@@ -75,13 +75,13 @@ def main():
     print(f"Fetching Linux kernel source {linux_version}")
     subprocess.check_call(
         [
-            "wget",
+            "/usr/bin/wget",
             f"https://cdn.kernel.org/pub/linux/kernel/v{folder}/linux-{linux_version}.tar.xz",
         ]
     )
     subprocess.check_call(
         [
-            "wget",
+            "/usr/bin/wget",
             f"https://cdn.kernel.org/pub/linux/kernel/v{folder}/linux-{linux_version}.tar.sign",
         ]
     )
@@ -89,26 +89,24 @@ def main():
     # We'll reuse the original tarball if we're not patching it
     keep_xz = ["--keep"] if not grsecurity else []
     subprocess.check_call(
-        ["xz", "-d", "-T", "0", "-v", f"linux-{linux_version}.tar.xz"] + keep_xz
+        ["/usr/bin/xz", "-d", "-T", "0", "-v", f"linux-{linux_version}.tar.xz"] + keep_xz
     )
     subprocess.check_call(
         [
-            "gpgv",
+            "/usr/bin/gpgv",
             "--keyring",
             "/pubkeys/kroah_hartman.gpg",
             f"linux-{linux_version}.tar.sign",
             f"linux-{linux_version}.tar",
         ]
     )
-    shutil.unpack_archive(
-        f"linux-{linux_version}.tar"
-    )
+    shutil.unpack_archive(f"linux-{linux_version}.tar")
 
     # Apply grsec patches
     if grsecurity:
         print(f"Applying grsec patches for kernel source {linux_version}")
         subprocess.check_call(
-            ["patch", "-p", "1", "-i", "/patches-grsec/grsec"],
+            ["/usr/bin/patch", "-p", "1", "-i", "/patches-grsec/grsec"],
             cwd=f"linux-{linux_version}",
         )
 
@@ -121,7 +119,7 @@ def main():
         print("Generating orig tarball")
         subprocess.check_call(
             [
-                "tar",
+                "/bin/tar",
                 "--use-compress-program=xz -T 0",
                 "-cf",
                 orig_tarball,
@@ -160,14 +158,14 @@ def main():
     # Building Linux kernel source
     print("Building Linux kernel source", linux_version)
     subprocess.check_call(
-        ["dpkg-buildpackage", "-uc", "-us"],
+        ["/usr/bin/dpkg-buildpackage", "-uc", "-us"],
     )
 
     os.chdir("..")
     # Storing build artifacts
     print("Storing build artifacts for", linux_version)
     # Because Python doesn't support brace-fnmatch globbing
-    extensions = ['buildinfo', 'changes', 'dsc', 'deb', 'tar.xz']
+    extensions = ["buildinfo", "changes", "dsc", "deb", "tar.xz"]
     artifacts = []
     for extension in extensions:
         artifacts.extend(Path(".").glob(f"*.{extension}"))

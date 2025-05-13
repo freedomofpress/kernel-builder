@@ -3,13 +3,13 @@ import argparse
 import logging
 import os
 import re
-import requests
 import subprocess
 import sys
-from requests.auth import HTTPBasicAuth
 import tempfile
 from pathlib import Path
 
+import requests
+from requests.auth import HTTPBasicAuth
 
 GRSECURITY_PATCH_TYPES = [
     # stable6 corresponds to the long-term 5.15 kernel, good until Q4 2025
@@ -41,8 +41,7 @@ def parse_args():
         default=False,
         help="Dump kernel version required for specified patch type, then exit",
     )
-    args = parser.parse_args()
-    return args
+    return parser.parse_args()
 
 
 class GrsecurityPatch:
@@ -61,11 +60,10 @@ class GrsecurityPatch:
 
     @property
     def patch_name(self):
-        patch_name_url = "https://grsecurity.net/latest_{}_patch".format(self.patch_type)
-        r = requests.get(patch_name_url)
+        patch_name_url = f"https://grsecurity.net/latest_{self.patch_type}_patch"
+        r = requests.get(patch_name_url)  # noqa: S113
         r.raise_for_status()
-        patch_name = r.content.rstrip().decode("utf-8")
-        return patch_name
+        return r.content.rstrip().decode("utf-8")
 
     @property
     def kernel_version(self):
@@ -87,15 +85,13 @@ class GrsecurityPatch:
 
     @property
     def patch_url(self):
-        patch_url = self.download_prefix + self.patch_name
-        return patch_url
+        return self.download_prefix + self.patch_name
 
     @property
     def patch_content(self):
         patch_file = self.tempdir / self.patch_name
         with open(patch_file) as f:
-            patch_content = f.read()
-        return patch_content
+            return f.read()
 
     def download(self):
         """
@@ -125,7 +121,7 @@ def download_file(url, dest_file, auth=None):
     Substitues for curl. Does not clobber files.
     """
     if not os.path.exists(dest_file):
-        with requests.get(url, stream=True, auth=auth) as r:
+        with requests.get(url, stream=True, auth=auth) as r:  # noqa: S113
             r.raise_for_status()
             with open(dest_file, "wb") as f:
                 for chunk in r.iter_content(chunk_size=8192):
@@ -149,6 +145,7 @@ def main():
     logging.debug("Verifying grsecurity patch")
     grsec_config.verify()
     print(grsec_config.patch_content)
+    return 0
 
 
 if __name__ == "__main__":
