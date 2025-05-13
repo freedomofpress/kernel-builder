@@ -7,6 +7,8 @@ import requests
 import subprocess
 import sys
 from requests.auth import HTTPBasicAuth
+import tempfile
+from pathlib import Path
 
 
 GRSECURITY_PATCH_TYPES = [
@@ -55,6 +57,7 @@ class GrsecurityPatch:
         self.grsecurity_username = os.environ.get("GRSECURITY_USERNAME")
         self.grsecurity_password = os.environ.get("GRSECURITY_PASSWORD")
         self.requests_auth = HTTPBasicAuth(self.grsecurity_username, self.grsecurity_password)
+        self.tempdir = Path(tempfile.mkdtemp())
 
     @property
     def patch_name(self):
@@ -89,7 +92,7 @@ class GrsecurityPatch:
 
     @property
     def patch_content(self):
-        patch_file = "/tmp/" + self.patch_name
+        patch_file = self.tempdir / self.patch_name
         with open(patch_file) as f:
             patch_content = f.read()
         return patch_content
@@ -100,7 +103,7 @@ class GrsecurityPatch:
         """
         for fname in [self.patch_name, self.patch_name + ".sig"]:
             url = self.download_prefix + fname
-            dest_file = "/tmp/" + fname
+            dest_file = self.tempdir / fname
             if os.path.exists(dest_file):
                 continue
             download_file(url, dest_file, auth=self.requests_auth)
@@ -110,9 +113,9 @@ class GrsecurityPatch:
         Performs gpg verification of the detached signature file
         for the patch. Assumes public key is already present in keyring.
         """
-        patch_file = "/tmp/" + self.patch_name
-        sig_file = patch_file + ".sig"
-        cmd = "gpgv --keyring /pubkeys/spender.gpg {} {}".format(sig_file, patch_file).split()
+        patch_file = self.tempdir / self.patch_name
+        sig_file = f"{patch_file}.sig"
+        cmd = f"/usr/bin/gpgv --keyring /pubkeys/spender.gpg {sig_file} {patch_file}".split()
         with open(os.devnull, "w") as f:
             subprocess.check_call(cmd, stdout=f, stderr=f)
 
