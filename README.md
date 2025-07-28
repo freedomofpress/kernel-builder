@@ -114,7 +114,7 @@ use in all [SecureDrop] instances. Experienced sysadmins can leverage these
 scripts to compile custom kernels for SecureDrop or non-SecureDrop projects.
 
 The logic here is intended to supersede the legacy build logic at
-https://github.com/freedomofpres s/ansible-role-grsecurity-build/.
+https://github.com/freedomofpress/ansible-role-grsecurity-build/.
 
 [Freedom of the Press Foundation]: https://freedom.press
 [SecureDrop]: https://securedrop.org
