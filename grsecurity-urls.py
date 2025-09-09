@@ -12,8 +12,6 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 GRSECURITY_PATCH_TYPES = [
-    # stable6 corresponds to the long-term 5.15 kernel, good until Q4 2025
-    "stable6",
     # stable9 corresponds to the long-term 6.6 kernel, good until Q4 2026
     "stable9",
 ]
@@ -31,7 +29,7 @@ def parse_args():
     parser.add_argument(
         "--patch-type",
         action="store",
-        default=os.environ.get("GRSECURITY_PATCH_TYPE", "stable6"),
+        default=os.environ.get("GRSECURITY_PATCH_TYPE", "stable9"),
         choices=GRSECURITY_PATCH_TYPES,
         help="Which channel to use for kernel & patch; affects kernel version",
     )

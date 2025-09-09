@@ -34,7 +34,6 @@ jobs:
       fail-fast: false
       matrix:
         target:
-          - tiny-5.15
           - tiny-6.6
         # Build twice for comparison
         build:
@@ -70,7 +69,6 @@ jobs:
       fail-fast: false
       matrix:
         target:
-          - tiny-5.15
           - tiny-6.6
     steps:
       - name: Install dependencies
