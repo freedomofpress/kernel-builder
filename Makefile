@@ -11,8 +11,8 @@ lint:  ## Check scripts
 
 .PHONY: fix
 fix:  ## Fix scripts
-	@poetry run ruff check . --fix
 	@poetry run ruff format .
+	@poetry run ruff check . --fix
 
 .PHONY: tiny-6.6
 tiny-6.6: OUT:=$(SCRIPT_OUTPUT_PREFIX)-tiny-6.6.$(SCRIPT_OUTPUT_EXT)

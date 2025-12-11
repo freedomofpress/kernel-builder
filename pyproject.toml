@@ -13,6 +13,7 @@ package-mode = false
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.11.8"
 zizmor = "^1.6.0"
+python-debian = "^1.0.1"
 
 [tool.ruff]
 line-length = 100
@@ -55,6 +56,8 @@ ignore = [
     "SIM108",
     # Flags any subprocess use
     "S603",
+    # OK to use relative paths to commands
+    "S607",
 ]
 
 [build-system]
