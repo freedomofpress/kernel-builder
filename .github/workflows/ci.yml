@@ -53,7 +53,7 @@ jobs:
       - name: Build tiny kernel
         run: make ${{ matrix.target }}
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         id: upload
         with:
           name: ${{ matrix.target }}-${{ matrix.build }}
