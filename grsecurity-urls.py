@@ -14,6 +14,7 @@ from requests.auth import HTTPBasicAuth
 GRSECURITY_PATCH_TYPES = [
     # stable9 corresponds to the long-term 6.6 kernel, good until Q4 2026
     "stable9",
+    "stable12",
 ]
 
 

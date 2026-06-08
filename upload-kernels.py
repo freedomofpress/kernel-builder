@@ -17,7 +17,7 @@ from pathlib import Path
 
 from debian import deb822
 
-VERSION_MAPPING = {"core": {"6.6": "noble"}, "workstation": {"6.6": "bookworm"}}
+VERSION_MAPPING = {"core": {"6.6": "noble"}, "workstation": {"6.6": "bookworm", "6.18": "trixie"}}
 
 IS_QUBES = Path("/usr/share/qubes/marker-vm").exists()
 BUILD_PATH = Path(__file__).parent / "build"

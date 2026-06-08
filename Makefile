@@ -46,7 +46,8 @@ reprotest-sd: ## DEBUG Builds SD kernel config without grsec in CI
 
 securedrop-core-6.6: OUT:=$(SCRIPT_OUTPUT_PREFIX)-securedrop-core-6.6.$(SCRIPT_OUTPUT_EXT)
 securedrop-core-6.6: ## Builds kernels for SecureDrop servers, 6.6.x
-	GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable9 LOCALVERSION="securedrop" \
+	LINUX_MAJOR_VERSION=6.6 \
+	  GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable9 LOCALVERSION="securedrop" \
 		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-securedrop-6.6" \
 		script \
 		--command ./scripts/build-kernel-wrapper \
@@ -55,8 +56,19 @@ securedrop-core-6.6: ## Builds kernels for SecureDrop servers, 6.6.x
 
 securedrop-workstation-6.6: OUT:=$(SCRIPT_OUTPUT_PREFIX)-securedrop-workstation-6.6.$(SCRIPT_OUTPUT_EXT)
 securedrop-workstation-6.6: ## Builds kernels for SecureDrop Workstation, 6.6.x
-	GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable9 LOCALVERSION="workstation" \
+	LINUX_MAJOR_VERSION=6.6 \
+	  GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable9 LOCALVERSION="workstation" \
 		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-workstation-6.6" \
+		script \
+		--command ./scripts/build-kernel-wrapper \
+		--return \
+		$(OUT)
+
+securedrop-workstation-6.18: OUT:=$(SCRIPT_OUTPUT_PREFIX)-securedrop-workstation-6.18.$(SCRIPT_OUTPUT_EXT)
+securedrop-workstation-6.18: ## Builds kernels for SecureDrop Workstation, 6.18.x
+	LINUX_MAJOR_VERSION=6.18 \
+    GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable12 LOCALVERSION="workstation" \
+		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-workstation-6.18" \
 		script \
 		--command ./scripts/build-kernel-wrapper \
 		--return \

@@ -3,7 +3,7 @@ Section: kernel
 Priority: optional
 Maintainer: SecureDrop Team <securedrop@freedom.press>
 Rules-Requires-Root: no
-Build-Depends: bc, debhelper, rsync, kmod, cpio, bison, flex, libelf-dev, libssl-dev
+Build-Depends: bc, debhelper (>= 13), debhelper-compat (= 13), rsync, kmod, cpio, bison, flex, libelf-dev, libssl-dev
 Homepage: https://securedrop.org/
 
 Package: linux-image-{{linux_build_version}}-{{version_suffix}}

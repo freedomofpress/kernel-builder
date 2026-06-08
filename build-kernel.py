@@ -131,8 +131,9 @@ def main():  # noqa: PLR0915
 
     os.chdir(f"linux-{linux_version}")
     # Copy debian/
-    print("Setting up our debian/ tree")
+    print(f"Setting up our debian/ tree for Linux {linux_major_version}")
     shutil.copytree("/debian", "debian")
+    shutil.move(f"debian/rules-{linux_major_version}", "debian/rules")
 
     template_variables = {
         "linux_build_version": linux_build_version,
