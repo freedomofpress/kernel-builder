@@ -18,9 +18,10 @@ RUN apt-get update && \
     fakeroot \
     flex \
     git \
+    gpgv \
     kmod \
     libelf-dev \
-    liblz4-tool \
+    lz4 \
     libssl-dev \
     ncurses-dev \
     python3 \

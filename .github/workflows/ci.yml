@@ -35,6 +35,7 @@ jobs:
       matrix:
         target:
           - tiny-6.6
+          - tiny-6.18
         # Build twice for comparison
         build:
           - one
@@ -70,6 +71,7 @@ jobs:
       matrix:
         target:
           - tiny-6.6
+          - tiny-6.18
     steps:
       - name: Install dependencies
         run: |

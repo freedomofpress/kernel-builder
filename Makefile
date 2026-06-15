@@ -24,6 +24,17 @@ tiny-6.6: ## Builds latest 6.6 kernel, unpatched
 		--return \
 		$(OUT)
 
+.PHONY: tiny-6.18
+tiny-6.18: OUT:=$(SCRIPT_OUTPUT_PREFIX)-tiny-6.18.$(SCRIPT_OUTPUT_EXT)
+tiny-6.18: ## Builds latest 6.18 kernel, unpatched
+	LINUX_MAJOR_VERSION="6.18" LOCALVERSION="tiny" \
+		BUILD_DISTRO="trixie" \
+		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/tinyconfig-6.18" \
+		script \
+		--command ./scripts/build-kernel-wrapper \
+		--return \
+		$(OUT)
+
 .PHONY: grsec
 grsec: OUT:=$(SCRIPT_OUTPUT_PREFIX)-grsec.$(SCRIPT_OUTPUT_EXT)
 grsec: ## Builds grsecurity-patched kernel (requires credentials)
