@@ -79,6 +79,7 @@ securedrop-workstation-6.18: OUT:=$(SCRIPT_OUTPUT_PREFIX)-securedrop-workstation
 securedrop-workstation-6.18: ## Builds kernels for SecureDrop Workstation, 6.18.x
 	LINUX_MAJOR_VERSION=6.18 \
     GRSECURITY=1 GRSECURITY_PATCH_TYPE=stable12 LOCALVERSION="workstation" \
+		BUILD_DISTRO="trixie" \
 		LINUX_LOCAL_CONFIG_PATH="$(PWD)/configs/config-workstation-6.18" \
 		script \
 		--command ./scripts/build-kernel-wrapper \
