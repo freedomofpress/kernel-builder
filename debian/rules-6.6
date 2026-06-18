@@ -26,10 +26,10 @@ binary-arch: build-arch
 	$(MAKE) -f $(srctree)/Makefile ARCH=$(ARCH) \
 	KERNELRELEASE=$(KERNELRELEASE) \
 	run-command KBUILD_RUN_COMMAND=+$(srctree)/scripts/package/builddeb
-	sed -i s/#DEB_VERSION_UPSTREAM#/$(KERNELRELEASE)/ debian/$(METAPACKGE)/DEBIAN/postinst
-	chmod 775 debian/$(METAPACKGE)/DEBIAN/postinst
-	dpkg-gencontrol -p$(METAPACKGE) -P"debian/$(METAPACKGE)"
-	dpkg-deb --root-owner-group --build "debian/$(METAPACKGE)" ..
+	sed -i s/#DEB_VERSION_UPSTREAM#/$(KERNELRELEASE)/ debian/$(METAPACKGE)-meta/DEBIAN/postinst
+	chmod 775 debian/$(METAPACKGE)-meta/DEBIAN/postinst
+	dpkg-gencontrol -p$(METAPACKGE) -P"debian/$(METAPACKGE)-meta"
+	dpkg-deb --root-owner-group --build "debian/$(METAPACKGE)-meta" ..
 
 .PHONY: build build-indep build-arch
 build: build-arch build-indep
