@@ -14,6 +14,10 @@ fix:  ## Fix scripts
 	@poetry run ruff format .
 	@poetry run ruff check . --fix
 
+.PHONY: hardening-check
+hardening-check:  ## Run kernel-hardening-checker
+	@poetry run ./scripts/check-hardening
+
 .PHONY: tiny-6.6
 tiny-6.6: OUT:=$(SCRIPT_OUTPUT_PREFIX)-tiny-6.6.$(SCRIPT_OUTPUT_EXT)
 tiny-6.6: ## Builds latest 6.6 kernel, unpatched

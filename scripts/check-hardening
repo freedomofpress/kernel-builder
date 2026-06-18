@@ -1,0 +1,26 @@
+#!/bin/bash
+# Run kernel-hardening-checker (https://github.com/a13xp0p0v/kernel-hardening-checker)
+# against each of our non-tiny kernel configs. The architecture and kernel version
+# are autodetected from each config's header.
+#
+# Run via `make hardening-check` so the checker from the Poetry environment is used.
+set -e
+set -u
+set -o pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+
+# Our non-tiny kernel configs (tiny configs are intentionally excluded).
+configs=(
+    config-securedrop-6.6
+    config-workstation-6.6
+    config-workstation-6.18
+)
+
+for config in "${configs[@]}"; do
+    echo "=================================================================="
+    echo "Checking ${config}"
+    echo "=================================================================="
+    kernel-hardening-checker -c "${repo_root}/configs/${config}" -m show_fail
+    echo
+done
