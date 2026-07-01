@@ -63,7 +63,7 @@ jobs:
 
   reproducible:
     runs-on: ubuntu-latest
-    container: debian:bookworm
+    container: debian:trixie
     needs:
       - build
     strategy:
