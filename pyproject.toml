@@ -14,6 +14,7 @@ package-mode = false
 ruff = "^0.11.8"
 zizmor = "^1.6.0"
 python-debian = "^1.0.1"
+kernel-hardening-checker = {git = "https://github.com/a13xp0p0v/kernel-hardening-checker.git"}
 
 [tool.ruff]
 line-length = 100
