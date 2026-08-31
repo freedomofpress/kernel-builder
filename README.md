@@ -33,22 +33,13 @@ in your password manager.
 ## Building kernels in Qubes
 
 Here's how to set up a build environment in [Qubes], suitable for use with [SecureDrop].
-The build requires `docker`, so make sure your TemplateVM has docker configured.
+The build requires `podman` or `docker`, so make sure your TemplateVM has one of those set up.
 
 ```
 qvm-create sd-kernel-builder --template debian-11 --label purple
 qvm-prefs sd-kernel-builder vcpus $(nproc)
 qvm-volume resize sd-kernel-builder:private 50G
 
-```
-
-Then add the following customization to the AppVM to ensure
-the private volume [bind-dir](https://www.qubes-os.org/doc/bind-dirs/)
-is used for the build:
-
-```
-sudo mkdir -p /rw/config/qubes-bind-dirs.d
-echo "binds+=( '/var/lib/docker' )" | sudo tee -a /rw/config/qubes-bind-dirs.d/50_user.conf
 ```
 
 And reboot the AppVM. Otherwise, you will need a large system partition.

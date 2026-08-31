@@ -14,9 +14,16 @@ export DEB_BUILD_TIMESTAMP="${SOURCE_DATE_EPOCH}"
 export TERM=dumb  # to omit control characters from "script" transcripts
 export BUILD_DISTRO="${BUILD_DISTRO:-bookworm}"
 
+# Container runtime; podman is preferred, docker also works
+CONTAINER_RUNTIME="${CONTAINER_RUNTIME:-$(command -v podman || command -v docker || true)}"
+if [[ -z "$CONTAINER_RUNTIME" ]]; then
+    echo "ERROR: podman or docker is required" >&2
+    exit 1
+fi
+
 # Build container image for kernel dependencies
 IMG_NAME="fpf.local/kernel-builder"
-docker build -t "${IMG_NAME}-${BUILD_DISTRO}" \
+"$CONTAINER_RUNTIME" build -t "${IMG_NAME}-${BUILD_DISTRO}" \
     --build-arg UID="$(id -u)" \
     --build-arg GID="$(id -g)" \
     --build-arg BUILD_DISTRO="$BUILD_DISTRO" \
@@ -25,11 +32,11 @@ docker build -t "${IMG_NAME}-${BUILD_DISTRO}" \
 # Configure local customizations
 local_config_volume_opt=""
 if [[ -n "${LINUX_LOCAL_CONFIG_PATH:-}" ]]; then
-    local_config_volume_opt="-v ${LINUX_LOCAL_CONFIG_PATH}:/config:ro"
+    local_config_volume_opt="-v ${LINUX_LOCAL_CONFIG_PATH}:/config:ro,z"
 fi
 local_patches_volume_opt=""
 if [[ -n "${LINUX_LOCAL_PATCHES_PATH:-}" ]]; then
-    local_patches_volume_opt="-v ${LINUX_LOCAL_PATCHES_PATH}:/patches:ro"
+    local_patches_volume_opt="-v ${LINUX_LOCAL_PATCHES_PATH}:/patches:ro,z"
 fi
 
 # Create output dir
@@ -41,8 +48,13 @@ DOCKER_RUN_ARGUMENTS=""
 if test -t 0; then
     DOCKER_RUN_ARGUMENTS="${DOCKER_RUN_ARGUMENTS} -it"
 fi
+if [[ "$CONTAINER_RUNTIME" == *podman ]]; then
+    # rootless podman maps the invoking user to container root, so without this
+    # the build user can't write to /output
+    DOCKER_RUN_ARGUMENTS="${DOCKER_RUN_ARGUMENTS} --userns=keep-id"
+fi
 
-docker run --rm $DOCKER_RUN_ARGUMENTS \
+"$CONTAINER_RUNTIME" run --rm $DOCKER_RUN_ARGUMENTS \
     -e GRSECURITY_USERNAME \
     -e GRSECURITY_PASSWORD \
     -e GRSECURITY_PATCH_TYPE \
