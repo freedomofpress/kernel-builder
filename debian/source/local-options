@@ -1,0 +1,2 @@
+# we modify these files to inject our deterministic seed
+extend-diff-ignore = "^scripts/(gen-randstruct-seed\.sh|gcc-plugins/gen-type_canary\.sh)$"
