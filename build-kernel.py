@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import hashlib
 import os
 import re
 import shutil
@@ -15,6 +16,61 @@ def render_template(filename, context):
     template = jinja2.Template(template_content)
     rendered_content = template.render(context)
     Path(filename).write_text(rendered_content)
+
+
+def derive_seed(release, purpose):
+    """
+    Because our kernels are public, using a random seed doesn't provide any hardening
+    but it interferes with reproducibility. Instead we use a deterministic seed.
+    """
+    return hashlib.sha256(f"{release}-{purpose}".encode()).hexdigest()
+
+
+def pin_build_seeds(srcdir, release):
+    """
+    Override various scripts that reach for randomness with values based on our
+    deterministic seed instead.
+    """
+    print("Pinning build seeds for", release)
+    # randstruct: scripts/basic/Makefile calls this with the seed file and the
+    # hashed-seed header as $1 and $2. Same 64 hex chars as `od -t x8 -N 32`.
+    randstruct = srcdir / "scripts/gen-randstruct-seed.sh"
+    if not randstruct.exists():
+        print(f"ERROR: {randstruct} not found, cannot pin the randstruct seed")
+        sys.exit(1)
+    randstruct.write_text(
+        "#!/bin/sh\n"
+        "# SPDX-License-Identifier: GPL-2.0\n"
+        "# Seed pinned by kernel-builder for reproducibility; see derive_seed().\n"
+        f'SEED="{derive_seed(release, "randstruct")}"\n'
+        'echo "$SEED" > "$1"\n'
+        'HASH=$(echo -n "$SEED" | sha256sum | cut -d" " -f1)\n'
+        'echo "#define RANDSTRUCT_HASHED_SEED \\"$HASH\\"" > "$2"\n'
+    )
+
+    # type_canary (grsecurity only): writes the header to stdout. The original
+    # emits four ULL words from 32 bytes of urandom, then an 8-char hash of them.
+    type_canary = srcdir / "scripts/gcc-plugins/gen-type_canary.sh"
+    if type_canary.exists():
+        digest = bytes.fromhex(derive_seed(release, "type_canary"))
+        words = ", ".join(
+            f"0x{int.from_bytes(digest[i : i + 8], 'big'):016x}ULL" for i in range(0, 32, 8)
+        )
+        type_canary.write_text(
+            "#!/bin/sh\n"
+            "# SPDX-License-Identifier: GPL-2.0\n"
+            "# Seed pinned by kernel-builder for reproducibility; see derive_seed().\n"
+            f'RAND=" {words} "\n'
+            'HASH=$(echo "$RAND" | sha256sum | cut -d" " -f1 | tr -d " \\n" | cut -c1-8)\n'
+            "cat<<EOF\n"
+            "/*\n"
+            " * Automatically generated file, do not edit!\n"
+            " */\n"
+            "\n"
+            "#define TYPE_CANARY_SEED_INIT\t{ $RAND }\n"
+            '#define TYPE_CANARY_SEED_HASH\t"$HASH"\n'
+            "EOF\n"
+        )
 
 
 def main():  # noqa: PLR0915
@@ -114,7 +170,9 @@ def main():  # noqa: PLR0915
     # otherwise we can re-use the upstream one
     linux_build_version = f"{linux_version}-{build_version}"
     version_suffix = ("grsec-" if grsecurity else "") + local_version
-    orig_tarball = f"linux-upstream_{linux_build_version}-{version_suffix}.orig.tar.xz"
+    release = f"{linux_build_version}-{version_suffix}"
+    orig_tarball = f"linux-upstream_{release}.orig.tar.xz"
+    pin_build_seeds(Path(f"linux-{linux_version}"), release)
     if grsecurity:
         print("Generating orig tarball")
         subprocess.check_call(
@@ -156,8 +214,12 @@ def main():  # noqa: PLR0915
 
     # Building Linux kernel source
     print("Building Linux kernel source", linux_version)
+    env = os.environ.copy()
+    # inject our deterministic seed for latent_entropy plugin
+    env["KCFLAGS"] = f"-frandom-seed={derive_seed(release, 'latent_entropy')}"
     subprocess.check_call(
         ["/usr/bin/dpkg-buildpackage", "-uc", "-us"],
+        env=env,
     )
 
     os.chdir("..")
