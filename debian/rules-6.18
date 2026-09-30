@@ -79,11 +79,17 @@ $(binary-targets): build-arch
 .PHONY: binary binary-indep binary-arch
 binary: binary-arch binary-indep
 binary-indep: build-indep
+
+# The metapackage writes its own .files list (like the kernel packages above)
+# so it isn't clobbered when binary-arch assembles debian/files.
+.PHONY: binary-meta
+binary-meta:
+	$(Q)truncate -s0 $(call mk-files,$@)
 	$(Q)sed -i s/#DEB_VERSION_UPSTREAM#/$(KERNELRELEASE)/ debian/$(METAPACKGE)-meta/DEBIAN/postinst
 	$(Q)chmod 775 debian/$(METAPACKGE)-meta/DEBIAN/postinst
-	$(Q)dpkg-gencontrol -p$(METAPACKGE) -P"debian/$(METAPACKGE)-meta"
+	$(Q)dpkg-gencontrol -p$(METAPACKGE) -P"debian/$(METAPACKGE)-meta" -f$(call mk-files,$@)
 	$(Q)dpkg-deb --root-owner-group --build "debian/$(METAPACKGE)-meta" ..
-binary-arch: $(binary-targets)
+binary-arch: $(binary-targets) binary-meta
 	$(Q)cat $(call mk-files,$^) > debian/files
 
 .PHONY: build build-indep build-arch
